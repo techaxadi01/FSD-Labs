@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="logo.svg?v=1">
+    <title>EduFlow - Assessment Deck</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="bg-gradient-to-b from-white via-emerald-50/20 to-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <div id="toastNotification" class="fixed bottom-6 left-6 z-50 transform translate-y-[20px] opacity-0 bg-slate-900/75 backdrop-blur-md text-emerald-400 font-mono text-xs px-5 py-3 rounded-xl shadow-2xl border border-slate-700/50 flex items-center gap-2.5 transition-all duration-300 pointer-events-none">
+        <i class="fas fa-satellite-dish animate-pulse text-emerald-400"></i>
+        <span id="toastMessage">Quiz Engine Configured Successfully</span>
+    </div>
+
+    <header class="bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500 shadow-xl text-white py-6 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="bg-white/20 hover:bg-white/30 p-2.5 rounded-xl transition text-white">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight flex items-center gap-2">
+                        <i class="fas fa-brain animate-pulse"></i> Adaptive Assessment Deck
+                    </h1>
+                    <p class="text-xs text-emerald-100 font-medium">Test your domain understanding across engineering metrics with structured feedback arrays.</p>
+                </div>
+            </div>
+            <div class="text-right">
+                <span class="text-xs font-mono bg-black/20 px-3 py-1.5 rounded-lg border border-white/10 text-emerald-200">
+                    <i class="fas fa-hourglass-half mr-1"></i> Mode: Self-Paced Practice
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl w-full mx-auto px-6 py-12 flex-1 flex flex-col gap-10">
+        
+        <div id="subjectSelectionZone" class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="bg-emerald-100 text-emerald-600 p-2.5 rounded-xl">
+                    <i class="fas fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-slate-800">Select Target Matrix</h2>
+                    <p class="text-xs text-slate-400">Pick a subject structure below to dynamically spin up a 10-question evaluation deck.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <button class="subject-card-btn bg-slate-50 hover:bg-emerald-50/30 border border-slate-200 hover:border-emerald-300 p-4 rounded-xl text-left transition duration-200 flex items-start gap-3 group" data-subject="fsd">
+                    <div class="bg-orange-100 text-orange-600 p-2.5 rounded-xl text-xs group-hover:scale-110 transition-transform"><i class="fas fa-code"></i></div>
+                    <div><h4 class="font-bold text-xs text-slate-800">Full Stack Dev (FSD)</h4><p class="text-[10px] text-slate-400 mt-0.5">REST APIs, Async workflows & DOM patterns</p></div>
+                </button>
+
+                <button class="subject-card-btn bg-slate-50 hover:bg-emerald-50/30 border border-slate-200 hover:border-emerald-300 p-4 rounded-xl text-left transition duration-200 flex items-start gap-3 group" data-subject="adt">
+                    <div class="bg-blue-100 text-blue-600 p-2.5 rounded-xl text-xs group-hover:scale-110 transition-transform"><i class="fas fa-network-wired"></i></div>
+                    <div><h4 class="font-bold text-xs text-slate-800">Advanced Data Types (ADT)</h4><p class="text-[10px] text-slate-400 mt-0.5">Trees, complex hashing, stacks & lists</p></div>
+                </button>
+
+                <button class="subject-card-btn bg-slate-50 hover:bg-emerald-50/30 border border-slate-200 hover:border-emerald-300 p-4 rounded-xl text-left transition duration-200 flex items-start gap-3 group" data-subject="c_prog">
+                    <div class="bg-emerald-100 text-emerald-600 p-2.5 rounded-xl text-xs group-hover:scale-110 transition-transform"><i class="fas fa-terminal"></i></div>
+                    <div><h4 class="font-bold text-xs text-slate-800">C Programming</h4><p class="text-[10px] text-slate-400 mt-0.5">Pointer logic, memory control & structures</p></div>
+                </button>
+
+                <button class="subject-card-btn bg-slate-50 hover:bg-emerald-50/30 border border-slate-200 hover:border-emerald-300 p-4 rounded-xl text-left transition duration-200 flex items-start gap-3 group" data-subject="cod">
+                    <div class="bg-red-100 text-red-600 p-2.5 rounded-xl text-xs group-hover:scale-110 transition-transform"><i class="fas fa-microchip"></i></div>
+                    <div><h4 class="font-bold text-xs text-slate-800">Comp Org & Design (COD)</h4><p class="text-[10px] text-slate-400 mt-0.5">ALU mechanics, registers & memory cache</p></div>
+                </button>
+
+                <button class="subject-card-btn bg-slate-50 hover:bg-emerald-50/30 border border-slate-200 hover:border-emerald-300 p-4 rounded-xl text-left transition duration-200 flex items-start gap-3 group sm:col-span-2 md:col-span-1" data-subject="math">
+                    <div class="bg-indigo-100 text-indigo-600 p-2.5 rounded-xl text-xs group-hover:scale-110 transition-transform"><i class="fas fa-calculator"></i></div>
+                    <div><h4 class="font-bold text-xs text-slate-800">Discrete Math Matrix</h4><p class="text-[10px] text-slate-400 mt-0.5">Set theory & propositional truth arrays</p></div>
+                </button>
+            </div>
+        </div>
+
+        <div id="quizWorkspaceZone" class="hidden bg-white border border-slate-200 rounded-2xl shadow-sm p-6 flex flex-col gap-6 max-w-3xl mx-auto w-full">
+            
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2">
+                    <span id="quizSubjectBadge" class="bg-emerald-100 text-emerald-700 font-bold uppercase tracking-wider px-2.5 py-1 rounded-md text-[9px]">SUBJECT</span>
+                    <h3 class="font-bold text-slate-800 text-sm flex items-center gap-1.5">
+                        Question <span id="currentQuestionNumText" class="text-emerald-600">1</span> of 10
+                    </h3>
+                </div>
+                <div class="text-right font-mono text-[11px] text-slate-500">
+                    Score: <span id="currentLiveScore" class="font-bold text-emerald-600">0</span>
+                </div>
+            </div>
+
+            <div id="activeQuestionCard" class="space-y-5 py-2">
+                <h2 id="questionPromptString" class="text-slate-800 font-bold text-sm tracking-tight leading-relaxed">
+                    Loading telemetry vector string...
+                </h2>
+
+                <div id="choiceOptionsGroup" class="grid grid-cols-1 gap-3 text-xs font-medium">
+                    </div>
+
+                <div id="explanationBannerPane" class="hidden border rounded-xl p-4 transition-all duration-300 flex items-start gap-3">
+                    <div id="explanationIconWrapper" class="p-2 rounded-lg text-xs mt-0.5"></div>
+                    <div class="space-y-0.5">
+                        <h4 id="explanationHeaderTitle" class="font-bold text-xs">Correction Insights</h4>
+                        <p id="explanationBodyString" class="text-[11px] leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-100 pt-4 flex justify-end">
+                <button id="nextQuestionActionButton" disabled
+                    class="bg-slate-300 text-slate-500 font-bold px-5 py-2.5 rounded-xl cursor-not-allowed text-xs transition duration-200 tracking-wide flex items-center gap-1.5">
+                    Select an Answer Option <i class="fas fa-arrow-right text-[10px]"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="quizScoreboardReportZone" class="hidden bg-white border border-slate-200 rounded-2xl shadow-sm p-8 text-center flex flex-col items-center gap-4 max-w-md mx-auto w-full">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-2xl shadow-inner animate-bounce">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold text-slate-800">Quiz Run Completed!</h2>
+                <p class="text-xs text-slate-400 mt-1">Review your processing scores against target vector margins.</p>
+            </div>
+            
+            <div class="bg-slate-50 border border-slate-200 rounded-xl px-8 py-4 my-2 w-full">
+                <span class="block text-[10px] font-bold uppercase tracking-wider text-slate-400">Final Metrics</span>
+                <span id="finalScoreTelemetryDisplay" class="text-3xl font-black font-mono text-emerald-600">0 / 10</span>
+            </div>
+
+            <button id="restartQuizDeckTrigger" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-xl text-xs transition tracking-wide flex items-center justify-center gap-2">
+                <i class="fas fa-rotate-left text-[11px]"></i> Run Alternative Quiz Track
+            </button>
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 py-6 text-center text-xs font-medium mt-auto">
+        <p>© 2026 EduFlow. Assessment Synchronization Services Provisioned.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // DOM Target Interface Hooks
+            const subjectSelectionZone = document.getElementById('subjectSelectionZone');
+            const quizWorkspaceZone = document.getElementById('quizWorkspaceZone');
+            const quizScoreboardReportZone = document.getElementById('quizScoreboardReportZone');
+            const quizSubjectBadge = document.getElementById('quizSubjectBadge');
+            const currentQuestionNumText = document.getElementById('currentQuestionNumText');
+            const currentLiveScore = document.getElementById('currentLiveScore');
+            const questionPromptString = document.getElementById('questionPromptString');
+            const choiceOptionsGroup = document.getElementById('choiceOptionsGroup');
+            const explanationBannerPane = document.getElementById('explanationBannerPane');
+            const explanationIconWrapper = document.getElementById('explanationIconWrapper');
+            const explanationHeaderTitle = document.getElementById('explanationHeaderTitle');
+            const explanationBodyString = document.getElementById('explanationBodyString');
+            const nextQuestionActionButton = document.getElementById('nextQuestionActionButton');
+            const finalScoreTelemetryDisplay = document.getElementById('finalScoreTelemetryDisplay');
+            const restartQuizDeckTrigger = document.getElementById('restartQuizDeckTrigger');
+            
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMessage');
+
+            // Workspace Runtime Variables
+            let activelyLoadedDeck = [];
+            let questionCursorIndex = 0;
+            let totalRunningCorrectCount = 0;
+            let choiceSelectionLocked = false;
+
+            // Raw Dynamic Question Database Map Matrices (Exactly 10 items per branch)
+            const quizDatabase = {
+                fsd: [
+                    { q: "What is the primary role of the HTTP status code range 4xx?", o: ["Informational responses", "Server architecture exceptions", "Client-side operation errors", "Successful channel synchronization"], a: 2, e: "4xx status codes point directly to client-side issues (e.g., 404 Not Found, 401 Unauthorized)." },
+                    { q: "Which tool natively supports running javascript out-of-browser loops?", o: ["V8 Node.js Engine", "Webpack Bundler", "Babel Transpiler", "Apache Cassandra Workspace"], a: 0, e: "Node.js compiles JS directly using Chrome's V8 Engine out of browser nodes." },
+                    { q: "What hook dependency control isolates rendering loops in React patterns?", o: ["useState", "useEffect", "useTransition", "useContext"], a: 1, e: "useEffect coordinates resource bindings and bounds rendering bypass variables." },
+                    { q: "In REST API standard formats, what verb removes systemic server entries?", o: ["POST", "PATCH", "DELETE", "REMOVE"], a: 2, e: "DELETE drops targeted database entities or records via structured URIs." },
+                    { q: "What design paradigm guarantees a standard web interface scales fluidly?", o: ["Responsive Design", "Legacy Rendering Grid", "Monolithic Tables", "Asymmetric Layouts"], a: 0, e: "Responsive layouts use flexible grids to auto-adjust across viewports." },
+                    { q: "Which database type stores values as key-value JSON structures?", o: ["PostgreSQL", "MySQL", "MongoDB", "Oracle DB"], a: 2, e: "MongoDB is a document database designed to store schema-less BSON records." },
+                    { q: "What does the 'M' stand for in the traditional MVC pattern?", o: ["Machine", "Middleware", "Model", "Matrix"], a: 2, e: "Model dictates data structures and validates logical records before persistence." },
+                    { q: "Which statement best describes asynchronous operations?", o: ["Blocks main thread loops", "Executes concurrently non-blocking", "Forces sequential calculations", "Requires compilation"], a: 1, e: "Async processing schedules callbacks without freezing operational runtimes." },
+                    { q: "What file handles package metadata and references in FSD structures?", o: ["index.js", "package.json", "env.local", "webpack.config"], a: 1, e: "package.json contains configurations, dependencies, and project versioning details." },
+                    { q: "What does CORS stand for on web application layers?", o: ["Cross-Origin Resource Sharing", "Centralized Origin Routing System", "Cached Object Registration Set", "Core Operating Router Socket"], a: 0, e: "CORS controls cross-domain network access restrictions enforced by browsers." }
+                ],
+                adt: [
+                    { q: "What is the worst-case lookup runtime execution in a standard balanced BST structure?", o: ["O(1)", "O(N)", "O(log N)", "O(N log N)"], a: 2, e: "Balanced BST operations cut remaining options in half sequentially, running at O(log N)." },
+                    { q: "Which abstract structure processes storage elements under FIFO paradigms?", o: ["Stack Structure", "Queue Matrix", "Max Heap Array", "Red-Black Balanced Node"], a: 1, e: "Queues evaluate under First-In, First-Out rules (FIFO)." },
+                    { q: "What condition occurs if a push instruction fires onto a completely filled stack?", o: ["Underflow Error", "Segmentation Fault", "Overflow Error", "Garbage Collection Loop"], a: 2, e: "Adding variables to max-capacity structures causes a stack overflow error." },
+                    { q: "Which data structure maps unique hash index loops instantly to memory ranges?", o: ["Linked List Track", "Binary Search Tree", "Hash Table Matrix", "Adjacency Graph Pointer"], a: 2, e: "Hash tables resolve elements in O(1) average runtime via strategic keys mapping." },
+                    { q: "What defines a directed acyclic graph structure (DAG)?", o: ["Contains loops", "No loops or cycles allowed", "Must be a complete binary deck", "Has unweighted undirected vectors"], a: 1, e: "DAGs have directed pathways that never cycle back onto active paths." },
+                    { q: "What is the height of an empty binary tree node structure?", o: ["0", "1", "-1", "Null pointer constant"], a: 2, e: "Convention states an empty or null tree architecture resolves to a height of -1." },
+                    { q: "Which traversal technique evaluates binary trees layer by layer?", o: ["Pre-order traversal", "In-order traversal", "Breadth-First Search (BFS)", "Post-order traversal"], a: 2, e: "BFS or Level-Order searches complete full layers before branching lower." },
+                    { q: "A linked list node strictly maintains references to what fields?", o: ["Key only", "Data and Next Node pointer", "Index position identifier", "Left and Right branches"], a: 1, e: "Singly linked lists store their active payload along with a pointer address referencing the next element." },
+                    { q: "What makes a Red-Black tree self-balancing?", o: ["Manual array restructuring", "Internal color properties and rotations", "Monolithic sorting sweeps", "Linear index scaling"], a: 1, e: "Red-Black trees use color rules and node rotations during changes to keep the path balanced." },
+                    { q: "What mechanism resolves index conflicts inside Hash Tables?", o: ["Memory paging", "Collision Resolution (e.g., Chaining)", "Cache line swapping", "Pointer arithmetic resets"], a: 1, e: "Collision resolution methods like chaining or open addressing resolve duplicate hash indexes safely." }
+                ],
+                c_prog: [
+                    { q: "What string character automatically terminates text array buffers in C compilation?", o: ["\\n", "\\0", "EOF constant", "Semicolon breakpoint"], a: 1, e: "The null terminator '\\0' signals the absolute boundary of a literal character array block." },
+                    { q: "What operator retrieves the direct hardware memory address pointer of a variable?", o: ["*", "&", "->", "sizeof"], a: 1, e: "The ampersand '&' behaves as the reference address operator in C." },
+                    { q: "Which statement allocates clean, zero-initialized heap memory blocks?", o: ["malloc()", "calloc()", "realloc()", "alloca()"], a: 1, e: "Unlike malloc, calloc zeroes out the allocated memory space before returning the pointer." },
+                    { q: "What structural keyword creates tracking variables that exist across file allocations?", o: ["static", "extern", "volatile", "register"], a: 1, e: "The 'extern' identifier allows variables to be declared in one file and shared across others during linking." },
+                    { q: "What size is allocated for an integer pointer tracking variable on modern 64-bit platforms?", o: ["2 bytes", "4 bytes", "8 bytes", "Variable matrix structures"], a: 2, e: "All memory address pointers on 64-bit runtime architectures require exactly 8 bytes of space." },
+                    { q: "What error triggers if code attempts to read from a deallocated tracking pointer?", o: ["Dangling Pointer read Exception", "Stack overflow event", "Compile logic type warning", "Memory leak buffer overflow"], a: 0, e: "Reading memory that was already freed can access corrupt data or trigger a segmentation fault." },
+                    { q: "How do you check total byte sizes allocated to structs or primitives dynamically?", o: ["length()", "sizeof operator", "count()", "memsize()"], a: 1, e: "sizeof is a built-time operator that returns memory footprint sizes in bytes." },
+                    { q: "What operator accesses structural inner elements when managing active pointers?", o: [". (Dot operator)", "-> (Arrow pointer shortcut)", "& (Address token)", "* (Dereference marker)"], a: 1, e: "The arrow operator '->' dereferences a pointer to a struct and accesses its inner fields." },
+                    { q: "What file tracking macro represents the complete termination of file streams?", o: ["NULL", "EOF", "CLR", "FIN"], a: 1, e: "EOF (End of File) is a standard constant macro injected by input/output stream modules." },
+                    { q: "What C code keyword prevents variables from being optimized away or cached by compilation routines?", o: ["static", "inline", "volatile", "auto"], a: 2, e: "The 'volatile' keyword tells the compiler that the value can change unexpectedly from outside resources." }
+                ],
+                cod: [
+                    { q: "What memory configuration caches instructions closest to processing units inside ALUs?", o: ["System DRAM modules", "Registers", "Level 1 Data Cache", "Virtual storage frames"], a: 1, e: "CPU registers offer the absolute fastest execution speeds on modern processors." },
+                    { q: "What structural system pipelining error stalls instructions while decoding dependent execution paths?", o: ["Data Hazard condition", "Cache hit event", "Page fault breakdown", "Clock frequency reduction"], a: 0, e: "Data hazards occur when an instruction depends on the results of a previous operation that hasn't finished yet." },
+                    { q: "What does 'Von Neumann Architecture' natively utilize to run calculations?", o: ["Separate instruction and data storage buses", "Unified shared tracking memory pipelines", "Asynchronous core matrix systems", "Hardwired fixed relay operations"], a: 1, e: "Von Neumann architectures share a single memory pipeline for both system commands and target data strings." },
+                    { q: "Which numbering format maps directly to computing hardware state layouts?", o: ["Hexadecimal representations", "Decimal indices", "Binary states (0, 1)", "Octal configurations"], a: 2, e: "Computing logic operates using binary electrical states: high voltage (1) or low voltage (0)." },
+                    { q: "What part of the central processor handles sorting calculations and comparisons?", o: ["Control Unit (CU)", "Memory Cache line manager", "Arithmetic Logic Unit (ALU)", "Bus Interface system"], a: 2, e: "The ALU performs all math operations, bit shifts, and logical comparisons." },
+                    { q: "What does a 'Cache Miss' force system components to execute?", o: ["Clear CPU cache loops", "Pull values directly from main RAM layout lines", "Trigger kernel traps", "Drop active processor states"], a: 1, e: "A cache miss means the requested data wasn't in fast cache memory, forcing a slower read from system RAM." },
+                    { q: "What instruction set concept relies on simplified instructions of uniform size?", o: ["CISC paradigms", "RISC paradigms", "Monolithic computing blocks", "Thread scheduling"], a: 1, e: "RISC architecture uses an optimized, simplified set of instructions to maximize clock speed." },
+                    { q: "What electrical sync line coordinates operational timings inside motherboards?", o: ["Data bus lane", "System Clock pulse signal", "Address select line", "Interrupt vector route"], a: 1, e: "The system clock sends steady electrical pulses to coordinate data steps across components." },
+                    { q: "What logic gate generates an output of 1 only when all incoming inputs are 1?", o: ["OR gate", "XOR gate", "AND gate", "NAND gate"], a: 2, e: "An AND gate requires all its input lines to be true (1) to output a true signal." },
+                    { q: "What tracking register points to the next instruction queued for calculation steps?", o: ["Instruction Cache (IC)", "Program Counter (PC)", "Stack Array Pointer (SP)", "Accumulator Registry (AC)"], a: 1, e: "The Program Counter (PC) stores the memory address of the next instruction waiting to run." }
+                ],
+                math: [
+                    { q: "What is the cardinality of a power set matching an original base set containing exactly 4 elements?", o: ["8", "12", "16", "24"], a: 2, e: "The size of a power set is calculated as 2^n. For 4 elements, 2^4 equals 16 subsets." },
+                    { q: "What conditional truth value results if proposition P is true and proposition Q is false under a conditional statement (P → Q)?", o: ["True", "False", "Indeterminate logic boundary", "Contradiction state"], a: 1, e: "A conditional implication (P → Q) is only false when the premise is true and the conclusion is false." },
+                    { q: "Which symbol maps sets to common elements shared across both boundary systems?", o: ["∪ (Union token)", "∩ (Intersection token)", "⊆ (Subset indicator)", "⊕ (Symmetric difference)"], a: 1, e: "The intersection symbol ∩ finds elements that are shared by both sets." },
+                    { q: "What compound propositional statement generates true evaluations across all possible truth configurations?", o: ["Fallacy statement", "Tautology layout", "Contradiction matrix", "Satisfiable parameter"], a: 1, e: "A tautology is a logical statement that is true in every possible scenario or truth assignment." },
+                    { q: "What set corresponds to universal sets subtracted by target group parameters (U \ A)?", o: ["Null Void Set Ø", "Complement of Set A", "Symmetric relative set", "Power distribution collection"], a: 1, e: "Subtracting a set from the universal set leaves the complement, containing everything outside that set." },
+                    { q: "If sets A and B share no common elements, they are considered to be what type of sets?", o: ["Subordinate sets", "Universal mappings", "Disjoint sets", "Equivalent configurations"], a: 2, e: "Disjoint sets have an intersection that results in an empty set, meaning they share zero values." },
+                    { q: "What does the bi-conditional statement (P ↔ Q) require to evaluate as true?", o: ["P must be true always", "Both variables must share identical truth values", "Q must evaluate as a contradiction", "One variable must be false"], a: 1, e: "A biconditional statement is true only when both parts are either true together or false together." },
+                    { q: "De Morgan's Laws state that the negation of an intersection ¬(A ∩ B) is equivalent to what?", o: ["¬A ∩ ¬B", "¬A ∪ ¬B", "A ∪ B", "¬(A ∪ B)"], a: 1, e: "De Morgan's Laws state that negating an intersection flips it into the union of the individual negations." },
+                    { q: "What logic format is represented by 'For all x, P(x)' statements?", o: ["Existential quantification", "Universal quantification", "Conditional assertion", "Truth domain negation"], a: 1, e: "The universal quantifier 'For all' (∀) states that a property holds true for every element in a domain." },
+                    { q: "What is the absolute cardinality of an empty set Ø?", o: ["-1", "Undefined vector state", "0", "1"], a: 2, e: "The empty set contains zero elements, giving it a cardinality of exactly 0." }
+                ]
+            };
+
+            // Helper function to dispatch custom alerts using bottom-left glass notification box
+            function displayStatusAlert(messageText) {
+                toastMsg.innerText = messageText;
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateY(0px)';
+
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateY(20px)';
+                }, 2500);
+            }
+
+            // Subject Selector Activation Loop
+            document.querySelectorAll('.subject-card-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetBranchKey = btn.getAttribute('data-subject');
+                    const subjectTitle = btn.querySelector('h4').innerText;
+
+                    activelyLoadedDeck = [...quizDatabase[targetBranchKey]];
+                    
+                    questionCursorIndex = 0;
+                    totalRunningCorrectCount = 0;
+                    choiceSelectionLocked = false;
+
+                    subjectSelectionZone.classList.add('hidden');
+                    quizScoreboardReportZone.classList.add('hidden');
+                    quizWorkspaceZone.classList.remove('hidden');
+                    
+                    quizSubjectBadge.innerText = subjectTitle.split(' (')[0]; 
+
+                    renderActiveQuestionCard();
+                    displayStatusAlert(`🎯 Engine Loaded: 10 Question ${targetBranchKey.toUpperCase()} Deck Ready.`);
+                });
+            });
+
+            // Core Rendering Engine for Question Cards
+            function renderActiveQuestionCard() {
+                choiceSelectionLocked = false;
+                explanationBannerPane.className = "hidden border rounded-xl p-4 transition-all duration-300 flex items-start gap-3";
+                explanationBannerPane.classList.add('hidden');
+
+                nextQuestionActionButton.disabled = true;
+                nextQuestionActionButton.className = "bg-slate-300 text-slate-500 font-bold px-5 py-2.5 rounded-xl cursor-not-allowed text-xs transition duration-200 tracking-wide flex items-center gap-1.5";
+                nextQuestionActionButton.innerHTML = `Select an Answer Option <i class="fas fa-arrow-right text-[10px]"></i>`;
+
+                currentQuestionNumText.innerText = questionCursorIndex + 1;
+                currentLiveScore.innerText = totalRunningCorrectCount;
+
+                const currentDataNode = activelyLoadedDeck[questionCursorIndex];
+                questionPromptString.innerText = currentDataNode.q;
+
+                choiceOptionsGroup.innerHTML = '';
+
+                currentDataNode.o.forEach((optionText, idx) => {
+                    const optionBtn = document.createElement('button');
+                    optionBtn.className = "w-full text-left bg-slate-50 hover:bg-emerald-50/20 border border-slate-200 hover:border-emerald-300 p-3.5 rounded-xl transition duration-150 flex items-center gap-3 group text-slate-700 hover:text-slate-900";
+                    optionBtn.setAttribute('data-option-idx', idx);
+
+                    optionBtn.innerHTML = `
+                        <span class="w-5 h-5 rounded-md bg-white border border-slate-300 flex items-center justify-center font-mono text-[10px] text-slate-400 group-hover:border-emerald-400 group-hover:text-emerald-600 transition-colors shrink-0">
+                            ${String.fromCharCode(65 + idx)}
+                        </span>
+                        <span class="option-text-string font-medium leading-normal">${optionText}</span>
+                    `;
+
+                    optionBtn.addEventListener('click', () => {
+                        evaluateUserChoiceSelection(optionBtn, idx);
+                    });
+
+                    choiceOptionsGroup.appendChild(optionBtn);
+                });
+            }
+
+            // Evaluation & Feedback Verification Processing Matrix
+            function evaluateUserChoiceSelection(selectedButton, chosenIndex) {
+                if (choiceSelectionLocked) return; 
+                choiceSelectionLocked = true;
+
+                const targetQuestionNode = activelyLoadedDeck[questionCursorIndex];
+                const correctAnswerIndex = targetQuestionNode.a;
+                const allOptionButtons = choiceOptionsGroup.querySelectorAll('button');
+
+                if (chosenIndex === correctAnswerIndex) {
+                    totalRunningCorrectCount++;
+                    currentLiveScore.innerText = totalRunningCorrectCount;
+                    
+                    selectedButton.className = "w-full text-left bg-emerald-50 border-2 border-emerald-500 p-3.5 rounded-xl transition flex items-center gap-3 text-emerald-800 font-bold shadow-sm shadow-emerald-500/10";
+                    selectedButton.querySelector('span').className = "w-5 h-5 rounded-md bg-emerald-500 text-white flex items-center justify-center text-[10px] shrink-0";
+                    selectedButton.querySelector('span').innerHTML = `<i class="fas fa-check"></i>`;
+
+                    explanationBannerPane.classList.remove('hidden');
+                    explanationBannerPane.classList.add('bg-emerald-50/40', 'border-emerald-200', 'text-emerald-800');
+                    explanationIconWrapper.className = "p-2 rounded-lg text-xs mt-0.5 bg-emerald-100 text-emerald-600";
+                    explanationIconWrapper.innerHTML = `<i class="fas fa-circle-check"></i>`;
+                    explanationHeaderTitle.innerText = "Excellent Work! Correct Response Insight";
+                    explanationBodyString.innerText = targetQuestionNode.e;
+
+                } else {
+                    selectedButton.className = "w-full text-left bg-red-50 border-2 border-red-500 p-3.5 rounded-xl transition flex items-center gap-3 text-red-800 font-bold shadow-sm shadow-red-500/10";
+                    selectedButton.querySelector('span').className = "w-5 h-5 rounded-md bg-red-500 text-white flex items-center justify-center text-[10px] shrink-0";
+                    selectedButton.querySelector('span').innerHTML = `<i class="fas fa-xmark"></i>`;
+
+                    const correctBtn = allOptionButtons[correctAnswerIndex];
+                    correctBtn.className = "w-full text-left bg-emerald-50 border border-emerald-400 p-3.5 rounded-xl transition flex items-center gap-3 text-emerald-700 font-medium";
+                    correctBtn.querySelector('span').className = "w-5 h-5 rounded-md bg-emerald-100 border border-emerald-300 text-emerald-600 flex items-center justify-center text-[10px] shrink-0 font-bold";
+                    correctBtn.querySelector('span').innerHTML = `<i class="fas fa-check text-[9px]"></i>`;
+
+                    explanationBannerPane.classList.remove('hidden');
+                    explanationBannerPane.classList.add('bg-red-50/40', 'border-red-200', 'text-slate-700');
+                    explanationIconWrapper.className = "p-2 rounded-lg text-xs mt-0.5 bg-red-100 text-red-600";
+                    explanationIconWrapper.innerHTML = `<i class="fas fa-circle-exclamation"></i>`;
+                    explanationHeaderTitle.innerText = "Incorrect Response Insight";
+                    explanationBodyString.innerText = targetQuestionNode.e;
+                }
+
+                allOptionButtons.forEach(btn => {
+                    const currentIdx = parseInt(btn.getAttribute('data-option-idx'));
+                    if (currentIdx !== chosenIndex && currentIdx !== correctAnswerIndex) {
+                        btn.className = "w-full text-left bg-slate-50 opacity-40 border border-slate-200 p-3.5 rounded-xl flex items-center gap-3 text-slate-400 cursor-not-allowed";
+                        btn.querySelector('span').className = "w-5 h-5 rounded-md bg-slate-100 border border-slate-200 flex items-center justify-center text-[10px] text-slate-300 shrink-0";
+                    }
+                });
+
+                // UNLOCK CONTROL ACTION BUTTON (SWITCHES COLOUR MODE TO THEME-EMERALD)
+                nextQuestionActionButton.disabled = false;
+                nextQuestionActionButton.className = "bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-5 py-2.5 rounded-xl cursor-pointer text-xs transition duration-200 tracking-wide shadow-md shadow-emerald-600/10 flex items-center gap-1.5";
+                
+                if (questionCursorIndex === 9) {
+                    nextQuestionActionButton.innerHTML = `Finish Assessment Track <i class="fas fa-flag-checkered text-[10px]"></i>`;
+                } else {
+                    nextQuestionActionButton.innerHTML = `Advance Question Card <i class="fas fa-arrow-right text-[10px]"></i>`;
+                }
+            }
+
+            nextQuestionActionButton.addEventListener('click', () => {
+                if (questionCursorIndex < 9) {
+                    questionCursorIndex++;
+                    renderActiveQuestionCard();
+                } else {
+                    quizWorkspaceZone.classList.add('hidden');
+                    quizScoreboardReportZone.classList.remove('hidden');
+                    
+                    finalScoreTelemetryDisplay.innerText = `${totalRunningCorrectCount} / 10`;
+                    displayStatusAlert("🎉 Assessment Completed. Metrics Cached.");
+                }
+            });
+
+            restartQuizDeckTrigger.addEventListener('click', () => {
+                quizScoreboardReportZone.classList.add('hidden');
+                subjectSelectionZone.classList.remove('hidden');
+            });
+
+        });
+    </script>
+</body>
+
+</html>
