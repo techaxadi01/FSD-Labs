@@ -1,0 +1,104 @@
+// Grabs the corrected HTML elements directly out of your page layout markup safely
+const focusEndAudio = document.getElementById('focusEndAudio');
+const breakEndAudio = document.getElementById('breakEndAudio');
+
+let timer, soundTimer;
+let isRunning = false;
+let isBreakPhase = false;
+let timeRemaining = 25 * 60; 
+
+function toggleTimer() {
+    const btn = document.getElementById('actionBtn');
+    const status = document.getElementById('timerStatus');
+    
+    // Forces instant fullscreen mode on first click to bypass browser safety rules
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => console.log("Handled."));
+    }
+
+    stopAlarmPlayback(); // Instantly stops any ring if user clicks button while it's playing
+    
+    if (isRunning) {
+        clearInterval(timer);
+        isRunning = false;
+        btn.innerText = isBreakPhase ? "Resume Break" : "Resume Focus";
+    } else {
+        isRunning = true;
+        btn.innerText = "Pause Session";
+        
+        timer = setInterval(() => {
+            timeRemaining--;
+            updateDisplay();
+            
+            if (timeRemaining <= 0) {
+                clearInterval(timer);
+                isRunning = false;
+                
+                const studyMins = parseInt(document.getElementById('studyInput').value) || 25;
+                const breakMins = parseInt(document.getElementById('breakInput').value) || 5;
+                
+                if (!isBreakPhase) {
+                    isBreakPhase = true;
+                    timeRemaining = breakMins * 60;
+                    status.innerText = "Break Time!";
+                    status.className = "text-xs uppercase tracking-widest text-rose-400 font-bold bg-rose-500/10 px-3 py-1 rounded-full";
+                    btn.innerText = "Start Break";
+                    
+                    // Plays your 15s file over and over for 1 full minute
+                    playAlarmLoop(focusEndAudio);
+                    triggerNotification("Focus Complete!", "Time to step away and take your break.");
+                } else {
+                    isBreakPhase = false;
+                    timeRemaining = studyMins * 60;
+                    status.innerText = "Focus Session";
+                    status.className = "text-xs uppercase tracking-widest text-emerald-400 font-bold bg-emerald-500/10 px-3 py-1 rounded-full";
+                    btn.innerText = "Start Focus";
+                    
+                    // Plays your 15s file over and over for 1 full minute
+                    playAlarmLoop(breakEndAudio);
+                    triggerNotification("Break Over!", "Let's dive back in and focus.");
+                }
+                updateDisplay();
+            }
+        }, 1000);
+    }
+}
+
+// Reset Engine Logic
+function resetTimer() {
+    clearInterval(timer);
+    stopAlarmPlayback();
+    isRunning = false;
+    isBreakPhase = false;
+    
+    const status = document.getElementById('timerStatus');
+    const btn = document.getElementById('actionBtn');
+    
+    status.innerText = "Focus Session";
+    status.className = "text-xs uppercase tracking-widest text-emerald-400 font-bold bg-emerald-500/10 px-3 py-1 rounded-full";
+    btn.innerText = "Click to Open & Start Focus";
+    
+    applyCustomDurations();
+}
+
+// Handles looping your 15-16 second media tracks precisely for 60 seconds
+function playAlarmLoop(audioElement) {
+    stopAlarmPlayback(); 
+    audioElement.currentTime = 0;
+    audioElement.loop = true;
+    audioElement.play().catch(e => console.log("Awaiting activation rules."));
+    
+    // Forces the music track to systematically turn off exactly after 1 minute (60000ms)
+    soundTimer = setTimeout(() => {
+        audioElement.pause();
+        audioElement.currentTime = 0;
+    }, 60000);
+}
+
+function stopAlarmPlayback() {
+    clearTimeout(soundTimer);
+    focusEndAudio.pause();
+    breakEndAudio.pause();
+    focusEndAudio.currentTime = 0;
+    breakEndAudio.currentTime = 0;
+}

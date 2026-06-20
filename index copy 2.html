@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/svg+xml" href="logo.svg?v=1">
+    <title>EduFlow - Academic Resource & Assignment Management Platform</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Smooth Scrolling -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-b from-white via-emerald-50/30 to-slate-50 text-slate-800">
+
+    <!-- HEADER -->
+    <header id="home"></header>
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50
+        bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500
+        shadow-xl">
+
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="flex justify-between items-center h-20">
+
+                <!-- LOGO -->
+                <a href="index.html" class="flex items-center gap-3">
+                    <span class="text-3xl font-bold text-white">
+                        <i class="fas fa-graduation-cap text-xl"></i> EduFlow
+                    </span>
+                </a>
+
+                <!-- NAVIGATION LINKS -->
+                <ul class="hidden md:flex gap-8 font-medium text-white">
+                    <li><a href="#home" class="hover:text-emerald-100 transition">Home</a></li>
+                    <li><a href="#utility" class="hover:text-emerald-100 transition">Utility Hub</a></li>
+                    <li><a href="#ai-bot" class="hover:text-emerald-100 transition">AI Bot</a></li>
+                    <li><a href="peer.html" class="hover:text-emerald-100 transition">Peer Radar</a></li>
+                    <li><a href="focus.html" class="hover:text-emerald-100 transition">Focus Mode</a></li>
+                </ul>
+
+                <!-- Buttons -->
+                <div class="hidden md:flex gap-4">
+
+                    <a href="login.html"
+                        class="px-5 py-2.5 rounded-xl border border-white text-white font-semibold
+                        hover:bg-white/20 hover:scale-105 transition duration-200">
+                        Login
+                    </a>
+
+                    <a href="signup.html"
+                        class="px-5 py-2.5 rounded-xl bg-white text-emerald-600 font-bold
+                        hover:bg-emerald-50 hover:scale-105 shadow-md transition duration-200">
+                        Get Started
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+        
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="relative flex items-center justify-center bg-slate-950 overflow-hidden py-24">
+
+        <video id="heroVideo" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover pointer-events-none z-0">
+            <source src="bg.mp4" type="video/mp4">
+        </video>
+
+        <div class=" relative z-20 w-full max-w-7xl mx-auto px-6">
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+                <!-- Left Grid -->
+                <div>
+
+                    <div class="inline-block bg-white px-5 py-2 rounded-full shadow mb-6">
+                        <span class="text-emerald-600 font-medium">
+                            Next Generation Learning Platform
+                        </span>
+                    </div>
+
+                    <h3 class="text-emerald-700 text-4xl md:text-5xl lg:text-5xl font-bold leading-tight mb-6">
+                        Your All-in-One Academic Resource & Assignment Management Platform
+                    </h3>
+
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Access resources, connect with teachers, collaborate with peers, manage assignments, discover free tools and use AI-powered learning assistance.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+
+                        <a href="#" 
+                            class="bg-emerald-500 
+                            text-white
+                            px-6 py-3
+                            rounded-xl
+                            shadow-lg
+                            hover:bg-teal-600
+                            hover:scale-105
+                            transition">
+
+                            Explore Resources
+
+                        </a>
+
+                        <a href="signup.html" 
+                            class="bg-white
+                            border border-emerald-500
+                            text-emerald-600
+                            px-6 py-3
+                            rounded-xl
+                            hover:bg-slate-200
+                            hover:border-emerald-600
+                            hover:scale-105
+                            transition">
+
+                            Get Started
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- Right Grid -->
+                <div>
+                    <div class="bg-white rounded-3xl shadow-xl p-8">
+
+                        <div class="grid grid-cols-2 gap-6">
+
+                            <a href="peer.html" class="block bg-slate-50 rounded-2xl p-6 text-center shadow border border-transparent hover:border-emerald-400 hover:scale-105 transition duration-300 cursor-pointer">
+                                <i class="fas fa-users text-4xl text-purple-600"></i>
+                                <h3 class="font-semibold mt-4 text-slate-800">
+                                    Peer Radar
+                                </h3>
+                            </a>
+
+                            <a href="focus.html" class="block bg-slate-50 rounded-2xl p-6 text-center shadow border border-transparent hover:border-emerald-400 hover:scale-105 transition duration-300 cursor-pointer">
+                                <i class="fas fa-stopwatch text-4xl text-orange-600"></i>
+                                <h3 class="font-semibold mt-4 text-slate-800">
+                                    Focus Mode
+                                </h3>
+                            </a>
+
+                            <a href="#" class="block bg-slate-50 rounded-2xl p-6 text-center shadow border border-transparent hover:border-emerald-400 hover:scale-105 transition duration-300 cursor-pointer">
+                                <i class="fas fa-list-check text-4xl text-red-500"></i>
+                                <h3 class="font-semibold mt-4 text-slate-800">
+                                    Assignments
+                                </h3>
+                            </a>
+
+                            <a href="#ai-bot" class="block bg-slate-50 rounded-2xl p-6 text-center shadow border border-transparent hover:border-emerald-400 hover:scale-105 transition duration-300 cursor-pointer">
+                                <i class="fas fa-robot text-4xl text-blue-600"></i>
+                                <h3 class="font-semibold mt-4 text-slate-800">
+                                    AI Tools
+                                </h3>
+                            </a>
+
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Utility Hub -->
+    <section id="utility" class="py-24">
+
+        <div class="max-w-7xl mx-auto px-6">
+
+            <h2 class="text-5xl font-bold text-center mb-4">Take Your Learning to the Next Level</h2>
+            <p class="text-center text-gray-500 mb-8">
+                One platform for learning, collaboration, productivity and growth.
+            </p>
+
+            <div class="max-w-xs mx-auto mb-10 text-center">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Filter Hub View</label>
+                <select id="hubCategoryFilter" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-700 shadow-sm focus:outline-none focus:border-emerald-500">
+                    <option value="all">⚡ Show All Academic Modules</option>
+                    <option value="core">📚 Core Learning & Resources</option>
+                    <option value="productivity">⏰ Productivity & Management</option>
+                </select>
+            </div>
+
+            <div class="bg-slate-900 text-slate-300 px-6 py-3.5 rounded-xl max-w-2xl mx-auto mb-12 text-center text-sm font-mono border border-slate-800 shadow">
+                <span class="text-emerald-400">💡 Module Guide:</span> <span id="hubInfoPanel">Hover over any workspace card below to stream live feature breakdown tooltips.</span>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <div class="hub-card bg-white rounded-xl shadow p-6 text-center border border-transparent transition-all duration-200 cursor-pointer" data-group="core" data-tip="Find active study partners, map matching schedules, and synchronize group milestones.">
+                    <i class="fas fa-users text-4xl text-purple-500"></i>
+                    <h3 class="font-semibold mt-4">Student Collaboration</h3>
+                    <p class="mt-2 text-gray-600">Find study partners and collaborate on projects.</p>
+                </div>
+
+                <div class="hub-card bg-white rounded-xl shadow p-6 text-center border border-transparent transition-all duration-200 cursor-pointer" data-group="core" data-tip="Book digital office hours, track mentorship openings, and message department chairs directly.">
+                    <i class="fas fa-chalkboard-user text-4xl text-emerald-600"></i>
+                    <h3 class="font-semibold mt-4">Teacher Connect</h3>
+                    <p class="mt-2 text-gray-600">Faculty interaction, mentorship and academic guidance.</p>
+                </div>
+
+                <div class="hub-card bg-white rounded-xl shadow p-6 text-center border border-transparent transition-all duration-200 cursor-pointer" data-group="productivity" data-tip="Launch sandboxed immersive fullscreen layouts built to strip away notifications and cognitive friction.">
+                    <i class="fas fa-stopwatch text-4xl text-orange-500"></i>
+                    <h3 class="text-2xl font-bold mt-4">Focus Mode</h3>
+                    <p class="mt-2 text-gray-600">Study with all the Distractions Blocked.</p>
+                </div>
+
+                <div class="hub-card bg-white rounded-xl shadow p-6 text-center border border-transparent transition-all duration-200 cursor-pointer" data-group="productivity" data-tip="Log upcoming deadlines, map task constraints, and parse priority trees using automated alert states.">
+                    <i class="fas fa-list-check text-4xl text-blue-500"></i>
+                    <h3 class="font-semibold mt-4">Assignment Tracker</h3>
+                    <p class="mt-2 text-gray-600">Track deadlines and receive smart reminders.</p>
+                </div>
+
+                <div class="hub-card bg-white rounded-xl shadow p-6 text-center border border-transparent transition-all duration-200 cursor-pointer" data-group="productivity" data-tip="Map daily workflows, block calendar sections, and export task intervals directly onto tracking feeds.">
+                    <i class="fas fa-calendar-check text-4xl text-red-500"></i>
+                    <h3 class="text-2xl font-bold mt-4">Study Planner</h3>
+                    <p class="mt-2 text-gray-600">Plan your Day & Stay Productive.</p>
+                </div>
+                
+                <div class="hub-card bg-white rounded-xl shadow p-6 text-center border border-transparent transition-all duration-200 cursor-pointer" data-group="core" data-tip="Parse textual reading logs or lecture summaries directly into comprehensive flashcards and dynamic mock exams.">
+                    <i class="fas fa-circle-question text-4xl text-amber-500"></i>
+                    <h3 class="text-2xl font-bold mt-4">Quiz Generator</h3>
+                    <p class="mt-2 text-gray-600">Revise what you Studied through AI made Quizes.</p>
+                </div>
+
+                <div class="hub-card bg-white rounded-xl shadow p-6 text-center border border-transparent transition-all duration-200 cursor-pointer" data-group="core" data-tip="Access historical question papers (PYQs), validated lab guides, textbook arrays, and shared repository links.">
+                    <i class="fas fa-book text-4xl text-purple-400"></i>
+                    <h3 class="font-semibold mt-4">Academic Resources</h3>
+                    <p class="mt-2 text-gray-600">Notes, PDFs, PYQs, lab manuals and curated learning material.</p>
+                </div>
+                
+                <div class="hub-card bg-white rounded-xl shadow p-6 text-center border border-transparent transition-all duration-200 cursor-pointer" data-group="core" data-tip="Interact with text processing neural vectors to compile notes or draft outline hierarchies.">
+                    <i class="fas fa-robot text-4xl text-blue-600"></i>
+                    <h3 class="font-semibold mt-4">AI Study Assistant</h3>
+                    <p class="mt-2 text-gray-600">Generate summaries, quizzes and study plans.</p>
+                </div>
+                
+                <div class="hub-card bg-white rounded-xl shadow p-6 text-center border border-transparent transition-all duration-200 cursor-pointer" data-group="productivity" data-tip="Scan global internship positions, build professional profiles, and optimize structural resume layouts cleanly.">
+                    <i class="fas fa-briefcase text-4xl text-amber-800"></i>
+                    <h3 class="font-semibold mt-4">Career Development</h3>
+                    <p class="mt-2 text-gray-600">Access internships, job opportunities and professional growth resources.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    
+    <!-- AI Bot -->
+    <section id="ai-bot" class="bg-gradient-to-b from-slate-100 to-white py-24 border-t border-slate-200">
+        
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <h2 class="text-5xl font-bold text-center mb-4">EduFlow AI Assistant</h2>
+            <p class="text-center text-gray-500 mb-16">Interact with our smart system bot for instant curriculum guidance and roadmap tracking.</p>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                
+                <div id="chatbotWorkspace" class="bg-white border border-slate-200 rounded-2xl shadow-md lg:col-span-2 flex flex-col h-[520px] overflow-hidden">
+                    
+                    <div class="bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500 p-4 text-white flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-white/20 p-2 rounded-xl">
+                                <i class="fas fa-robot text-xl text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-sm tracking-wide">EduFlow Copilot</h3>
+                                <p class="text-[10px] text-emerald-100 flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 bg-emerald-300 rounded-full animate-pulse"></span> Online • Core Subject Guide
+                                </p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-mono bg-black/20 px-2.5 py-1 rounded-md text-emerald-200">DOM Event Console</span>
+                    </div>
+
+                    <div id="chatMessageScreen" class="flex-1 p-6 overflow-y-auto bg-slate-50 space-y-4 text-xs">
+                        <div class="flex gap-2.5 max-w-[85%]">
+                            <div class="w-7 h-7 rounded-lg bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-sm">
+                                <i class="fas fa-robot text-[10px]"></i>
+                            </div>
+                            <div class="bg-white border border-slate-200 p-3 rounded-2xl rounded-tl-none shadow-sm text-slate-700 leading-relaxed">
+                                👋 Welcome to your Academic Portal Assistant! Click any of the shortcut prompt tags on the right pane, or type keywords like <strong class="text-emerald-600">"fullstack"</strong>, <strong class="text-emerald-600">"database"</strong>, or <strong class="text-emerald-600">"c-prog"</strong> below to map out structured notes pipelines.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-white border-t border-slate-100 flex gap-2 items-center relative">
+                        <input type="text" id="chatInputField" placeholder="Type prompt command or ask about topics..." 
+                            class="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-emerald-500 transition-colors">
+                        
+                        <button id="chatSendBtn" class="bg-emerald-600 hover:bg-emerald-500 text-white p-3 rounded-xl transition shadow-md shadow-emerald-600/10 shrink-0">
+                            <i class="fas fa-paper-plane text-xs"></i>
+                        </button>
+
+                        <div id="inputLivePill" class="absolute -top-6 left-6 bg-slate-900 text-emerald-400 font-mono text-[9px] px-2.5 py-0.5 rounded-t-md border-t border-x border-slate-800 opacity-0 transition-opacity duration-200">
+                            📡 Event Stream: [input] detected...
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <i class="fas fa-terminal text-2xl text-slate-700"></i>
+                            <h4 class="text-lg font-bold text-slate-800">Command Indexes</h4>
+                        </div>
+                        <p class="text-xs text-gray-500 leading-relaxed mb-6">
+                            Hover over or click these quick-launch buttons to feed pre-set structural context data fields straight into the interactive chat terminal engine.
+                        </p>
+
+                        <div class="space-y-2.5">
+                            <button class="preset-btn w-full text-left bg-slate-50 hover:bg-purple-50 hover:border-purple-300 border border-slate-200 p-3 rounded-xl flex items-center justify-between group transition-all" data-cmd="fullstack" data-subject="Full Stack Development">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-layer-group text-purple-500 text-sm"></i>
+                                    <span class="text-xs font-semibold text-slate-700">Full Stack Development</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-[10px] text-slate-300 group-hover:text-purple-500 transition-colors"></i>
+                            </button>
+
+                            <button class="preset-btn w-full text-left bg-slate-50 hover:bg-emerald-50 hover:border-emerald-300 border border-slate-200 p-3 rounded-xl flex items-center justify-between group transition-all" data-cmd="database" data-subject="Advanced Database Technology">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-database text-emerald-600 text-sm"></i>
+                                    <span class="text-xs font-semibold text-slate-700">Advanced Database Tech</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-[10px] text-slate-300 group-hover:text-emerald-600 transition-colors"></i>
+                            </button>
+
+                            <button class="preset-btn w-full text-left bg-slate-50 hover:bg-orange-50 hover:border-orange-300 border border-slate-200 p-3 rounded-xl flex items-center justify-between group transition-all" data-cmd="c-prog" data-subject="C Programming Structure">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-code text-orange-500 text-sm"></i>
+                                    <span class="text-xs font-semibold text-slate-700">C Programming Core</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-[10px] text-slate-300 group-hover:text-orange-500 transition-colors"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950 text-emerald-400 p-4 rounded-xl font-mono text-[11px] mt-6 border border-slate-800 shadow-inner">
+                        <p class="text-slate-500">// Real-Time Event Log Tracker:</p>
+                        <p id="chatTelemetryLog" class="font-bold mt-1 text-amber-400">> System Monitoring Ready...</p>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </section>
+    <!-- TYPOGRAPHY SECTION -->
+    <section class="bg-slate-800 text-white py-24">
+        
+        <div class="max-w-4xl mx-auto px-6 prose prose-lg prose-invert">
+            
+            <h2 class="text-4xl font-bold text-white mb-6">
+                How AI is Transforming Education
+            </h2>
+            
+            <p class="mb-4">
+                Artificial Intelligence is revolutionizing learning through adaptive study recommendations, automated assessments, note summarization and intelligent tutoring systems.
+            </p>
+
+            <p class="mb-4">
+                EduFlow combines resources, assignments, collaboration and AI-driven assistance to help students learn more effectively and stay productive.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-black text-gray-300">
+
+        <div class="max-w-8xl mx-auto px-10 py-12">
+            
+            <div class="grid md:grid-cols-11 gap-10">
+                
+                <div class="max-w-xs md:col-span-3 mr-10 pl-10">
+                    <h3 class="text-white text-2xl font-bold mb-4">EduFlow</h3>
+                    <p>
+                        Empowering students through technology, collaboration and AI.
+                    </p>
+                </div>
+
+                <div class="md:col-span-4 grid md:grid-cols-2 gap-7">
+
+                    <div>
+                        <h4 class="text-white font-semibold mb-4">Resources</h4>
+                        <ul class="space-y-2">
+                            <li>Notes</li>
+                            <li>Assignments</li>
+                            <li>Courses</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-white font-semibold mb-4">Community</h4>
+                        <ul class="space-y-2">
+                            <li>Students</li>
+                            <li>Teachers</li>
+                            <li>Projects</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="md:col-span-2">
+
+                    <h4 class="text-white font-semibold mb-4">Follow Us</h4>
+
+                    <div class="flex gap-4 text-2xl">
+                        <i class="fab fa-github hover:text-white"></i>
+                        <i class="fab fa-linkedin hover:text-white"></i>
+                        <i class="fab fa-youtube hover:text-white"></i>
+                        <i class="fas fa-envelope hover:text-white"></i>
+                    </div>
+
+                    <div>
+                        <h5 class="text-white font-semibold mt-6 mb-2">Address</h5>
+                        <p>
+                            Bangalore, Karnataka,<br>India
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="md:col-span-2">
+
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-white font-semibold">Geo Location</h4>
+                        <button onclick="route()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold font-medium py-1 px-3 rounded-lg text-xs transition">
+                            Show Route
+                        </button>
+                    </div>
+
+                    <iframe id="MapFrame"
+                        class="w-full h-48 rounded-lg border border-slate-800" 
+                        loading="lazy" scrolling="no">
+                    </iframe>
+
+                    <div class="mt-2">
+                        <p class="text-sm text-gray-400 mt-2">
+                            Your Location: <span id="coordinates"></span>
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr class="border-gray-800 my-8">
+
+            <p class="text-center">
+                &copy; 2026 EduFlow. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+    <!-- Geolocation API -->
+    <script>
+        const campusLocation = "Bangalore";
+        let userLat = null;
+        let userLng = null;
+
+        (function() {
+            document.getElementById('MapFrame').src = `https://maps.google.com/maps?q=${campusLocation}&z=13&output=embed`;
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                        function(position) {
+                        userLat = position.coords.latitude;
+                        userLng = position.coords.longitude;
+
+                        document.getElementById('coordinates').innerText = 
+                            `${userLat.toFixed(2)}° N, ${userLng.toFixed(2)}° E`;
+                        },
+                        function(error) {
+                            document.getElementById('coordinates').innerText = "Access Denied";
+                            document.getElementById('coordinates').className = "text-red-400 font-bold";
+                        }
+                );
+            }
+        })();
+
+        function route(){
+            if (userLat && userLng){
+                document.getElementById('MapFrame').src = 
+                    `https://maps.google.com/maps?saddr=${userLat},${userLng}&daddr=${campusLocation}&output=embed`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // =========================================================================
+            // SUGGESTION 1: UTILITY HUB EVENTS (CHANGE, MOUSEOVER, MOUSEOUT, DBLCLICK)
+            // =========================================================================
+            const filterDropdown = document.getElementById('hubCategoryFilter');
+            const infoPanel = document.getElementById('hubInfoPanel');
+            const cards = document.querySelectorAll('.hub-card');
+
+            // 1. CHANGE EVENT: Filters the visibility elements dynamically based on user dropdown state
+            filterDropdown.addEventListener('change', function(event) {
+                const requestedGroup = event.target.value;
+                
+                cards.forEach(card => {
+                    const cardGroup = card.getAttribute('data-group');
+                    if (requestedGroup === 'all' || cardGroup === requestedGroup) {
+                        card.style.display = 'block';
+                        card.style.opacity = '1';
+                    } else {
+                        card.style.display = 'none';
+                        card.style.opacity = '0';
+                    }
+                });
+            });
+
+            // Loop cards to attach localized interactions efficiently
+            cards.forEach(card => {
+                const title = card.querySelector('h3').innerText;
+                const tipText = card.getAttribute('data-tip');
+
+                // 2. MOUSEOVER EVENT: Alters style properties and updates string feeds onto info bar
+                card.addEventListener('mouseover', () => {
+                    card.style.borderColor = '#10b981';
+                    card.style.transform = 'scale(1.03)';
+                    card.style.backgroundColor = '#f0fdf4'; // Light green tint
+                    infoPanel.innerHTML = `<strong>[${title}]</strong> — ${tipText}`;
+                });
+
+                // 3. MOUSEOUT EVENT: Reverts layout configurations seamlessly when cursor leaves bounds
+                card.addEventListener('mouseout', () => {
+                    card.style.borderColor = 'transparent';
+                    card.style.transform = 'scale(1)';
+                    card.style.backgroundColor = '#ffffff';
+                    infoPanel.innerText = 'Hover over any workspace card below to stream live feature breakdown tooltips.';
+                });
+
+                // 4. DBLCLICK EVENT: Triggers deep functional confirmations instantly on double-click action
+                card.style.userSelect = 'none'; // Prevents blue highlighting on fast double clicking
+                card.addEventListener('dblclick', () => {
+                    alert(`🚀 Launching Platform Module Environment for: "${title}"`);
+                });
+            });
+
+            // =========================================================================
+            // SUGGESTION 2: AI TEXT CONSOLE EVENTS (FOCUS, INPUT, BLUR, CONTEXTMENU)
+            // =========================================================================
+            const aiTextarea = document.getElementById('aiTextarea');
+            const aiTooltip = document.getElementById('aiTooltip');
+            const aiCounter = document.getElementById('aiCounter');
+            const summarizerWorkspace = document.getElementById('summarizerWorkspace');
+            const customMenu = document.getElementById('customContextMenu');
+
+            // 5. FOCUS EVENT: Highlights input bounds and reveals auxiliary tutorial text labels
+            aiTextarea.addEventListener('focus', () => {
+                aiTextarea.style.borderColor = '#10b981';
+                aiTextarea.style.boxShadow = '0 0 0 4px rgba(16, 185, 129, 0.1)';
+                aiTooltip.style.opacity = '1';
+            });
+
+            // 6. BLUR EVENT: Clears form active glow filters and collapses prompt visibility states
+            aiTextarea.addEventListener('blur', () => {
+                aiTextarea.style.borderColor = '#d1d5db';
+                aiTextarea.style.boxShadow = 'none';
+                aiTooltip.style.opacity = '0';
+            });
+
+            // 7. INPUT EVENT: Reads characters instantaneously to run telemetry logging counts
+            aiTextarea.addEventListener('input', () => {
+                aiCounter.innerText = aiTextarea.value.length;
+            });
+
+            // 8. CONTEXTMENU EVENT: Disables default browser popups to deploy custom styled overlays
+            summarizerWorkspace.addEventListener('contextmenu', (event) => {
+                event.preventDefault(); // Kills the normal browser right-click overlay panel
+                
+                // Track exact mouse coordinate offsets to drop the menu box right where the click hit
+                const containerRect = summarizerWorkspace.getBoundingClientRect();
+                const relativeX = event.clientX - containerRect.left;
+                const relativeY = event.clientY - containerRect.top;
+
+                customMenu.style.left = `${relativeX}px`;
+                customMenu.style.top = `${relativeY}px`;
+                customMenu.classList.remove('hidden');
+            });
+
+            // Close context menu if user left clicks anywhere else on the system viewport layout
+            document.addEventListener('click', () => {
+                customMenu.classList.add('hidden');
+            });
+
+            // Global handlers bound to scope for context menu actions
+            window.clearWorkspaceText = function() {
+                aiTextarea.value = '';
+                aiCounter.innerText = '0';
+            };
+
+            window.insertSampleData = function() {
+                aiTextarea.value = "Advanced Web Programming Lecture Notes - Session 3.\nFocus Topics: Analyzing Client-Side Hardware Telemetry and DOM Event Architecture Frameworks.";
+                aiCounter.innerText = aiTextarea.value.length;
+            };
+
+            // =========================================================================
+            // SUGGESTION 3: REGISTRY FORM FORM EVENTS (KEYDOWN, BLUR, SUBMIT)
+            // =========================================================================
+            const form = document.getElementById('assignmentRegistryForm');
+            const titleInput = document.getElementById('taskTitleInput');
+            const courseInput = document.getElementById('taskCourseInput');
+            const titleWarning = document.getElementById('taskTitleWarning');
+            const liveTaskLog = document.getElementById('liveTaskLog');
+
+            // 9. KEYDOWN EVENT: Monitors keys to shift active input target when Enter key is struck
+            titleInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Prevents premature form submissions
+                    courseInput.focus();   // Shifts blinking focus directly into the next field
+                }
+            });
+
+            // 10. INLINE BLUR VALIDATION EVENT: Scans specific input states for error verification on exit
+            titleInput.addEventListener('blur', () => {
+                if (titleInput.value.trim() === "") {
+                    titleInput.style.borderColor = '#ef4444'; // Turns border Red
+                    titleWarning.classList.remove('hidden');
+                } else {
+                    titleInput.style.borderColor = '#d1d5db'; // Restores layout border rules
+                    titleWarning.classList.add('hidden');
+                }
+            });
+
+            // 11. SUBMIT EVENT: Intercepts workflow loops to append code blocks safely without page reloads
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Halts the browser from refreshing the file
+                
+                const finalTitle = titleInput.value.trim();
+                const finalCourse = courseInput.value.trim() || "General Academic Module";
+
+                if (finalTitle === "") {
+                    titleInput.style.borderColor = '#ef4444';
+                    titleWarning.classList.remove('hidden');
+                    return; // Aborts script loop execution safely
+                }
+
+                // If this is the first item being loaded, clear out the empty text notice placeholder
+                if (liveTaskLog.querySelector('.italic')) {
+                    liveTaskLog.innerHTML = '';
+                }
+
+                // Assemble and append a fresh structural row element natively into the page container layout
+                const newRowElement = document.createElement('li');
+                newRowElement.className = "bg-slate-50 border-l-2 border-blue-500 px-2 py-1 text-[11px] font-mono text-slate-700 flex justify-between rounded shadow-sm";
+                newRowElement.innerHTML = `<span>📝 <strong>${finalTitle}</strong> <span class="text-slate-400">(${finalCourse})</span></span> <span class="text-blue-500 font-bold">ACTIVE</span>`;
+                
+                liveTaskLog.appendChild(newRowElement);
+
+                // Reset field elements back to blank configurations safely
+                form.reset();
+                titleInput.style.borderColor = '#d1d5db';
+                titleWarning.classList.add('hidden');
+            });
+        });
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatScreen = document.getElementById('chatMessageScreen');
+            const chatInput = document.getElementById('chatInputField');
+            const sendBtn = document.getElementById('chatSendBtn');
+            const telemetryLog = document.getElementById('chatTelemetryLog');
+            const livePill = document.getElementById('inputLivePill');
+            const presetButtons = document.querySelectorAll('.preset-btn');
+
+            // Course Curriculum Knowledge Database Array
+            const knowledgeBase = {
+                fullstack: "🚀 <strong>Full Stack Roadmap Architecture:</strong><br><br>• <strong>Frontend UI Tier:</strong> Focus on modern structures like semantic HTML5 elements, responsive utility layouts (Tailwind CSS Engine), and reactive DOM manipulation patterns.<br>• <strong>Backend Logic Layer:</strong> Implement runtime environments (Node.js/Express) to construct scalable API endpoints.<br>• <strong>State Storage:</strong> Establish communication bridges using dynamic database management engines.",
+                database: "🗄️ <strong>Advanced Database Management Insights:</strong><br><br>• <strong>Relational Query Engines:</strong> Mastering query evaluation pipelines, complex transactional indexing structures, and subquery cost execution graphs.<br>• <strong>Concurrency Controls:</strong> Implementing ACID property guarantees via Two-Phase Locking protocols (2PL) to prevent write conflicts.<br>• <strong>NoSQL Schema Arrays:</strong> Leveraging fast, distributed document stores for non-structured data.",
+                "c-prog": "💻 <strong>C Programming Operational Fundamentals:</strong><br><br>• <strong>Memory Architecture:</strong> Manipulating precise hardware memory allocations directly via pointers, reference addresses, and arrays.<br>• <strong>Storage Allocations:</strong> Managing memory dynamically using native low-level system methods like <code>malloc()</code> and <code>free()</code>.<br>• <strong>Compilations:</strong> Understanding Preprocessor expansion macros, parsing debugging logs, and executable build processing chains."
+            };
+
+            // Dynamic tracking telemetry logger update function
+            function pushTelemetry(eventName, eventSummary) {
+                telemetryLog.innerText = `> Event: [${eventName}] - ${eventSummary}`;
+            }
+
+            // Message UI Bubble Creator Node
+            function appendChatMessage(sender, htmlContent) {
+                const row = document.createElement('div');
+                row.className = `flex gap-2.5 max-w-[85%] ${sender === 'user' ? 'ml-auto justify-end' : ''}`;
+
+                const botIconHtml = `
+                    <div class="w-7 h-7 rounded-lg bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-sm">
+                        <i class="fas fa-robot text-[10px]"></i>
+                    </div>`;
+
+                const userIconHtml = `
+                    <div class="w-7 h-7 rounded-lg bg-slate-800 text-white flex items-center justify-center shrink-0 shadow-sm order-last">
+                        <i class="fas fa-user text-[10px]"></i>
+                    </div>`;
+
+                const bubbleStyles = sender === 'user' 
+                    ? 'bg-emerald-600 text-white rounded-2xl rounded-tr-none shadow-md' 
+                    : 'bg-white border border-slate-200 text-slate-700 rounded-2xl rounded-tl-none shadow-sm';
+
+                row.innerHTML = `
+                    ${sender === 'user' ? userIconHtml : botIconHtml}
+                    <div class="${bubbleStyles} p-3 leading-relaxed">
+                        ${htmlContent}
+                    </div>`;
+
+                chatScreen.appendChild(row);
+                chatScreen.scrollTop = chatScreen.scrollHeight; // Kept screen auto-scrolled down
+            }
+
+            // String Token Evaluation Router
+            function evaluateSystemResponse(userStringText) {
+                const parsedToken = userStringText.toLowerCase().trim();
+                if (parsedToken.includes('fullstack') || parsedToken.includes('stack') || parsedToken.includes('web')) {
+                    return knowledgeBase['fullstack'];
+                } else if (parsedToken.includes('database') || parsedToken.includes('db') || parsedToken.includes('sql')) {
+                    return knowledgeBase['database'];
+                } else if (parsedToken.includes('c-prog') || parsedToken.includes('c programming') || parsedToken.includes('pointer')) {
+                    return knowledgeBase['c-prog'];
+                } else {
+                    return "🔍 <strong>Command Prompt Unrecognized:</strong><br>I couldn't map that keyword to an active course track. Try clicking one of the preset shortcuts on the right pane or type 'fullstack', 'database', or 'c-prog'.";
+                }
+            }
+
+            // Central Message Cycle Handler
+            function executeSystemChatCycle() {
+                const textValue = chatInput.value.trim();
+                if (textValue === "") return;
+
+                appendChatMessage('user', textValue);
+                chatInput.value = '';
+                livePill.style.opacity = '0';
+
+                setTimeout(() => {
+                    const matchedPayload = evaluateSystemResponse(textValue);
+                    appendChatMessage('bot', matchedPayload);
+                }, 200);
+            }
+
+            // =========================================================================
+            //                     NATIVE JavaScript .addEventListener BINDINGS
+            // =========================================================================
+
+            // EVENT 1. CLICK EVENT: Tracks manual submittals via the send button
+            sendBtn.addEventListener('click', () => {
+                executeSystemChatCycle();
+                pushTelemetry('click', 'Manual button dispatch message processing cycle.');
+            });
+
+            // EVENT 2. INPUT EVENT: Monitors text field changes dynamically
+            chatInput.addEventListener('input', () => {
+                const strLen = chatInput.value.length;
+                livePill.style.opacity = strLen > 0 ? '1' : '0';
+                pushTelemetry('input', `Buffer modification queue text string length: ${strLen}`);
+            });
+
+            // EVENT 3. FOCUS EVENT: Transforms active inputs visually
+            chatInput.addEventListener('focus', () => {
+                chatInput.style.borderColor = '#059669'; 
+                chatInput.style.boxShadow = '0 0 0 4px rgba(5, 150, 105, 0.1)';
+                pushTelemetry('focus', 'Input targeted active. System text stream buffer listening.');
+            });
+
+            // EVENT 4. BLUR EVENT: Collapses active layouts back to standard states
+            chatInput.addEventListener('blur', () => {
+                chatInput.style.borderColor = '#d1d5db';
+                chatInput.style.boxShadow = 'none';
+                livePill.style.opacity = '0';
+                pushTelemetry('blur', 'Input container context blurred.');
+            });
+
+            // EVENT 5. KEYDOWN EVENT: Lets users submit prompts cleanly via the "Enter" key
+            chatInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Prevents page reload glitches
+                    executeSystemChatCycle();
+                    pushTelemetry('keydown', 'Enter key shortcut processed message dispatch.');
+                }
+            });
+
+            // EVENTS 6 & 7. MOUSEOVER & MOUSEOUT loop configurations on preset selectors
+            presetButtons.forEach(btn => {
+                const subjectLabel = btn.getAttribute('data-subject');
+                const commandTarget = btn.getAttribute('data-cmd');
+
+                // MOUSEOVER Event Listener
+                btn.addEventListener('mouseover', () => {
+                    btn.style.transform = 'translateX(6px)';
+                    pushTelemetry('mouseover', `Hover tracking over index module: "${subjectLabel}"`);
+                });
+
+                // MOUSEOUT Event Listener
+                btn.addEventListener('mouseout', () => {
+                    btn.style.transform = 'translateX(0px)';
+                    pushTelemetry('mouseout', 'Hover cursor exited button container bounds.');
+                });
+
+                // CLICK Event Listener on preset buttons
+                btn.addEventListener('click', () => {
+                    chatInput.value = commandTarget;
+                    executeSystemChatCycle();
+                    pushTelemetry('click', `Preset button action injected prompt array payload: [${commandTarget}]`);
+                });
+            });
+        });
+    
+    </script>
+
+</body>
+</html>

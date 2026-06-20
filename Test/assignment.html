@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduFlow - Assignment Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+
+    <nav class="bg-emerald-600 p-6 shadow-md">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-white text-2xl font-bold">EduFlow Tracker</h1>
+            <a href="index.html" class="text-white hover:underline">Back to Home</a>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto p-6 mt-6">
+        
+        <section class="bg-white p-6 rounded-xl shadow-md mb-8 max-w-xl mx-auto">
+            <h2 class="text-xl font-bold text-emerald-700 mb-4">Create New Assignment Task</h2>
+            
+            <form id="assignmentForm" onsubmit="addAssignment(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Assignment Title</label>
+                    <input id="taskTitle" type="text" placeholder="e.g., Database Normalization Lab" required 
+                           class="w-full p-2 border border-slate-300 rounded-lg focus:outline-emerald-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Due Deadline Date</label>
+                    <input id="taskDate" type="date" required 
+                           class="w-full p-2 border border-slate-300 rounded-lg focus:outline-emerald-500">
+                </div>
+                <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-lg font-medium transition">
+                    Add to Tracker Board
+                </button>
+            </form>
+        </section>
+
+        <section class="grid md:grid-cols-3 gap-6">
+            
+            <div class="bg-slate-100 p-4 rounded-xl min-h-[350px] border border-slate-200">
+                <h3 class="font-bold text-gray-700 text-lg mb-4 flex justify-between">
+                    <span>📌 Pending Tasks</span>
+                    <span id="todo-count" class="bg-slate-300 px-2 rounded text-sm">0</span>
+                </h3>
+                <div id="todo-zone" ondragover="allowDrop(event)" ondrop="dropTask(event, 'todo')" class="space-y-3 min-h-[280px]">
+                    </div>
+            </div>
+
+            <div class="bg-amber-50 p-4 rounded-xl min-h-[350px] border border-amber-200">
+                <h3 class="font-bold text-amber-800 text-lg mb-4 flex justify-between">
+                    <span>⚡ In Progress</span>
+                    <span id="progress-count" class="bg-amber-200 px-2 rounded text-sm">0</span>
+                </h3>
+                <div id="progress-zone" ondragover="allowDrop(event)" ondrop="dropTask(event, 'progress')" class="space-y-3 min-h-[280px]">
+                    </div>
+            </div>
+
+            <div class="bg-emerald-50 p-4 rounded-xl min-h-[350px] border border-emerald-200">
+                <h3 class="font-bold text-emerald-800 text-lg mb-4 flex justify-between">
+                    <span>✅ Completed</span>
+                    <span id="completed-count" class="bg-emerald-200 px-2 rounded text-sm">0</span>
+                </h3>
+                <div id="completed-zone" ondragover="allowDrop(event)" ondrop="dropTask(event, 'completed')" class="space-y-3 min-h-[280px]">
+                    </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-6 mt-12 text-sm">
+        <p>&copy; 2026 EduFlow Tracker. Visual assignment management made simple.</p>
+    </footer>
+
+    <script>
+        // --- DATA PERSISTENCE (Web Storage API) ---
+        // Retrieve existing assignments or start with default placeholder items if database is empty
+        let taskList = JSON.parse(localStorage.getItem('eduFlowTasks')) || [
+            { id: "task-1", title: "Maths Integration Sheet", date: "2026-06-20", status: "todo" },
+            { id: "task-2", title: "Compiler Design Practical", date: "2026-06-18", status: "progress" }
+        ];
+
+        // Renders assignments systematically across columns based on status values
+        function renderBoard() {
+            // Define references to the 3 target zone sections
+            const todoZone = document.getElementById('todo-zone');
+            const progressZone = document.getElementById('progress-zone');
+            const completedZone = document.getElementById('completed-zone');
+
+            // Clear previous cards inside the container columns before population loop
+            todoZone.innerHTML = '';
+            progressZone.innerHTML = '';
+            completedZone.innerHTML = '';
+
+            // Initialize column item counters
+            let counts = { todo: 0, progress: 0, completed: 0 };
+
+            taskList.forEach(task => {
+                counts[task.status]++;
+
+                // Create individual draggable card block
+                const taskCard = document.createElement('div');
+                taskCard.id = task.id;
+                
+                // --- API #4: HTML5 DRAG & DROP PROPERTIES ---
+                taskCard.setAttribute('draggable', 'true');
+                taskCard.ondragstart = function(event) {
+                    event.dataTransfer.setData("text/plain", task.id);
+                };
+
+                // Visual styling for standard assignments cards
+                taskCard.className = "p-4 bg-white rounded-lg shadow-sm border border-slate-200 cursor-grab active:cursor-grabbing hover:border-emerald-400 transition";
+                taskCard.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <h4 class="font-bold text-slate-800 text-sm">${task.title}</h4>
+                        <button onclick="deleteTask('${task.id}')" class="text-xs text-red-400 hover:text-red-600 ml-2">✕</button>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2">📅 Due: ${task.date}</p>
+                `;
+
+                // Append card layout block into the respective matching status list column
+                if (task.status === 'todo') todoZone.appendChild(taskCard);
+                if (task.status === 'progress') progressZone.appendChild(taskCard);
+                if (task.status === 'completed') completedZone.appendChild(taskCard);
+            });
+
+            // Update column badges text numbers dynamically
+            document.getElementById('todo-count').innerText = counts.todo;
+            document.getElementById('progress-count').innerText = counts.progress;
+            document.getElementById('completed-count').innerText = counts.completed;
+        }
+
+        // --- API #5: FORM INPUT CHECKS (Constraint Validation API) ---
+        function addAssignment(event) {
+            event.preventDefault(); // Stop standard default browser layout refreshing behavior
+
+            const titleInput = document.getElementById('taskTitle');
+            const dateInput = document.getElementById('taskDate');
+
+            // Explicit native programmatic trigger check validation test evaluation
+            if (!titleInput.checkValidity() || !dateInput.checkValidity()) {
+                alert("Please fill out all task requirements accurately.");
+                return;
+            }
+
+            // Assemble formal target database node data block instance structure
+            const newTask = {
+                id: "task-" + Date.now(), // Generate custom tracking ID numbers
+                title: titleInput.value,
+                date: dateInput.value,
+                status: "todo" // Automatically set new entries to standard pending queue initially
+            };
+
+            taskList.push(newTask);
+            saveAndRefresh();
+            document.getElementById('assignmentForm').reset();
+        }
+
+        // --- DRAG & DROP LOGIC FUNCTIONS ---
+        // Prevents default behavior to allow items to be dropped into target columns
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        // Triggered when item card node is dropped onto target column zone element
+        function dropTask(event, newStatus) {
+            event.preventDefault();
+            const taskId = event.dataTransfer.getData("text/plain");
+            
+            // Find matched card record array item reference entry inside memory storage space
+            const targetTask = taskList.find(t => t.id === taskId);
+            if (targetTask) {
+                targetTask.status = newStatus; // Alter card assignment category state value update
+                saveAndRefresh();
+            }
+        }
+
+        function deleteTask(taskId) {
+            taskList = taskList.filter(t => t.id !== taskId);
+            saveAndRefresh();
+        }
+
+        // Sync items into localStorage and rebuild active board layouts view
+        function saveAndRefresh() {
+            localStorage.setItem('eduFlowTasks', JSON.stringify(taskList));
+            renderBoard();
+        }
+
+        // Initial setup initialization board render execution block loop call on load
+        renderBoard();
+    </script>
+</body>
+</html>

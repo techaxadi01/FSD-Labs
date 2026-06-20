@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/svg+xml" href="logo.svg?v=1">
+    <title>EduFlow - Academic Resource & Assignment Management Platform</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Smooth Scrolling -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-b from-white via-emerald-50/30 to-slate-50 text-slate-800">
+
+    <!-- HEADER -->
+    <header id="home"></header>
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50
+        bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500
+        shadow-xl">
+
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="flex justify-between items-center h-20">
+
+                <!-- LOGO -->
+                <a href="index.html" class="flex items-center gap-3">
+                    <span class="text-3xl font-bold text-white">
+                        <i class="fas fa-graduation-cap text-xl"></i> EduFlow
+                    </span>
+                </a>
+
+                <!-- NAVIGATION LINKS -->
+                <ul class="hidden md:flex gap-8 font-medium text-white">
+                    <li><a href="#home" class="hover:text-emerald-100 transition">Home</a></li>
+                    <li><a href="#utility" class="hover:text-emerald-100 transition">Utility Hub</a></li>
+                    <li><a href="#ai-bot" class="hover:text-emerald-100 transition">AI Bot</a></li>
+                    <li><a href="peer.html" class="hover:text-emerald-100 transition">Peer Radar</a></li>
+                    <li><a href="focus.html" class="hover:text-emerald-100 transition">Focus Mode</a></li>
+                </ul>
+
+                <!-- Buttons -->
+                <div class="hidden md:flex gap-4">
+
+                    <a href="login.html"
+                        class="px-5 py-2.5 rounded-xl border border-white text-white font-semibold
+                        hover:bg-white/20 hover:scale-105 transition duration-200">
+                        Login
+                    </a>
+
+                    <a href="signup.html"
+                        class="px-5 py-2.5 rounded-xl bg-white text-emerald-600 font-bold
+                        hover:bg-emerald-50 hover:scale-105 shadow-md transition duration-200">
+                        Get Started
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+        
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="relative flex items-center justify-center bg-slate-950 overflow-hidden py-24">
+
+        <video id="heroVideo" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover pointer-events-none z-0">
+            <source src="bg.mp4" type="video/mp4">
+        </video>
+
+        <div class=" relative z-20 w-full max-w-7xl mx-auto px-6">
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+                <!-- Left Grid -->
+                <div>
+
+                    <div class="inline-block bg-white px-5 py-2 rounded-full shadow mb-6">
+                        <span class="text-emerald-600 font-medium">
+                            Next Generation Learning Platform
+                        </span>
+                    </div>
+
+                    <h3 class="text-emerald-700 text-4xl md:text-5xl lg:text-5xl font-bold leading-tight mb-6">
+                        Your All-in-One Academic Resource & Assignment Management Platform
+                    </h3>
+
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Access resources, connect with teachers, collaborate with peers, manage assignments, discover free tools and use AI-powered learning assistance.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+
+                        <a href="#" 
+                            class="bg-emerald-500 
+                            text-white
+                            px-6 py-3
+                            rounded-xl
+                            shadow-lg
+                            hover:bg-teal-600
+                            hover:scale-105
+                            transition">
+
+                            Explore Resources
+
+                        </a>
+
+                        <a href="signup.html" 
+                            class="bg-white
+                            border border-emerald-500
+                            text-emerald-600
+                            px-6 py-3
+                            rounded-xl
+                            hover:bg-slate-200
+                            hover:border-emerald-600
+                            hover:scale-105
+                            transition">
+
+                            Get Started
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- Right Grid -->
+                <div>
+                    <div class="bg-white rounded-3xl shadow-xl p-8">
+
+                        <div class="grid grid-cols-2 gap-6">
+
+                            <a href="peer.html" class="block bg-slate-50 rounded-2xl p-6 text-center shadow border border-transparent hover:border-emerald-400 hover:scale-105 transition duration-300 cursor-pointer">
+                                <i class="fas fa-users text-4xl text-purple-600"></i>
+                                <h3 class="font-semibold mt-4 text-slate-800">
+                                    Peer Radar
+                                </h3>
+                            </a>
+
+                            <a href="focus.html" class="block bg-slate-50 rounded-2xl p-6 text-center shadow border border-transparent hover:border-emerald-400 hover:scale-105 transition duration-300 cursor-pointer">
+                                <i class="fas fa-stopwatch text-4xl text-orange-600"></i>
+                                <h3 class="font-semibold mt-4 text-slate-800">
+                                    Focus Mode
+                                </h3>
+                            </a>
+
+                            <a href="#" class="block bg-slate-50 rounded-2xl p-6 text-center shadow border border-transparent hover:border-emerald-400 hover:scale-105 transition duration-300 cursor-pointer">
+                                <i class="fas fa-list-check text-4xl text-red-500"></i>
+                                <h3 class="font-semibold mt-4 text-slate-800">
+                                    Assignments
+                                </h3>
+                            </a>
+
+                            <a href="#ai-bot" class="block bg-slate-50 rounded-2xl p-6 text-center shadow border border-transparent hover:border-emerald-400 hover:scale-105 transition duration-300 cursor-pointer">
+                                <i class="fas fa-robot text-4xl text-blue-600"></i>
+                                <h3 class="font-semibold mt-4 text-slate-800">
+                                    AI Tools
+                                </h3>
+                            </a>
+
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Utility Hub -->
+    <section id="utility" class="py-24">
+
+        <div class="max-w-7xl mx-auto px-6">
+
+            <h2 class="text-5xl font-bold text-center mb-4">Take Your Learning to the Next Level</h2>
+            <p class="text-center text-gray-500 mb-16">
+                One platform for learning, collaboration, productivity and growth.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <div class="bg-white rounded-xl shadow p-6 text-center">
+                    <i class="fas fa-users text-4xl text-purple-500"></i>
+                    <h3 class="font-semibold mt-4">Student Collaboration</h3>
+                    <p class="mt-2 text-gray-600">
+                        Find study partners and collaborate on projects.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow p-6 text-center">
+                    <i class="fas fa-chalkboard-user text-4xl text-emerald-600"></i>
+                    <h3 class="font-semibold mt-4">Teacher Connect</h3>
+                    <p class="mt-2 text-gray-600">
+                        Faculty interaction, mentorship and academic guidance.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow p-6 text-center">
+                    <i class="fas fa-stopwatch text-4xl text-orange-500"></i>
+                    <h3 class="text-2xl font-bold mt-4">Focus Mode</h3>
+                    <p class="mt-2 text-gray-600">
+                        Study with all the Distractions Blocked.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow p-6 text-center">
+                    <i class="fas fa-list-check text-4xl text-blue-500"></i>
+                    <h3 class="font-semibold mt-4">Assignment Tracker</h3>
+                    <p class="mt-2 text-gray-600">
+                        Track deadlines and receive smart reminders.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow p-6 text-center">
+                    <i class="fas fa-calendar-check text-4xl text-red-500"></i>
+                    <h3 class="text-2xl font-bold mt-4">Study Planner</h3>
+                    <p class="mt-2 text-gray-600">
+                        Plan your Day & Stay Productive.
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow p-6 text-center">
+                    <i class="fas fa-circle-question text-4xl ttext-amber-500"></i>
+                    <h3 class="text-2xl font-bold mt-4">Quiz Generator</h3>
+                    <p class="mt-2 text-gray-600">
+                        Revise what you Studied through AI made Quizes.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow p-6 text-center">
+                    <i class="fas fa-book text-4xl text-purple-400"></i>
+                    <h3 class="font-semibold mt-4">Academic Resources</h3>
+                    <p class="mt-2 text-gray-600">
+                        Notes, PDFs, PYQs, lab manuals and curated learning material.
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow p-6 text-center">
+                    <i class="fas fa-robot text-4xl text-blue-600"></i>
+                    <h3 class="font-semibold mt-4">AI Study Assistant</h3>
+                    <p class="mt-2 text-gray-600">
+                        Generate summaries, quizzes and study plans.
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow p-6 text-center">
+                    <i class="fas fa-briefcase text-4xl text-amber-800"></i>
+                    <h3 class="font-semibold mt-4">Career Development</h3>
+                    <p class="mt-2 text-gray-600">
+                        Access internships, job opportunities and professional growth resources.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    
+    <!-- AI Bot -->
+    <section id="ai-bot" class="bg-gradient-to-b from-slate-100 to-white py-24">
+        
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <h2 class="text-5xl font-bold text-center mb-16">AI Powered Learning</h2>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <div class="glass rounded-2xl p-8">
+                    <i class="fas fa-file-lines text-4xl text-emerald-400"></i>
+                    <h3 class="text-2xl font-bold mt-4">Notes Summarizer</h3>
+                </div>
+                
+                <div class="glass rounded-2xl p-8">
+                    <i class="fas fa-calendar-check text-4xl text-blue-400"></i>
+                    <h3 class="text-2xl font-bold mt-4">Study Planner</h3>
+                </div>
+                
+                <div class="glass rounded-2xl p-8">
+                    <i class="fas fa-circle-question text-4xl text-purple-400"></i>
+                    <h3 class="text-2xl font-bold mt-4">Quiz Generator</h3>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </section>
+
+    <!-- TYPOGRAPHY SECTION -->
+    <section class="bg-slate-800 text-white py-24">
+        
+        <div class="max-w-4xl mx-auto px-6 prose prose-lg prose-invert">
+            
+            <h2 class="text-4xl font-bold text-white mb-6">
+                How AI is Transforming Education
+            </h2>
+            
+            <p class="mb-4">
+                Artificial Intelligence is revolutionizing learning through adaptive study recommendations, automated assessments, note summarization and intelligent tutoring systems.
+            </p>
+
+            <p class="mb-4">
+                EduFlow combines resources, assignments, collaboration and AI-driven assistance to help students learn more effectively and stay productive.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-black text-gray-300">
+
+        <div class="max-w-8xl mx-auto px-10 py-12">
+            
+            <div class="grid md:grid-cols-11 gap-10">
+                
+                <div class="max-w-xs md:col-span-3 mr-10 pl-10">
+                    <h3 class="text-white text-2xl font-bold mb-4">EduFlow</h3>
+                    <p>
+                        Empowering students through technology, collaboration and AI.
+                    </p>
+                </div>
+
+                <div class="md:col-span-4 grid md:grid-cols-2 gap-7">
+
+                    <div>
+                        <h4 class="text-white font-semibold mb-4">Resources</h4>
+                        <ul class="space-y-2">
+                            <li>Notes</li>
+                            <li>Assignments</li>
+                            <li>Courses</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-white font-semibold mb-4">Community</h4>
+                        <ul class="space-y-2">
+                            <li>Students</li>
+                            <li>Teachers</li>
+                            <li>Projects</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="md:col-span-2">
+
+                    <h4 class="text-white font-semibold mb-4">Follow Us</h4>
+
+                    <div class="flex gap-4 text-2xl">
+                        <i class="fab fa-github hover:text-white"></i>
+                        <i class="fab fa-linkedin hover:text-white"></i>
+                        <i class="fab fa-youtube hover:text-white"></i>
+                        <i class="fas fa-envelope hover:text-white"></i>
+                    </div>
+
+                    <div>
+                        <h5 class="text-white font-semibold mt-6 mb-2">Address</h5>
+                        <p>
+                            Bangalore, Karnataka,<br>India
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="md:col-span-2">
+
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-white font-semibold">Geo Location</h4>
+                        <button onclick="route()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold font-medium py-1 px-3 rounded-lg text-xs transition">
+                            Show Route
+                        </button>
+                    </div>
+
+                    <iframe id="MapFrame"
+                        class="w-full h-48 rounded-lg border border-slate-800" 
+                        loading="lazy" scrolling="no">
+                    </iframe>
+
+                    <div class="mt-2">
+                        <p class="text-sm text-gray-400 mt-2">
+                            Your Location: <span id="coordinates"></span>
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr class="border-gray-800 my-8">
+
+            <p class="text-center">
+                &copy; 2026 EduFlow. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+    <!-- Geolocation API -->
+    <script>
+        const campusLocation = "Bangalore";
+        let userLat = null;
+        let userLng = null;
+
+        (function() {
+            document.getElementById('MapFrame').src = `https://maps.google.com/maps?q=${campusLocation}&z=13&output=embed`;
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                        function(position) {
+                        userLat = position.coords.latitude;
+                        userLng = position.coords.longitude;
+
+                        document.getElementById('coordinates').innerText = 
+                            `${userLat.toFixed(2)}° N, ${userLng.toFixed(2)}° E`;
+                        },
+                        function(error) {
+                            document.getElementById('coordinates').innerText = "Access Denied";
+                            document.getElementById('coordinates').className = "text-red-400 font-bold";
+                        }
+                );
+            }
+        })();
+
+        function route(){
+            if (userLat && userLng){
+                document.getElementById('MapFrame').src = 
+                    `https://maps.google.com/maps?saddr=${userLat},${userLng}&daddr=${campusLocation}&output=embed`;
+            }
+        }
+    </script>
+
+</body>
+</html>

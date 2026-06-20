@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/svg+xml" href="logo.svg?v=1">
+    <title>EduFlow - Student Collaboration Hub</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Leaflet JS for Geolocation -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" 
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    
+    <!-- Smooth Scrolling -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-b from-white via-emerald-50/30 to-slate-50 text-slate-800">
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500 shadow-xl">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <!-- LOGO -->
+                <a href="index.html" class="flex items-center gap-3">
+                    <span class="text-3xl font-bold text-white">
+                        <i class="fas fa-graduation-cap text-xl"></i> EduFlow
+                    </span>
+                </a>
+
+                <!-- NAVIGATION LINKS -->
+                <ul class="hidden md:flex gap-8 font-medium text-white">
+                    <li><a href="index.html#home" class="hover:text-emerald-100 transition">Home</a></li>
+                    <li><a href="index.html#resources" class="hover:text-emerald-100 transition">Resources</a></li>
+                    <li><a href="index.html#teachers" class="hover:text-emerald-100 transition">Teachers</a></li>
+                    <li><a href="index.html#assignments" class="hover:text-emerald-100 transition">Assignments</a></li>
+                    <li><a href="#peer-map-section" class="hover:text-emerald-100 transition font-bold underline">Find Peers</a></li>
+                </ul>
+
+                <div class="hidden md:flex gap-3">
+                    <span class="text-white font-semibold flex items-center gap-2 bg-white/20 px-4 py-2 rounded-xl">
+                        <i class="fas fa-user-circle"></i> Student Portal
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- HERO SECTION -->
+    <section class="bg-slate-950 text-white py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-emerald-900/40 to-teal-900/40 z-10"></div>
+        <div class="relative z-20 max-w-7xl mx-auto px-6 text-center">
+            <div class="inline-block bg-emerald-500/20 text-emerald-400 px-5 py-2 rounded-full shadow border border-emerald-500/30 mb-4">
+                <span class="font-medium"><i class="fas fa-users-nodes mr-2"></i>EduFlow Peer Network</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Student Collaboration & Study Groups</h1>
+            <p class="max-w-2xl mx-auto text-gray-400 text-lg">
+                Discover local campus study pairs, form interactive project groups, coordinate assignments, and share essential resources.
+            </p>
+        </div>
+    </section>
+
+    <!-- GEOLOCATION & PEER FINDER MAP -->
+    <section id="peer-map-section" class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden grid lg:grid-cols-3">
+                
+                <!-- Sidebar Control Panel -->
+                <div class="p-8 bg-slate-50 border-r border-slate-100 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+                            <i class="fas fa-location-crosshairs text-emerald-500"></i> Nearby Peers
+                        </h3>
+                        <p class="text-sm text-gray-500 mb-6">
+                            Allow location services to see fellow students currently active on campus or looking for partners.
+                        </p>
+
+                        <div class="space-y-4" id="peer-list">
+                            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-slate-800">Rahul K. (CSE)</h4>
+                                    <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full font-medium">Compiler Design</span>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1"><i class="fas fa-map-marker-alt text-red-500 mr-1"></i> Library Room 3A</p>
+                            </div>
+
+                            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-slate-800">Sneha M. (ECE)</h4>
+                                    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-medium">Signal Processing</span>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1"><i class="fas fa-map-marker-alt text-red-500 mr-1"></i> Block 2 Cafeteria</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-200">
+                        <button onclick="requestNotifications()" class="w-full bg-slate-900 text-white font-medium py-2.5 px-4 rounded-xl hover:bg-slate-800 transition flex items-center justify-center gap-2 text-sm">
+                            <i class="fas fa-bell text-yellow-400"></i> Enable Match Notifications
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Map Interface Box -->
+                <div class="lg:col-span-2 h-[450px] lg:h-auto min-h-[400px] relative">
+                    <div id="peerMap" class="w-full h-full z-0"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE GROUP CREATOR & PERSISTENCE HUB -->
+    <section class="py-12 bg-gradient-to-b from-white to-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- Form Module: Create Study Circle -->
+                <div class="bg-white p-8 rounded-2xl shadow-md border border-slate-100">
+                    <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <i class="fas fa-plus-circle text-emerald-600"></i> Form Study Group
+                    </h3>
+                    
+                    <form id="groupForm" onsubmit="createStudyGroup(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">Subject / Topic</label>
+                            <input id="groupSubject" type="text" placeholder="e.g., Data Structures Quiz Prep" required
+                                class="w-full px-4 py-2 border border-slate-200 rounded-xl focus:outline-none focus:border-emerald-500 transition text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">Meeting Destination</label>
+                            <input id="groupVenue" type="text" placeholder="e.g., Central Library Lab 2" required
+                                class="w-full px-4 py-2 border border-slate-200 rounded-xl focus:outline-none focus:border-emerald-500 transition text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">Target Time Slot</label>
+                            <input id="groupTime" type="time" required
+                                class="w-full px-4 py-2 border border-slate-200 rounded-xl focus:outline-none focus:border-emerald-500 transition text-sm">
+                        </div>
+                        <button type="submit" class="w-full bg-emerald-500 text-white font-semibold py-2.5 rounded-xl hover:bg-emerald-600 shadow-md hover:shadow-lg transition text-sm">
+                            Publish Group Invitation
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Display Module: Active Dynamic Groups (Driven via LocalStorage) -->
+                <div class="md:col-span-2 bg-white p-8 rounded-2xl shadow-md border border-slate-100">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fas fa-folder-open text-teal-600"></i> Active Shared Hubs
+                        </h3>
+                        <button onclick="clearGroups()" class="text-xs text-red-500 hover:underline flex items-center gap-1">
+                            <i class="fas fa-trash-can"></i> Reset Board Data
+                        </button>
+                    </div>
+
+                    <div id="groupsGrid" class="grid sm:grid-cols-2 gap-4">
+                        <!-- Dynamic content items generate here -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-gray-300 mt-12">
+        <div class="max-w-7xl mx-auto px-6 py-12 text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <h3 class="text-white text-2xl font-bold">EduFlow</h3>
+                    <p class="text-sm text-gray-400 mt-1">Empowering students through technology, collaboration and AI.</p>
+                </div>
+                <div class="flex gap-4 text-xl">
+                    <i class="fab fa-github hover:text-white cursor-pointer"></i>
+                    <i class="fab fa-linkedin hover:text-white cursor-pointer"></i>
+                    <i class="fab fa-youtube hover:text-white cursor-pointer"></i>
+                    <i class="fas fa-envelope hover:text-white cursor-pointer"></i>
+                </div>
+            </div>
+            <hr class="border-gray-800 my-6">
+            <p class="text-center text-xs text-gray-500">&copy; 2026 EduFlow. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- LOGIC SCRIPTS DRIVING HTML5 APIs -->
+    <script>
+        // Default Mock Coordinates (Centred on Bangalore Hub matching Landing Page)
+        let baseLat = 12.9716;
+        let baseLng = 77.5946;
+
+        // Initialize Leaflet Map Component
+        const peerMap = L.map('peerMap', {
+            zoomControl: true,
+            attributionControl: false
+        }).setView([baseLat, baseLng], 14);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(peerMap);
+
+        // Marker Styling Configuration
+        const userIcon = L.divIcon({
+            html: '<i class="fas fa-circle-user text-3xl text-emerald-500 drop-shadow"></i>',
+            iconSize: [30, 30], className: 'dummy-style'
+        });
+        const peerIcon = L.divIcon({
+            html: '<i class="fas fa-location-dot text-2xl text-purple-600 drop-shadow"></i>',
+            iconSize: [25, 25], className: 'dummy-style'
+        });
+
+        // 1. HTML5 Geolocation API Integration
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    baseLat = position.coords.latitude;
+                    baseLng = position.coords.longitude;
+
+                    peerMap.setView([baseLat, baseLng], 15);
+
+                    // Drop User Pin
+                    L.marker([baseLat, baseLng], {icon: userIcon}).addTo(peerMap)
+                        .bindPopup('<b>Your Current Location</b><br>Looking for peers.').openPopup();
+
+                    // Generate Dynamic Proximate Mock Pins relative to the actual User position
+                    generateLocalPeers(baseLat, baseLng);
+                },
+                function(error) {
+                    // Fallback to defaults gracefully if blocked
+                    L.marker([baseLat, baseLng], {icon: userIcon}).addTo(peerMap).bindPopup('Default Location');
+                    generateLocalPeers(baseLat, baseLng);
+                }
+            );
+        }
+
+        function generateLocalPeers(lat, lng) {
+            const peers = [
+                { name: "Rahul K. (CSE)", topic: "Compiler Design", offLat: 0.003, offLng: 0.002, loc: "Library Room 3A" },
+                { name: "Sneha M. (ECE)", topic: "Signal Processing", offLat: -0.002, offLng: 0.004, loc: "Block 2 Cafeteria" }
+            ];
+
+            peers.forEach(p => {
+                const pLat = lat + p.offLat;
+                const pLng = lng + p.offLng;
+                L.marker([pLat, pLng], {icon: peerIcon}).addTo(peerMap)
+                    .bindPopup(`<b>${p.name}</b><br>Topic: ${p.topic}<br>📍 ${p.loc}`);
+            });
+        }
+
+        // 2. HTML5 Web Storage API Integration (Persistent Session Initialization)
+        let groupCollection = JSON.parse(localStorage.getItem('eduFlowGroups')) || [
+            { id: 1, subject: "Web Development Sprint", venue: "Lab Complex 4", time: "14:30" },
+            { id: 2, subject: "Mathematics II Tutorial Study", venue: "Block 1 Seminar Lounge", time: "16:00" }
+        ];
+
+        function renderGroupBoard() {
+            const displayGrid = document.getElementById('groupsGrid');
+            displayGrid.innerHTML = '';
+
+            if(groupCollection.length === 0) {
+                displayGrid.innerHTML = `
+                    <div class="col-span-2 text-center py-8 text-gray-400">
+                        <i class="fas fa-ghost text-3xl mb-2"></i>
+                        <p class="text-sm">No active groups published. Create one to begin!</p>
+                    </div>`;
+                return;
+            }
+
+            groupCollection.forEach(group => {
+                const element = document.createElement('div');
+                element.className = "bg-slate-50 p-5 rounded-xl border border-slate-200/60 flex flex-col justify-between hover:shadow-md transition";
+                element.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start gap-2 mb-2">
+                            <h4 class="font-bold text-slate-800 text-base leading-tight">${group.subject}</h4>
+                            <span class="text-xs font-semibold px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200/50 rounded-md shrink-0">
+                                <i class="far fa-clock mr-1"></i>${group.time}
+                            </span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4 flex items-center gap-1.5">
+                            <i class="fas fa-map-pin text-slate-400 text-xs"></i> ${group.venue}
+                        </p>
+                    </div>
+                    <button onclick="shareStudyGroup('${group.subject}', '${group.venue}')" 
+                        class="text-xs font-medium text-slate-500 hover:text-emerald-600 flex items-center justify-center gap-1.5 py-1.5 bg-white border border-slate-200 rounded-lg hover:border-emerald-200 transition">
+                        <i class="fas fa-arrow-up-from-bracket"></i> Invite External Peers
+                    </button>
+                `;
+                displayGrid.appendChild(element);
+            });
+        }
+
+        function createStudyGroup(e) {
+            e.preventDefault();
+            const subject = document.getElementById('groupSubject').value;
+            const venue = document.getElementById('groupVenue').value;
+            const time = document.getElementById('groupTime').value;
+
+            const newGroup = { id: Date.now(), subject, venue, time };
+            groupCollection.push(newGroup);
+            
+            // Save inside persistent system
+            localStorage.setItem('eduFlowGroups', JSON.stringify(groupCollection));
+            renderGroupBoard();
+            document.getElementById('groupForm').reset();
+
+            // Fire UI Notification alert triggered internally
+            triggerSystemAlert("Group Created Successfully!", `New session opened for ${subject}.`);
+        }
+
+        function clearGroups() {
+            groupCollection = [];
+            localStorage.removeItem('eduFlowGroups');
+            renderGroupBoard();
+        }
+
+        // 3. HTML5 Notifications API Integration
+        function requestNotifications() {
+            if ("Notification" in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        triggerSystemAlert("Alert Engine Configured", "You will get notified when matching study partners approach your spot.");
+                    }
+                });
+            } else {
+                alert("This browser variant does not support integrated notification prompts.");
+            }
+        }
+
+        function triggerSystemAlert(title, message) {
+            if ("Notification" in window && Notification.permission === "granted") {
+                new Notification(title, { body: message, icon: 'logo.svg' });
+            } else {
+                // Flash alert fallback layout
+                alert(`${title}\n${message}`);
+            }
+        }
+
+        // 4. HTML5 Web Share API Integration
+        function shareStudyGroup(subject, venue) {
+            if (navigator.share) {
+                navigator.share({
+                    title: `Join our EduFlow Study Circle`,
+                    text: `Let's work together on: "${subject}" over at ${venue}.`,
+                    url: window.location.href
+                })
+                .then(() => console.log('Successfully broadcasted.'))
+                .catch((err) => console.log('Sharing canceled/aborted.', err));
+            } else {
+                // Fallback action if Web Share is unavailable via active browser instance
+                alert(`🔗 Direct Link Copied!\nInvite details: Join session on "${subject}" inside "${venue}".`);
+            }
+        }
+
+        // Execute board compilation loop on load
+        renderGroupBoard();
+    </script>
+</body>
+</html>

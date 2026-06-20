@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduFlow Lab 2 - HTML5 APIs</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>html{scroll-behavior:smooth}</style>
+</head>
+<body class="bg-slate-50">
+
+<nav class="bg-gradient-to-r from-emerald-600 to-teal-500 text-white p-4 sticky top-0">
+<div class="max-w-7xl mx-auto flex justify-between">
+<h1 class="font-bold text-2xl"><i class="fas fa-graduation-cap"></i> EduFlow</h1>
+<button onclick="savePreference()" class="bg-white text-emerald-600 px-4 py-2 rounded">Save Preference</button>
+</div>
+</nav>
+
+<section class="bg-gradient-to-br from-emerald-50 to-teal-100 py-20 text-center">
+<h2 class="text-5xl font-bold mb-4">Academic Resource & Assignment Management Platform</h2>
+<p class="text-gray-700">Lab 2 Demonstration using HTML5 APIs</p>
+</section>
+
+<section class="py-16">
+<div class="max-w-7xl mx-auto px-6">
+<h2 class="text-4xl font-bold text-center mb-10">Student Productivity Hub</h2>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+<div class="bg-white p-6 rounded-xl shadow">
+<h3 class="font-bold text-xl mb-4">File API</h3>
+<input type="file" id="resourceFile" class="border p-2 w-full">
+<p id="fileName" class="mt-3">No file selected</p>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow">
+<h3 class="font-bold text-xl mb-4">Clipboard API</h3>
+<input id="resourceLink" value="https://eduflow.com/resources" class="border p-2 w-full">
+<button onclick="copyLink()" class="mt-3 bg-emerald-500 text-white px-4 py-2 rounded">Copy Link</button>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow">
+<h3 class="font-bold text-xl mb-4">Geolocation API</h3>
+<button onclick="getLocation()" class="bg-blue-500 text-white px-4 py-2 rounded">Get Location</button>
+<p id="locationResult" class="mt-3"></p>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow">
+<h3 class="font-bold text-xl mb-4">Local Storage API</h3>
+<input id="assignmentName" placeholder="Assignment Name" class="border p-2 w-full">
+<button onclick="saveAssignment()" class="mt-3 bg-emerald-500 text-white px-4 py-2 rounded">Save</button>
+<ul id="assignmentList" class="mt-3"></ul>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow">
+<h3 class="font-bold text-xl mb-4">Notification API</h3>
+<button onclick="showReminder()" class="bg-yellow-500 text-white px-4 py-2 rounded">Reminder</button>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow">
+<h3 class="font-bold text-xl mb-4">Session Storage API</h3>
+<button onclick="savePreference()" class="bg-purple-500 text-white px-4 py-2 rounded">Save Preference</button>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="bg-slate-100 py-16">
+<div class="max-w-3xl mx-auto px-6">
+<h2 class="text-4xl font-bold text-center mb-8">AI Study Assistant</h2>
+<div class="bg-white p-6 rounded-xl shadow">
+<div id="chatBox" class="h-64 overflow-y-auto border p-4 rounded mb-4">
+<p><strong>Bot:</strong> Hello! Ask a study-related question.</p>
+</div>
+<input id="userInput" class="border p-2 w-full mb-3" placeholder="Ask something...">
+<div class="flex gap-3">
+<button onclick="sendMessage()" class="bg-emerald-500 text-white px-4 py-2 rounded">Send</button>
+<button onclick="startVoiceSearch()" class="bg-blue-500 text-white px-4 py-2 rounded">🎤 Speak</button>
+</div>
+</div>
+</div>
+</section>
+
+<footer class="bg-black text-white text-center p-6">
+<p>EduFlow Lab 2 - HTML5 APIs Demonstration</p>
+</footer>
+
+<script>
+document.getElementById("resourceFile").addEventListener("change",function(){
+const file=this.files[0];
+document.getElementById("fileName").innerText=file?"Selected: "+file.name:"No file selected";
+});
+
+function copyLink(){
+navigator.clipboard.writeText(document.getElementById("resourceLink").value);
+alert("Link copied");
+}
+
+function getLocation(){
+navigator.geolocation.getCurrentPosition(function(pos){
+document.getElementById("locationResult").innerHTML=
+"Latitude: "+pos.coords.latitude+"<br>Longitude: "+pos.coords.longitude;
+});
+}
+
+function loadAssignments(){
+let a=JSON.parse(localStorage.getItem("assignments"))||[];
+document.getElementById("assignmentList").innerHTML=a.map(x=>"<li>"+x+"</li>").join("");
+}
+
+function saveAssignment(){
+let v=document.getElementById("assignmentName").value;
+if(!v)return;
+let a=JSON.parse(localStorage.getItem("assignments"))||[];
+a.push(v);
+localStorage.setItem("assignments",JSON.stringify(a));
+document.getElementById("assignmentName").value="";
+loadAssignments();
+}
+
+function showReminder(){
+Notification.requestPermission().then(p=>{
+if(p==="granted"){
+new Notification("EduFlow Reminder",{body:"You have pending assignments"});
+}
+});
+}
+
+function savePreference(){
+sessionStorage.setItem("theme","light");
+alert("Preference saved for current session");
+}
+
+function sendMessage(){
+let input=document.getElementById("userInput");
+let q=input.value;
+if(!q)return;
+let chat=document.getElementById("chatBox");
+chat.innerHTML+="<p><strong>You:</strong> "+q+"</p>";
+let r="Please ask a study-related question.";
+let t=q.toLowerCase();
+if(t.includes("fsd")) r="Learn HTML, CSS, JavaScript, React and Node.js.";
+else if(t.includes("assignment")) r="Break assignments into smaller tasks.";
+else if(t.includes("study")) r="Create a study schedule and revise regularly.";
+else if(t.includes("ai")) r="AI can summarize notes and generate quizzes.";
+chat.innerHTML+='<p class="text-green-600"><strong>Bot:</strong> '+r+'</p>';
+input.value="";
+}
+
+function startVoiceSearch(){
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(!SR){alert("Speech Recognition not supported");return;}
+const rec=new SR();
+rec.start();
+rec.onresult=function(e){
+document.getElementById("userInput").value=e.results[0][0].transcript;
+};
+}
+
+window.onload=loadAssignments;
+</script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="logo.svg?v=1">
+    <title>EduFlow - Dynamic Timetable Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .drag-hover {
+            background-color: rgba(239, 68, 68, 0.15) !important;
+            border-color: #ef4444 !important;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-slate-900 to-slate-950 text-white min-h-screen flex flex-col items-center p-6 font-sans relative">
+
+    <div class="w-full max-w-6xl flex justify-between items-center text-sm mb-6 mt-2">
+        <a href="index.html" class="text-slate-400 hover:text-white transition flex items-center gap-2">
+            <i class="fas fa-arrow-left"></i> Exit to Dashboard Hub
+        </a>
+        <span class="text-xs text-slate-500 font-mono">Lab 3: Form Processing & Drag-and-Drop Events</span>
+    </div>
+
+    <div class="w-full max-w-6xl grid md:grid-cols-3 gap-8">
+        
+        <div class="space-y-6">
+            
+            <div id="assessmentCard" class="bg-slate-900/50 backdrop-blur-md border border-slate-800 rounded-3xl p-6 shadow-2xl space-y-4">
+                <div>
+                    <h2 class="text-xl font-bold tracking-tight text-red-500"><i class="fas fa-question-circle mr-2"></i>1. Assessment Survey</h2>
+                    <p class="text-slate-400 text-xs mt-0.5">Tell us your constraints to generate a balanced setup.</p>
+                </div>
+
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Daily Available Study Hours</label>
+                        <input type="number" id="dailyHours" value="3" min="1" max="12"
+                            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-red-500 transition-all">
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Study Intensity Level</label>
+                        <select id="intensityMode" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 transition-all">
+                            <option value="balanced">Standard Balanced Split</option>
+                            <option value="heavy">Heavy Exam Mode (+ Overtime blocks)</option>
+                        </select>
+                    </div>
+
+                    <button id="generateBtn" class="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-500 hover:to-orange-500 font-bold text-xs uppercase tracking-wider py-2.5 rounded-xl shadow-lg transform active:scale-95 transition-all">
+                        Generate Balanced Plan
+                    </button>
+                </div>
+            </div>
+
+            <div id="plannerMonitor" class="bg-slate-950 rounded-2xl p-4 font-mono text-[11px] space-y-1.5 border border-slate-800">
+                <span class="text-slate-500">// Real-Time Event Telemetry:</span>
+                <p id="plannerEvent" class="text-amber-400 font-bold">> Awaiting assessment entry...</p>
+            </div>
+
+            <div class="bg-slate-900/50 backdrop-blur-md border border-slate-800 rounded-3xl p-6 shadow-2xl">
+                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-3"><i class="fas fa-layer-group mr-2"></i>Subject Elements Bank (Drag to Modify)</label>
+                <div class="grid grid-cols-2 gap-2" id="subjectBank">
+                    <div class="bg-slate-950 border border-slate-800 p-2 rounded-xl text-center text-xs font-medium cursor-grab active:cursor-grabbing hover:border-red-500/50 transition" draggable="true" id="sub-math">📐 Mathematics</div>
+                    <div class="bg-slate-950 border border-slate-800 p-2 rounded-xl text-center text-xs font-medium cursor-grab active:cursor-grabbing hover:border-red-500/50 transition" draggable="true" id="sub-physics">⚡ Physics</div>
+                    <div class="bg-slate-950 border border-slate-800 p-2 rounded-xl text-center text-xs font-medium cursor-grab active:cursor-grabbing hover:border-red-500/50 transition" draggable="true" id="sub-coding">💻 Computer Sci</div>
+                    <div class="bg-slate-950 border border-slate-800 p-2 rounded-xl text-center text-xs font-medium cursor-grab active:cursor-grabbing hover:border-red-500/50 transition" draggable="true" id="sub-eng">📚 English Lit</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="md:col-span-2 space-y-4">
+            <div class="flex justify-between items-center">
+                <h2 class="text-xl font-bold tracking-tight"><i class="fas fa-calendar-alt text-red-500 mr-2"></i>2. Interactive Study Schedule Workspace</h2>
+                <span class="text-xs text-slate-500 bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">Drag items to rearrange</span>
+            </div>
+            
+            <div id="timetableGrid" class="space-y-2.5">
+                <div class="bg-slate-900/30 border border-slate-800/60 p-4 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 drop-zone" id="zone-monday">
+                    <span class="font-bold text-xs uppercase tracking-wider text-slate-400 w-24 flex items-center gap-2"><i class="fas fa-calendar-day text-slate-600"></i> Monday</span>
+                    <div class="flex flex-wrap gap-2 items-center flex-1 min-h-[46px] border border-dashed border-slate-800/80 rounded-xl p-1 px-3 slots-container"></div>
+                </div>
+                <div class="bg-slate-900/30 border border-slate-800/60 p-4 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 drop-zone" id="zone-tuesday">
+                    <span class="font-bold text-xs uppercase tracking-wider text-slate-400 w-24 flex items-center gap-2"><i class="fas fa-calendar-day text-slate-600"></i> Tuesday</span>
+                    <div class="flex flex-wrap gap-2 items-center flex-1 min-h-[46px] border border-dashed border-slate-800/80 rounded-xl p-1 px-3 slots-container"></div>
+                </div>
+                <div class="bg-slate-900/30 border border-slate-800/60 p-4 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 drop-zone" id="zone-wednesday">
+                    <span class="font-bold text-xs uppercase tracking-wider text-slate-400 w-24 flex items-center gap-2"><i class="fas fa-calendar-day text-slate-600"></i> Wednesday</span>
+                    <div class="flex flex-wrap gap-2 items-center flex-1 min-h-[46px] border border-dashed border-slate-800/80 rounded-xl p-1 px-3 slots-container"></div>
+                </div>
+                <div class="bg-slate-900/30 border border-slate-800/60 p-4 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 drop-zone" id="zone-thursday">
+                    <span class="font-bold text-xs uppercase tracking-wider text-slate-400 w-24 flex items-center gap-2"><i class="fas fa-calendar-day text-slate-600"></i> Thursday</span>
+                    <div class="flex flex-wrap gap-2 items-center flex-1 min-h-[46px] border border-dashed border-slate-800/80 rounded-xl p-1 px-3 slots-container"></div>
+                </div>
+                <div class="bg-slate-900/30 border border-slate-800/60 p-4 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 drop-zone" id="zone-friday">
+                    <span class="font-bold text-xs uppercase tracking-wider text-slate-400 w-24 flex items-center gap-2"><i class="fas fa-calendar-day text-slate-600"></i> Friday</span>
+                    <div class="flex flex-wrap gap-2 items-center flex-1 min-h-[46px] border border-dashed border-slate-800/80 rounded-xl p-1 px-3 slots-container"></div>
+                </div>
+            </div>
+
+            <div class="bg-red-950/20 border border-red-900/30 rounded-xl p-3 flex items-center justify-center text-xs text-red-400 font-medium gap-2 drop-zone" id="zone-trash">
+                <i class="fas fa-trash-can"></i> Drag an item here to delete it from that day's row layout
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // DOM Node Target Selectors
+        const dailyHoursInput = document.getElementById('dailyHours');
+        const intensityModeSelect = document.getElementById('intensityMode');
+        const generateBtn = document.getElementById('generateBtn');
+        const plannerEvent = document.getElementById('plannerEvent');
+        
+        // Subject catalogs array mapped to generate uniform distributions
+        const subjectCatalog = [
+            { id: 'sub-math', text: '📐 Mathematics' },
+            { id: 'sub-physics', text: '⚡ Physics' },
+            { id: 'sub-coding', text: '💻 Computer Sci' },
+            { id: 'sub-eng', text: '📚 English Lit' }
+        ];
+
+        // Centralized tracking log output broadcast helper
+        function broadcastTelemetry(event, message) {
+            plannerEvent.innerText = `> Event: [${event}] - ${message}`;
+        }
+
+        // ====================================================================
+        // STAGE 1 LOGIC: DISPATCH BALANCED DISTRIBUTION DATA FROM INPUT QUESTIONS
+        // ====================================================================
+        
+        // Form trigger execution handler using Click Event Listener
+        generateBtn.addEventListener('click', function() {
+            const allowedHours = parseInt(dailyHoursInput.value) || 2;
+            const intensity = intensityModeSelect.value;
+            
+            // Determine how many study blocks to allocate across the 5 work days
+            let totalBlocksPerDay = Math.min(4, Math.floor(allowedHours));
+            if (intensity === 'heavy') totalBlocksPerDay += 1; // Inject structural runtime overhead blocks
+
+            const targetDaySlots = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+            let catalogueIndex = 0;
+
+            // Loop through each day row and append items evenly
+            targetDaySlots.forEach(day => {
+                const daySlotContainer = document.querySelector(`#zone-${day} .slots-container`);
+                daySlotContainer.innerHTML = ''; // Clear previous iterations completely
+
+                for (let i = 0; i < totalBlocksPerDay; i++) {
+                    // Pick the next subject sequentially to ensure an even distribution
+                    const targetSubject = subjectCatalog[catalogueIndex % subjectCatalog.length];
+                    catalogueIndex++;
+
+                    // Create a customizable interactive tracking item node block instance
+                    const dynamicNodeBlock = createScheduleBlockInstance(targetSubject.id, targetSubject.text);
+                    daySlotContainer.appendChild(dynamicNodeBlock);
+                }
+            });
+
+            broadcastTelemetry('click', `Calculated even distribution metrics: Populated ${totalBlocksPerDay} blocks/day.`);
+        });
+
+        // Form Inputs Event Tracking Observers
+        dailyHoursInput.addEventListener('focus', () => broadcastTelemetry('focus', 'Daily study threshold field active.'));
+        intensityModeSelect.addEventListener('change', () => broadcastTelemetry('change', `Target severity altered to: ${intensityModeSelect.value.toUpperCase()}`));
+
+        // ====================================================================
+        // STAGE 2 LOGIC: INTERACTIVE MANUAL REARRANGING (DRAG & DROP EVENTS)
+        // ====================================================================
+        
+        let activeDraggedNodeElement = null;
+
+        // Dynamic element node instantiation mapping engine factories
+        function createScheduleBlockInstance(baseId, elementText) {
+            const subjectBlockElement = document.createElement('div');
+            subjectBlockElement.className = "bg-slate-950 border border-slate-700 p-1.5 px-3 rounded-lg text-xs font-medium cursor-grab active:cursor-grabbing transition-all";
+            subjectBlockElement.innerText = elementText;
+            subjectBlockElement.draggable = true;
+            subjectBlockElement.id = `${baseId}-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`;
+
+            // Hook Event Listeners for the generated item instances
+            subjectBlockElement.addEventListener('dragstart', function(e) {
+                activeDraggedNodeElement = subjectBlockElement;
+                subjectBlockElement.style.opacity = '0.4';
+                broadcastTelemetry('dragstart', `Repositioning schedule block: ${elementText}`);
+                e.dataTransfer.setData('text/plain', subjectBlockElement.id);
+            });
+
+            subjectBlockElement.addEventListener('dragend', function() {
+                subjectBlockElement.style.opacity = '1';
+                broadcastTelemetry('dragend', `Placed down schedule block element.`);
+            });
+
+            return subjectBlockElement;
+        }
+
+        // Initialize the Draggable Bank elements available from the start
+        const catalogDraggables = document.querySelectorAll('#subjectBank [draggable="true"]');
+        catalogDraggables.forEach(nodeItem => {
+            nodeItem.addEventListener('dragstart', function(e) {
+                activeDraggedNodeElement = nodeItem;
+                nodeItem.style.opacity = '0.4';
+                broadcastTelemetry('dragstart', `Cloning template node asset: ${nodeItem.innerText}`);
+                e.dataTransfer.setData('text/plain', nodeItem.id);
+            });
+            nodeItem.addEventListener('dragend', () => nodeItem.style.opacity = '1');
+        });
+
+        // Initialize Drop Target Destination Framework zones
+        const targetDropZones = document.querySelectorAll('.drop-zone');
+        targetDropZones.forEach(zone => {
+            
+            zone.addEventListener('dragover', function(e) {
+                e.preventDefault(); // Required feature to allow valid object dropping behaviors
+                zone.classList.add('drag-hover');
+            });
+
+            zone.addEventListener('dragleave', function() {
+                zone.classList.remove('drag-hover');
+            });
+
+            zone.addEventListener('drop', function(e) {
+                e.preventDefault();
+                zone.classList.remove('drag-hover');
+
+                if (!activeDraggedNodeElement) return;
+
+                // Handle item removal via Trash Zone drop location
+                if (zone.id === 'zone-trash') {
+                    if (activeDraggedNodeElement.parentElement.classList.contains('slots-container')) {
+                        broadcastTelemetry('drop', `Successfully deleted [${activeDraggedNodeElement.innerText}] from row.`);
+                        activeDraggedNodeElement.remove();
+                    }
+                    return;
+                }
+
+                const targetedDestinationSlot = zone.querySelector('.slots-container');
+                if (targetedDestinationSlot) {
+                    
+                    // If dragged from the catalog bank side, clone it cleanly
+                    if (activeDraggedNodeElement.parentElement.id === 'subjectBank') {
+                        const targetIdData = activeDraggedNodeElement.id;
+                        const targetTextData = activeDraggedNodeElement.innerText;
+                        
+                        const instantiatedFreshClone = createScheduleBlockInstance(targetIdData, targetTextData);
+                        targetedDestinationSlot.appendChild(instantiatedFreshClone);
+                        broadcastTelemetry('drop', `Added fresh instance allocation of ${targetTextData} into list.`);
+                    } else {
+                        // Move an existing schedule block directly across days
+                        targetedDestinationSlot.appendChild(activeDraggedNodeElement);
+                        broadcastTelemetry('drop', `Rearranged block positioning sequence destination vectors.`);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

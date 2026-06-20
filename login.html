@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" type="image/svg+xml" href="logo.svg?v=1">
+    <title>EduFlow - Log In</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Smooth Scrolling -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-b from-white via-emerald-50/30 to-slate-50 text-slate-800">
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50
+        bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500
+        shadow-xl">
+
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="flex justify-between items-center h-20">
+
+                <!-- LOGO -->
+                <a href="index.html" class="flex items-center gap-3">
+                    <span class="text-3xl font-bold text-white">
+                        <i class="fas fa-graduation-cap text-xl"></i> EduFlow
+                    </span>
+                </a>
+
+                <!-- Buttons -->
+                <div class="hidden md:flex gap-3">
+
+                    <!--
+                    <a href="login.html"
+                        class="px-5 py-2 rounded-xl
+                        border border-white/100
+                        bg-white/30
+                        text-white-500
+                        font-semibold
+                        hover:bg-teal-500/75
+                        hover:border-white/100
+                        hover:scale-105
+                        transition">
+
+                        Login
+
+                    </a>
+                    -->
+
+                    <a href="signup.html"
+                        class="px-5 py-2 rounded-xl
+                        bg-white
+                        text-emerald-600
+                        font-semibold
+                        hover:scale-105
+                        transition">
+
+                        Get Started
+                        
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+        
+    </nav>
+    
+    <div class="bg-gradient-to-br from-teal-100 to-emerald-200 min-h-screen flex items-center justify-center p-4">
+        
+        <!-- Login Box -->
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 border border-emerald-100">
+            
+            <!-- Header -->
+            <div class="text-center mb-8 text-xl font-bold">
+                <p class="text-gray-500">Welcome back!</p>
+            </div>
+
+            <!-- Role -->
+            <div class="bg-slate-100 p-1.5 rounded-xl flex mb-6 relative">
+                <button id="studentToggleBtn" onclick="switchRole('student')" 
+                    class="w-1/2 py-2.5 text-sm font-semibold rounded-lg transition-all duration-300 bg-white text-emerald-700 shadow-sm">
+                    <i class="fas fa-user-graduate mr-2"></i>Student
+                </button>
+                <button id="teacherToggleBtn" onclick="switchRole('teacher')" 
+                    class="w-1/2 py-2.5 text-sm font-semibold rounded-lg transition-all duration-300 text-gray-500 hover:text-slate-800">
+                    <i class="fas fa-chalkboard-user mr-2"></i>Teacher
+                </button>
+            </div>
+
+            <!-- Label -->
+            <div class="mb-4">
+                <span id="roleLabel" class="text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">
+                    Student Account
+                </span>
+            </div>
+
+            <!-- Login Form -->
+            <form onsubmit="handleLogin(event)" class="space-y-5">
+                <!-- Username Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-gray-400">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        <input type="text" required placeholder="Username" 
+                            class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition">
+                    </div>
+                </div>
+
+                <!-- Password Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-gray-400">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <input type="password" required placeholder="Password" 
+                            class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition">
+                    </div>
+                </div>
+
+                <!-- Additional options -->
+                <div class="flex items-center justify-between text-sm">
+                    <label class="flex items-center gap-2 text-gray-600 cursor-pointer">
+                        <input type="checkbox" class="rounded text-emerald-600 focus:ring-emerald-500 border-gray-300 w-4 h-4">
+                        Remember me
+                    </label>
+                    <a href="#" class="text-emerald-600 hover:underline font-medium">Forgot password?</a>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" 
+                    class="w-full bg-gradient-to-r from-emerald-600 to-green-500 text-white font-semibold py-3 rounded-xl shadow-lg hover:from-emerald-700 hover:to-green-600 transition duration-300 transform hover:-translate-y-0.5">
+                    Sign In
+                </button>
+            </form>
+
+            <!-- Footer / Redirect -->
+            <p class="text-center text-sm text-gray-600 mt-8">
+                Don't have an account? 
+                <a href="signup.html" class="text-emerald-600 font-bold hover:underline">Get Started</a>
+            </p>
+        </div>
+
+        <!-- Interface Script -->
+        <script>
+            let currentRole = 'student';
+
+            function switchRole(role) {
+                currentRole = role;
+                const studentBtn = document.getElementById('studentToggleBtn');
+                const teacherBtn = document.getElementById('teacherToggleBtn');
+                const roleLabel = document.getElementById('roleLabel');
+
+                if (role === 'student') {
+                    studentBtn.className = "w-1/2 py-2.5 text-sm font-semibold rounded-lg transition-all duration-300 bg-white text-emerald-700 shadow-sm";
+                    teacherBtn.className = "w-1/2 py-2.5 text-sm font-semibold rounded-lg transition-all duration-300 text-gray-500 hover:text-slate-800";
+                    roleLabel.innerText = "Student Account";
+                    roleLabel.className = "text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full";
+                } else {
+                    teacherBtn.className = "w-1/2 py-2.5 text-sm font-semibold rounded-lg transition-all duration-300 bg-white text-emerald-700 shadow-sm";
+                    studentBtn.className = "w-1/2 py-2.5 text-sm font-semibold rounded-lg transition-all duration-300 text-gray-500 hover:text-slate-800";
+                    roleLabel.innerText = "Teacher Account";
+                    roleLabel.className = "text-xs font-bold uppercase tracking-wider bg-blue-100 text-blue-800 px-3 py-1 rounded-full";
+                }
+            }
+
+            function handleLogin(event) {
+                event.preventDefault();
+                alert(`Logged in successfully as a ${currentRole}!`);
+                window.location.href = 'index.html';
+            }
+        </script>
+
+    </div>
+
+</body>
+</html>
