@@ -4,84 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="icon" type="image/svg+xml" href="logo.svg?v=1">
     <title>EduFlow - Peer Radar</title>
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS & Font Awesome -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <!-- Smooth Scrolling -->
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
     </style>
 </head>
 
-<body class="bg-gradient-to-b from-white via-emerald-50/30 to-slate-50 text-slate-800">
+<body class="bg-gradient-to-b from-white via-emerald-50/30 to-slate-50 text-slate-800 min-h-screen flex flex-col">
 
+    <!-- Toast Notification -->
     <div id="toastNotification" class="fixed bottom-6 left-6 z-50 transform translate-y-[20px] opacity-0 bg-slate-900/75 backdrop-blur-md text-emerald-400 font-mono text-xs px-5 py-3 rounded-xl shadow-2xl border border-slate-700/50 flex items-center gap-2.5 transition-all duration-300 pointer-events-none">
         <i class="fas fa-satellite-dish animate-pulse text-emerald-400"></i>
-        <span id="toastMessage">Telemetry Stream Signal Confirmed</span>
+        <span id="toastMessage">Signal Confirmed</span>
     </div>
 
-    <!-- NAVBAR -->
-    <nav class="sticky top-0 z-50
-        bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500
-        shadow-xl">
-
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500 shadow-xl">
         <div class="max-w-7xl mx-auto px-6">
-
             <div class="flex justify-between items-center h-20">
-
-                <!-- LOGO -->
                 <a href="index.html" class="flex items-center gap-3">
                     <span class="text-3xl font-bold text-white">
                         <i class="fas fa-graduation-cap text-xl"></i> EduFlow
                     </span>
                 </a>
-
-                <!-- NAVIGATION LINKS -->
                 <ul class="hidden md:flex gap-8 font-medium text-white">
-                    <li><a href="#home" class="hover:text-emerald-100 transition">Home</a></li>
-                    <li><a href="#utility" class="hover:text-emerald-100 transition">Utility Hub</a></li>
-                    <li><a href="#ai-bot" class="hover:text-emerald-100 transition">AI Bot</a></li>
-                    <li><a href="peer.html" class="hover:text-emerald-100 transition">Peer Radar</a></li>
+                    <li><a href="index.html" class="hover:text-emerald-100 transition">Home</a></li>
+                    <li><a href="index.html#utility" class="hover:text-emerald-100 transition">Utility Hub</a></li>
+                    <li><a href="index.html#ai-bot" class="hover:text-emerald-100 transition">AI Bot</a></li>
+                    <li><a href="peer.html" class="hover:text-emerald-100 transition font-bold">Peer Radar</a></li>
                     <li><a href="focus.html" class="hover:text-emerald-100 transition">Focus Mode</a></li>
                 </ul>
-
-                <!-- Buttons -->
                 <div class="hidden md:flex gap-4">
-
-                    <a href="login.html"
-                        class="px-5 py-2.5 rounded-xl border border-white text-white font-semibold
-                        hover:bg-white/20 hover:scale-105 transition duration-200">
-                        Login
-                    </a>
-
-                    <a href="signup.html"
-                        class="px-5 py-2.5 rounded-xl bg-white text-emerald-600 font-bold
-                        hover:bg-emerald-50 hover:scale-105 shadow-md transition duration-200">
-                        Get Started
-                    </a>
-
+                    <a href="login.html" class="px-5 py-2.5 rounded-xl border border-white text-white font-semibold hover:bg-white/20 hover:scale-105 transition duration-200">Login</a>
+                    <a href="signup.html" class="px-5 py-2.5 rounded-xl bg-white text-emerald-600 font-bold hover:bg-emerald-50 hover:scale-105 shadow-md transition duration-200">Get Started</a>
                 </div>
-
             </div>
-
         </div>
-        
     </nav>
     
+    <!-- Main Dashboard -->
     <main class="max-w-7xl w-full mx-auto px-6 py-12 flex-1 flex flex-col gap-10">
         
         <div class="grid lg:grid-cols-2 gap-8">
             
+            <!-- Create Session Form -->
             <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 flex flex-col justify-between">
                 <div>
                     <div class="flex items-center gap-3 mb-4">
@@ -89,25 +61,24 @@
                             <i class="fas fa-plus text-lg"></i>
                         </div>
                         <div>
-                            <h2 class="text-lg font-bold text-slate-800">Broadcast Your Location</h2>
-                            <p class="text-xs text-slate-400">Signal to peers that you are available for active group revision.</p>
+                            <h2 class="text-lg font-bold text-slate-800">Create Session</h2>
+                            <p class="text-xs text-slate-400">Tell your peers that you are available for group study.</p>
                         </div>
                     </div>
 
-                    <form id="createSessionForm" class="space-y-4 text-xs mt-2">
+                    <form id="sessionForm" class="space-y-4 text-xs mt-2">
                         <div>
                             <label class="block font-bold uppercase tracking-wider text-slate-400 mb-1">Target Subject / Topic</label>
                             <input type="text" id="subjectInput" placeholder="e.g., Advanced Database Indexing" required
                                 class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-emerald-500 transition-colors text-slate-800 font-medium">
                         </div>
 
-                        <div>
-                            <label class="block font-bold uppercase tracking-wider text-slate-400 mb-1">Campus Location Reference</label>
-                            <input type="text" id="locationInput" placeholder="e.g., Central Library Block A" required
-                                class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-emerald-500 transition-colors text-slate-800 font-medium">
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-4 gap-4">
+                            <div class="col-span-2">
+                                <label class="block font-bold uppercase tracking-wider text-slate-400 mb-1">Your Location</label>
+                                <input type="text" id="locationInput" placeholder="e.g., Central Library Block A" required
+                                    class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-emerald-500 transition-colors text-slate-800 font-medium">
+                            </div>
                             <div>
                                 <label class="block font-bold uppercase tracking-wider text-slate-400 mb-1">From Time</label>
                                 <input type="time" id="timeFromInput" required
@@ -120,20 +91,20 @@
                             </div>
                         </div>
 
-                        <div id="geoContainerPill" class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between transition-colors">
+                        <div id="geoPill" class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between transition-colors">
                             <div class="flex items-center gap-3">
                                 <i id="geoIcon" class="fas fa-map-pin text-xl text-slate-400"></i>
                                 <div>
-                                    <h4 class="font-bold text-slate-700">Hardware Telemetry GPS</h4>
-                                    <p id="geoStatusText" class="text-[10px] text-amber-500 font-mono animate-pulse">Requesting system permissions...</p>
+                                    <h4 class="font-bold text-slate-700">GPS Location</h4>
+                                    <p id="geoStatus" class="text-[10px] text-amber-500 font-mono">Checking Permissions...</p>
                                 </div>
                             </div>
-                            <button type="button" id="fetchGeoBtn" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-1.5 px-3 rounded-lg transition-all tracking-wide shadow-sm text-xs">
-                                <i class="fas fa-location-arrow mr-1 text-[10px]"></i> Grab GPS
+                            <button type="button" id="geoBtn" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-1.5 px-3 rounded-lg transition-all text-xs">
+                                <i class="fas fa-location-arrow mr-1 text-[10px]"></i> Get GPS
                             </button>
                         </div>
 
-                        <button type="submit" id="submitSessionBtn" disabled 
+                        <button type="submit" id="submitBtn" disabled 
                             class="w-full bg-slate-300 text-slate-500 font-bold py-3 rounded-xl cursor-not-allowed transition duration-200 tracking-wide text-xs flex items-center justify-center gap-2">
                             <i class="fas fa-lock text-[11px]"></i> Unlock via GPS Verification
                         </button>
@@ -141,21 +112,22 @@
                 </div>
             </div>
 
-            <div id="personalSessionsWorkspace" class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 flex flex-col">
+            <!-- Active User Sessions -->
+            <div id="mySessionsSection" class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 flex flex-col">
                 <div class="flex items-center gap-3 mb-4 border-b border-slate-100 pb-4">
                     <div class="bg-blue-100 text-blue-600 p-2.5 rounded-xl">
                         <i class="fas fa-user-clock text-lg"></i>
                     </div>
                     <div>
-                        <h2 class="text-lg font-bold text-slate-800">Your Active Broadcasts</h2>
-                        <p class="text-xs text-slate-400">Live operational nodes managed and broadcasted directly by you.</p>
+                        <h2 class="text-lg font-bold text-slate-800">Your Active Sessions</h2>
+                        <p class="text-xs text-slate-400">Live Study Tracks Managed By You.</p>
                     </div>
                 </div>
 
                 <div class="flex-1 overflow-y-auto max-h-[320px] pr-1">
                     <ul id="mySessionsFeed" class="space-y-3 text-xs">
-                        <li id="noMySessionsNotice" class="text-slate-400 italic text-center py-12">
-                            You are not broadcasting any study positions yet. Use the left console panel to spin up a session node.
+                        <li id="noSessionsNotice" class="text-slate-400 italic text-center py-12">
+                            You have no active study sessions right now. Use the left dashboard panel to launch one.
                         </li>
                     </ul>
                 </div>
@@ -163,8 +135,256 @@
 
         </div>
 
+        <!-- Campus Grid -->
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-6">
+                <div class="bg-purple-100 text-purple-600 p-2.5 rounded-xl">
+                    <i class="fas fa-tower-broadcast text-lg"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-slate-800">Active Campus Sessions</h2>
+                    <p class="text-xs text-slate-400">Explore and join active study clusters hosted by your peers.</p>
+                </div>
+            </div>
+
+            <div id="peersGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+        </div>
         
     </main>
     
+    <!-- Footer -->
+    <footer class="bg-black text-gray-300 py-6 text-center text-xs mt-auto">
+        <p>© 2026 EduFlow. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // DOM Elements
+            const form = document.getElementById('sessionForm');
+            const subjectInput = document.getElementById('subjectInput');
+            const locationInput = document.getElementById('locationInput');
+            const timeFromInput = document.getElementById('timeFromInput');
+            const timeToInput = document.getElementById('timeToInput');
+            const geoBtn = document.getElementById('geoBtn');
+            const geoStatus = document.getElementById('geoStatus');
+            const geoPill = document.getElementById('geoPill');
+            const geoIcon = document.getElementById('geoIcon');
+            const submitBtn = document.getElementById('submitBtn');
+            const mySessionsFeed = document.getElementById('mySessionsFeed');
+            const noSessionsNotice = document.getElementById('noSessionsNotice');
+            const peersGrid = document.getElementById('peersGrid');
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMessage');
+
+            // Store GPS coordinates
+            let lat = null;
+            let lng = null;
+
+            // Mock data for campus sessions
+            const mockPeers = [
+                { id: 101, name: "Rahul Sharma", subject: "Full Stack Dev - API Routes", place: "Christ University Central Campus", duration: "10:00 AM - 01:00 PM" },
+                { id: 102, name: "Sneha Patel", subject: "Advanced DB - B-Trees Practice", place: "Kendriya Vidyalaya No.2, Jallahali", duration: "03:30 PM - 05:00 PM" },
+                { id: 103, name: "Kevin Alvares", subject: "C Language Pointer Arithmetic", place: "St. Xavier's Lab 3 Mumbai", duration: "11:15 AM - 02:00 PM" }
+            ];
+
+            // Show notification toast
+            function showToast(text) {
+                toastMsg.innerText = text;
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateY(0px)';
+
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateY(20px)';
+                }, 3000);
+            }
+
+            // Render campus peer sessions
+            function renderPeersGrid() {
+                peersGrid.innerHTML = '';
+                mockPeers.forEach(peer => {
+                    const card = document.createElement('div');
+                    card.className = "w-full bg-slate-50 border border-slate-200 rounded-xl p-4 shadow-sm flex flex-col justify-between hover:border-emerald-300 transition-all";
+                    
+                    card.innerHTML = `
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="bg-purple-100 text-purple-700 font-bold px-2 py-0.5 rounded text-[9px] tracking-wide">PEER SIGNAL</span>
+                                <span class="text-slate-400 font-mono text-[10px]"><i class="fas fa-user text-[9px] mr-1"></i> ${peer.name}</span>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xs font-bold text-slate-800 mb-1 flex items-center gap-1.5">
+                                    <i class="fas fa-book-bookmark text-purple-500"></i> ${peer.subject}
+                                </h3>
+                                <p class="text-[11px] text-slate-500"><i class="fas fa-clock mr-1"></i> Window: ${peer.duration}</p>
+                            </div>
+
+                            <div class="w-full h-28 rounded-lg overflow-hidden border border-slate-200 bg-slate-200 shadow-inner relative">
+                                <iframe class="map-frame w-full h-full border-0 opacity-90" 
+                                    src="https://maps.google.com/maps?q=${encodeURIComponent(peer.place)}&t=&z=12&ie=UTF8&iwloc=&output=embed" 
+                                    allowfullscreen loading="lazy">
+                                </iframe>
+                                <span class="absolute bottom-1 left-1 bg-slate-900/80 text-white font-mono text-[9px] px-2 py-0.5 rounded flex items-center gap-1">
+                                    <i class="fas fa-map-location-dot text-purple-400"></i> Address Tracker
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-slate-200 flex gap-2 items-center text-[10px]">
+                            <button class="copy-btn bg-white hover:bg-slate-100 text-slate-700 font-semibold px-3 py-1.5 rounded-lg transition border border-slate-300 flex items-center gap-1 w-full justify-center" data-address="${peer.place}">
+                                <i class="fas fa-copy text-[9px]"></i> Copy Peer Address
+                            </button>
+                        </div>
+                    `;
+
+                    const copyButton = card.querySelector('.copy-btn');
+                    const mapIframe = card.querySelector('.map-frame');
+
+                    copyButton.addEventListener('click', () => {
+                        const targetAddress = copyButton.getAttribute('data-address');
+                        
+                        navigator.clipboard.writeText(targetAddress).then(() => {
+                            showToast("Location Address Copied!");
+                        });
+
+                        if (lat && lng) {
+                            mapIframe.src = `https://maps.google.com/maps?saddr=${lat},${lng}&daddr=${encodeURIComponent(targetAddress)}&output=embed`;
+                        }
+                    });
+
+                    peersGrid.appendChild(card);
+                });
+            }
+
+            // Get user's current GPS location
+            function getGPSLocation() {
+                geoStatus.innerText = "Querying device hardware...";
+                geoStatus.className = "text-[10px] text-amber-500 font-mono animate-pulse";
+                geoPill.style.borderColor = '#f59e0b';
+                geoIcon.className = "fas fa-map-pin text-xl text-amber-500 animate-bounce";
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            lat = position.coords.latitude;
+                            lng = position.coords.longitude;
+                            
+                            geoStatus.innerText = `Bound: ${lat.toFixed(4)}° N, ${lng.toFixed(4)}° E`;
+                            geoStatus.className = "text-[10px] text-emerald-600 font-mono font-bold";
+                            geoPill.style.borderColor = '#10b981';
+                            geoPill.classList.remove("bg-red-50/50", "border-red-500");
+                            geoIcon.className = "fas fa-map-pin text-xl text-emerald-600";
+                            
+                            geoBtn.innerHTML = `<i class="fas fa-check mr-1 text-[10px]"></i> Coordinates Bound`;
+                            geoBtn.className = "bg-emerald-50 text-emerald-600 border border-emerald-200 font-bold py-1.5 px-3 rounded-lg text-xs cursor-default shadow-none";
+                            geoBtn.disabled = true;
+
+                            submitBtn.disabled = false;
+                            submitBtn.className = "w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition shadow-md shadow-emerald-600/10 tracking-wide text-xs cursor-pointer flex items-center justify-center gap-2";
+                            submitBtn.innerHTML = `Broadcast Dynamic Peer Session`;
+                        },
+                        (error) => {
+                            geoStatus.innerText = "Access Warning: Permissions blocked.";
+                            geoStatus.className = "text-[10px] text-red-500 font-bold font-mono";
+                            geoPill.style.borderColor = '#ef4444';
+                            geoPill.classList.add("bg-red-50/50");
+                            geoIcon.className = "fas fa-triangle-exclamation text-xl text-red-500";
+                            
+                            showToast("Location Access Blocked! Enable browser permissions.");
+                        }
+                    );
+                } else {
+                    geoStatus.innerText = "Hardware lacking GPS support.";
+                    geoStatus.className = "text-[10px] text-red-500 font-bold";
+                }
+            }
+
+            // Initialize data and triggers
+            renderPeersGrid();
+            getGPSLocation();
+
+            geoBtn.addEventListener('click', getGPSLocation);
+
+            // Handle new session form submission
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                if (!lat || !lng) {
+                    showToast("Error: GPS telemetry missing.");
+                    return;
+                }
+
+                const subject = subjectInput.value.trim();
+                const location = locationInput.value.trim();
+                const timeStr = `${timeFromInput.value} - ${timeToInput.value}`;
+
+                if (mySessionsFeed.querySelector('#noSessionsNotice')) {
+                    noSessionsNotice.remove();
+                }
+
+                const li = document.createElement('li');
+                li.className = "bg-gradient-to-r from-slate-50 to-emerald-50/10 border border-emerald-200 rounded-xl p-4 shadow-sm flex flex-col gap-3 relative transition-all";
+                
+                li.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span>${subject}
+                            </h3>
+                            <p class="text-[10px] text-slate-500 mt-0.5"><i class="fas fa-map-location-dot mr-0.5 text-emerald-600"></i> ${location}</p>
+                            <p class="text-[10px] text-slate-400 mt-0.5"><i class="fas fa-clock mr-0.5"></i> Duration: ${timeStr}</p>
+                        </div>
+                        <button class="delete-btn text-slate-300 hover:text-red-500 transition text-[12px]" title="Terminate Stream Broadcast"><i class="fas fa-trash-can"></i></button>
+                    </div>
+
+                    <div class="w-full h-24 rounded-lg overflow-hidden border border-slate-200 bg-slate-100 shadow-inner">
+                        <iframe class="w-full h-full border-0" 
+                            src="https://maps.google.com/maps?q=${lat},${lng}&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                            allowfullscreen loading="lazy">
+                        </iframe>
+                    </div>
+
+                    <div class="flex justify-between items-center text-[9px] font-mono text-slate-400 border-t border-slate-100 pt-2">
+                        <span><i class="fas fa-crosshairs mr-0.5 text-emerald-500"></i> Telemetry: ${lat.toFixed(4)}° N, ${lng.toFixed(4)}° E</span>
+                        <span class="text-emerald-600 font-bold tracking-wider">LIVE</span>
+                    </div>
+                `;
+
+                li.querySelector('.delete-btn').addEventListener('click', () => {
+                    li.remove();
+                    if (mySessionsFeed.children.length === 0) {
+                        mySessionsFeed.appendChild(noSessionsNotice);
+                    }
+                });
+
+                mySessionsFeed.insertBefore(li, mySessionsFeed.firstChild);
+                showToast("Session Added Successfully!");
+                form.reset();
+
+                // Reset form and location state
+                submitBtn.disabled = true;
+                submitBtn.className = "w-full bg-slate-300 text-slate-500 font-bold py-3 rounded-xl cursor-not-allowed transition duration-200 tracking-wide text-xs flex items-center justify-center gap-2";
+                submitBtn.innerHTML = `<i class="fas fa-lock text-[11px]"></i> Unlock via GPS Verification`;
+
+                geoBtn.disabled = false;
+                geoBtn.innerHTML = `<i class="fas fa-location-arrow mr-1 text-[10px]"></i> Get GPS`;
+                geoBtn.className = "bg-slate-800 hover:bg-slate-700 text-white font-semibold py-1.5 px-3 rounded-lg transition-all text-xs";
+                
+                geoStatus.innerText = "Coordinates: Unlinked status.";
+                geoStatus.className = "text-[10px] text-slate-400 font-mono";
+                geoPill.style.borderColor = '#e2e8f0';
+                geoPill.classList.remove("bg-red-50/50");
+                geoIcon.className = "fas fa-map-pin text-xl text-slate-400";
+                
+                lat = null;
+                lng = null;
+                
+                getGPSLocation();
+            });
+        });
+    </script>
 </body>
+
 </html>
