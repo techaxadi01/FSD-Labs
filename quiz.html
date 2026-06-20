@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="logo.svg?v=1">
+    <title>EduFlow - Quiz Hub</title>
+    
+    <!-- Tailwind CSS & Font Awesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+
+<body class="bg-gradient-to-b from-white via-emerald-50/30 to-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500 shadow-xl">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center gap-3">
+                    <span class="text-3xl font-bold text-white">
+                        <i class="fas fa-graduation-cap text-xl"></i> EduFlow
+                    </span>
+                </a>
+                <ul class="hidden md:flex gap-8 font-medium text-white">
+                    <li><a href="index.html" class="hover:text-emerald-100 transition">Home</a></li>
+                    <li><a href="index.html#utility" class="hover:text-emerald-100 transition">Utility Hub</a></li>
+                    <li><a href="index.html#ai-bot" class="hover:text-emerald-100 transition">AI Bot</a></li>
+                    <li><a href="peer.html" class="hover:text-emerald-100 transition ">Peer Radar</a></li>
+                    <li><a href="focus.html" class="hover:text-emerald-100 transition">Focus Mode</a></li>
+                </ul>
+                <div class="hidden md:flex gap-4">
+                    <a href="login.html" class="px-5 py-2.5 rounded-xl border border-white text-white font-semibold hover:bg-white/20 hover:scale-105 transition duration-200">Login</a>
+                    <a href="signup.html" class="px-5 py-2.5 rounded-xl bg-white text-emerald-600 font-bold hover:bg-emerald-50 hover:scale-105 shadow-md transition duration-200">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="toastNotification" class="fixed bottom-6 left-6 z-50 transform translate-y-[20px] opacity-0 bg-slate-900/75 backdrop-blur-md text-emerald-400 font-mono text-xs px-5 py-3 rounded-xl shadow-2xl border border-slate-700/50 flex items-center gap-2.5 transition-all duration-300 pointer-events-none">
+        <i class="fas fa-satellite-dish animate-pulse text-emerald-400"></i>
+        <span id="toastMessage">Quiz Engine Configured Successfully</span>
+    </div>
+
+        <!-- Footer -->
+    <footer class="bg-black text-gray-300 py-6 text-center text-xs mt-auto">
+        <p>© 2026 EduFlow. All rights reserved.</p>
+    </footer>
+
+    <script>
+
+    </script>
+
+</body>
+</html>
