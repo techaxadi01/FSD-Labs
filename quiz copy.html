@@ -7,24 +7,17 @@
     <link rel="icon" type="image/svg+xml" href="logo.svg?v=1">
     <title>EduFlow - Quiz Hub</title>
     
-    <!-- Tailwind CSS & Font Awesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <style>
-        html { scroll-behavior: smooth; }
-    </style>
 </head>
 
 <body class="bg-gradient-to-b from-white via-emerald-50/30 to-slate-50 text-slate-800 min-h-screen flex flex-col">
 
-    <!-- Toast Notification -->
     <div id="toastNotification" class="fixed bottom-6 left-6 z-50 transform translate-y-[20px] opacity-0 bg-slate-900/75 backdrop-blur-md text-emerald-400 font-mono text-xs px-5 py-3 rounded-xl shadow-2xl border border-slate-700/50 flex items-center gap-2.5 transition-all duration-300 pointer-events-none">
         <i class="fas fa-bolt animate-pulse text-emerald-400"></i>
         <span id="toastMessage">Quiz System Ready</span>
     </div>
 
-    <!-- Navigation -->
     <nav class="sticky top-0 z-50 bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500 shadow-xl">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex justify-between items-center h-20">
@@ -42,15 +35,12 @@
         </div>
     </nav>
     
-    <!-- Main Dashboard -->
-    <main class="max-w-7xl w-full mx-auto px-6 py-12 flex-1 flex flex-col gap-10">
+    <main class="max-w-7xl w-full mx-auto px-6 py-12 flex-1 flex flex-col gap-10 justify-center">
         
-        <div class="grid lg:grid-cols-3 gap-8">
+        <div class="grid lg:grid-cols-3 gap-8 items-start">
             
-            <!-- Left Sidebar Controls -->
             <div class="lg:col-span-1 space-y-6">
                 
-                <!-- Quick Options Card -->
                 <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="bg-emerald-100 text-emerald-600 p-3 rounded-xl">
@@ -58,7 +48,7 @@
                         </div>
                         <div>
                             <h2 class="text-lg font-bold text-slate-800">Quiz Settings</h2>
-                            <p class="text-xs text-slate-400">Customize your evaluation parameters.</p>
+                            <p class="text-xs text-slate-400">Select a subject to begin.</p>
                         </div>
                     </div>
 
@@ -75,69 +65,50 @@
                             </select>
                         </div>
 
-                        <div>
-                            <label class="block font-bold uppercase tracking-wider text-slate-400 mb-1">Time Restriction</label>
-                            <div class="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl p-3 font-mono text-slate-600">
-                                <i class="fas fa-clock text-slate-400"></i>
-                                <span id="timerDisplay">00:00</span>
-                            </div>
-                        </div>
-
                         <button id="startBtn" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition shadow-md shadow-emerald-600/10 tracking-wide flex items-center justify-center gap-2">
                             <i class="fas fa-play text-[10px]"></i> Launch New Quiz
                         </button>
                     </div>
                 </div>
 
-                <!-- Stats Tracking Card -->
                 <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Performance Analytics</h3>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Session Progress</h3>
                     <div class="grid grid-cols-2 gap-4 text-center">
                         <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl">
                             <span class="block text-xl font-bold text-slate-800" id="statAccuracy">0%</span>
                             <span class="text-[10px] text-slate-400 uppercase font-bold tracking-tight">Accuracy</span>
                         </div>
                         <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl">
-                            <span class="block text-xl font-bold text-slate-800" id="statCompleted">0</span>
-                            <span class="text-[10px] text-slate-400 uppercase font-bold tracking-tight">Completed</span>
+                            <span class="block text-xl font-bold text-slate-800" id="statCompleted">0/0</span>
+                            <span class="text-[10px] text-slate-400 uppercase font-bold tracking-tight">Answered</span>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <!-- Quiz Workspace Content Area -->
-            <div class="lg:col-span-2 flex flex-col">
-                <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 flex-1 flex flex-col justify-between">
+            <div class="lg:col-span-2">
+                <div class="bg-white border border-slate-200 rounded-2xl shadow-md p-8 min-h-[400px] flex flex-col justify-between">
                     
                     <div>
-                        <div class="flex justify-between items-start border-b border-slate-100 pb-4 mb-6">
-                            <div class="flex items-center gap-3">
-                                <div class="bg-blue-100 text-blue-600 p-2.5 rounded-xl">
-                                    <i class="fas fa-graduation-cap text-lg"></i>
-                                </div>
-                                <div>
-                                    <h2 class="text-lg font-bold text-slate-800">Live Workspace</h2>
-                                    <p class="text-xs text-slate-400">Complete the questions below and review step-by-step explanations at the end.</p>
-                                </div>
-                            </div>
+                        <div class="flex justify-between items-center border-b border-slate-100 pb-4 mb-6">
+                            <span id="cardSubjectBadge" class="bg-blue-50 text-blue-600 border border-blue-100 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">EduFlow Quiz</span>
                             <span id="progressBadge" class="bg-slate-100 text-slate-600 font-mono text-[10px] px-2.5 py-1 rounded-lg border border-slate-200">0 / 0</span>
                         </div>
 
-                        <!-- Questions Form wrapper -->
-                        <form id="mainQuizForm" class="space-y-6 text-xs">
-                            <div id="questionsWrapper" class="space-y-6">
-                                <div class="text-center py-12 text-slate-400 italic">
-                                    No active session detected. Configure options on the side navigation panel to begin.
-                                </div>
+                        <div id="quizCardBody">
+                            <div class="text-center py-16 text-slate-400 italic">
+                                No active session. Select your preferred subject parameters on the sidebar panel to load the quiz workspace.
                             </div>
-                        </form>
+                        </div>
                     </div>
 
-                    <!-- Footer Action Control Elements -->
-                    <div id="actionFooter" class="hidden border-t border-slate-100 pt-4 mt-6 flex justify-end gap-3">
-                        <button type="button" id="submitFormBtn" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-6 rounded-xl transition tracking-wide text-xs">
-                            Process Results
+                    <div id="navActionBar" class="hidden border-t border-slate-100 pt-5 mt-6 flex justify-between items-center">
+                        <button id="prevBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-5 rounded-xl transition text-xs flex items-center gap-1.5 disabled:opacity-40 disabled:cursor-not-allowed">
+                            <i class="fas fa-chevron-left text-[10px]"></i> Previous
+                        </button>
+                        <button id="nextBtn" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-5 rounded-xl transition text-xs flex items-center gap-1.5 disabled:opacity-40 disabled:cursor-not-allowed">
+                            Next <i class="fas fa-chevron-right text-[10px]"></i>
                         </button>
                     </div>
 
@@ -148,236 +119,258 @@
         
     </main>
     
-    <!-- Footer -->
     <footer class="bg-black text-gray-300 py-6 text-center text-xs mt-auto">
         <p>© 2026 EduFlow. All rights reserved.</p>
     </footer>
 
-    <!-- Core Script System -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // DOM Hook Elements
+            // DOM Target Hooks
             const startBtn = document.getElementById('startBtn');
-            const submitFormBtn = document.getElementById('submitFormBtn');
             const topicSelect = document.getElementById('topicSelect');
-            const timerDisplay = document.getElementById('timerDisplay');
-            const questionsWrapper = document.getElementById('questionsWrapper');
-            const actionFooter = document.getElementById('actionFooter');
+            const quizCardBody = document.getElementById('quizCardBody');
+            const navActionBar = document.getElementById('navActionBar');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
             const progressBadge = document.getElementById('progressBadge');
+            const cardSubjectBadge = document.getElementById('cardSubjectBadge');
             const statAccuracy = document.getElementById('statAccuracy');
             const statCompleted = document.getElementById('statCompleted');
             const toast = document.getElementById('toastNotification');
             const toastMsg = document.getElementById('toastMessage');
 
-            // Global State Monitors
+            // Workspace Core State
             let activeQuestions = [];
-            let timeRemaining = 0;
-            let timerInterval = null;
-            let totalCompletedCount = 0;
+            let currentCardIndex = 0;
+            let userScores = {}; // Map holding questionId -> score outcome (0 or 1)
+            let userSelections = {}; // Map holding questionId -> chosen index string
 
-            // Question Pool Structure - 5 Subjects, 10 Questions each
+            // Comprehensive Question Data Array
             const questionsPool = [
                 // === DATA STRUCTURES & ALGORITHMS (ds) ===
-                { id: 1, category: "ds", label: "Which data structure operates on a strict FIFO (First-In-First-Out) basis?", options: ["Stack", "Queue", "Binary Tree", "Hash Map"], match: 1, explanation: "Queues insert elements from the back and remove from the front, strictly maintaining a First-In-First-Out processing pipeline." },
-                { id: 2, category: "ds", label: "What is the worst-case time complexity of searching in a standard unbalanced Binary Search Tree?", options: ["O(1)", "O(log n)", "O(n)", "O(n log n)"], match: 2, explanation: "In the worst case, an unbalanced tree becomes a linear degenerate link array (like a linked list), requiring O(n) lookups." },
-                { id: 3, category: "ds", label: "Which algorithm relies on a divide-and-conquer approach to sort array collections?", options: ["Bubble Sort", "Insertion Sort", "Selection Sort", "Merge Sort"], match: 3, explanation: "Merge Sort breaks arrays into atomic components recursively, sorting and merging sub-arrays up the chain." },
-                { id: 4, category: "ds", label: "What underlying structure is optimized for immediate key-value pairing data lookups?", options: ["Linked List", "Hash Table", "Graph Tree", "Max Heap Array"], match: 1, explanation: "Hash tables resolve lookup keys directly to index groupings, presenting near O(1) average performance lookup attributes." },
-                { id: 5, category: "ds", label: "Which sorting approach guarantees an absolute stable evaluation pattern with O(n log n) running bounds?", options: ["Quick Sort", "Merge Sort", "Heap Sort", "Selection Sort"], match: 1, explanation: "Merge Sort maintains initial sequence orders across identical items cleanly, tracking solid O(n log n) behaviors throughout." },
-                { id: 6, category: "ds", label: "What behavior describes standard recursive Stack Memory processing limits?", options: ["FIFO structure", "LIFO execution data context", "Random addressing array logs", "Heuristic tree links"], match: 1, explanation: "Execution runtime systems push stack frame configurations sequentially using Last-In-First-Out tracking mechanics." },
-                { id: 7, category: "ds", label: "Which traversal mode scans a tree structure row by row, layer by layer?", options: ["In-order Traversal", "Pre-order Traversal", "Post-order Traversal", "Breadth-First Search"], match: 3, explanation: "Breadth-First Search (or Level-Order) targets all child layers sequentially before advancing deeper into node links." },
-                { id: 8, category: "ds", label: "What graph technique relies on tracking historical parents via backward Queue structures?", options: ["Breadth-First Search", "Depth-First Search", "Kruskal Node Engine", "Prim Array Logic"], match: 0, explanation: "BFS processes adjacent child nodes immediately using a FIFO queue structure to ensure uniform level tracking." },
-                { id: 9, category: "ds", label: "What is the space complexity tracking bound of an optimal In-Place Heap Sort operation?", options: ["O(1)", "O(log n)", "O(n)", "O(n²)"], match: 0, explanation: "In-place heap structures rearrange elements directly inside the initial array allocation layout without auxiliary heap arrays." },
-                { id: 10, category: "ds", label: "Which balanced data tree configuration runs self-adjustment color rotations upon dynamic node addition?", options: ["Splay Tree", "B-Tree Matrix", "Red-Black Tree", "Min-Heap Collection"], match: 2, explanation: "Red-Black Trees utilize colored node bits along with structural rotation pivots to maintain balance bounds automatically." },
+                { id: 1, category: "ds", categoryLabel: "Data Structures", label: "Which data structure operates on a strict FIFO (First-In-First-Out) basis?", options: ["Stack", "Queue", "Binary Tree", "Hash Map"], match: 1, explanation: "Queues insert elements from the back and remove from the front, strictly maintaining a First-In-First-Out processing pipeline." },
+                { id: 2, category: "ds", categoryLabel: "Data Structures", label: "What is the worst-case time complexity of searching in a standard unbalanced Binary Search Tree?", options: ["O(1)", "O(log n)", "O(n)", "O(n log n)"], match: 2, explanation: "In the worst case, an unbalanced tree becomes a linear degenerate link array (like a linked list), requiring O(n) lookups." },
+                { id: 3, category: "ds", categoryLabel: "Data Structures", label: "Which algorithm relies on a divide-and-conquer approach to sort array collections?", options: ["Bubble Sort", "Insertion Sort", "Selection Sort", "Merge Sort"], match: 3, explanation: "Merge Sort breaks arrays into atomic components recursively, sorting and merging sub-arrays up the chain." },
+                { id: 4, category: "ds", categoryLabel: "Data Structures", label: "What underlying structure is optimized for immediate key-value pairing data lookups?", options: ["Linked List", "Hash Table", "Graph Tree", "Max Heap Array"], match: 1, explanation: "Hash tables resolve lookup keys directly to index groupings, presenting near O(1) average performance lookup attributes." },
+                { id: 5, category: "ds", categoryLabel: "Data Structures", label: "Which sorting approach guarantees an absolute stable evaluation pattern with O(n log n) running bounds?", options: ["Quick Sort", "Merge Sort", "Heap Sort", "Selection Sort"], match: 1, explanation: "Merge Sort maintains initial sequence orders across identical items cleanly, tracking solid O(n log n) behaviors throughout." },
+                { id: 6, category: "ds", categoryLabel: "Data Structures", label: "What behavior describes standard recursive Stack Memory processing limits?", options: ["FIFO structure", "LIFO execution data context", "Random addressing array logs", "Heuristic tree links"], match: 1, explanation: "Execution runtime systems push stack frame configurations sequentially using Last-In-First-Out tracking mechanics." },
+                { id: 7, category: "ds", categoryLabel: "Data Structures", label: "Which traversal mode scans a tree structure row by row, layer by layer?", options: ["In-order Traversal", "Pre-order Traversal", "Post-order Traversal", "Breadth-First Search"], match: 3, explanation: "Breadth-First Search (or Level-Order) targets all child layers sequentially before advancing deeper into node links." },
+                { id: 8, category: "ds", categoryLabel: "Data Structures", label: "What graph technique relies on tracking historical parents via backward Queue structures?", options: ["Breadth-First Search", "Depth-First Search", "Kruskal Node Engine", "Prim Array Logic"], match: 0, explanation: "BFS processes adjacent child nodes immediately using a FIFO queue structure to ensure uniform level tracking." },
+                { id: 9, category: "ds", categoryLabel: "Data Structures", label: "What is the space complexity tracking bound of an optimal In-Place Heap Sort operation?", options: ["O(1)", "O(log n)", "O(n)", "O(n²)"], match: 0, explanation: "In-place heap structures rearrange elements directly inside the initial array allocation layout without auxiliary heap arrays." },
+                { id: 10, category: "ds", categoryLabel: "Data Structures", label: "Which balanced data tree configuration runs self-adjustment color rotations upon dynamic node addition?", options: ["Splay Tree", "B-Tree Matrix", "Red-Black Tree", "Min-Heap Collection"], match: 2, explanation: "Red-Black Trees utilize colored node bits along with structural rotation pivots to maintain balance bounds automatically." },
 
                 // === DATABASE SYSTEMS (db) ===
-                { id: 11, category: "db", label: "What target asset describes the exact goal of standard Database Index components?", options: ["Row Level Locking Logs", "Storage Footprint Compression", "Query Execution Optimization", "Foreign Constraint Enforcements"], match: 2, explanation: "Indexes build reference maps on selected table rows, bypassing expensive full-table scans to accelerate data retrieval queries." },
-                { id: 12, category: "db", label: "Which relational property ensures a database transaction fully finishes or rolls back completely?", options: ["Atomicity", "Consistency", "Isolation", "Durability"], match: 0, explanation: "Atomicity defines the 'all-or-nothing' execution phase rule, ensuring failures leave zero partial configurations behind." },
-                { id: 13, category: "db", label: "What standard normalization form actively works to strip transitive functional dependencies from tables?", options: ["1NF", "2NF", "3NF", "BCNF"], match: 2, explanation: "Third Normal Form ensures non-prime attributes rely strictly on the primary key, blocking transitive dependency anomalies." },
-                { id: 14, category: "db", label: "Which command completely drops table rows instantly without scanning or logging item deletes?", options: ["DROP", "DELETE", "TRUNCATE", "REMOVE"], match: 2, explanation: "TRUNCATE releases data storage pages instantly and generates minimal log entries compared to iterative DELETE actions." },
-                { id: 15, category: "db", label: "What join layout brings all left table matches alongside unlinked nulls from the target right table?", options: ["Inner Join", "Left Outer Join", "Full Join", "Cross Product Join"], match: 1, explanation: "Left Outer Joins retain every record from the left table, inserting NULL markers for right-side elements that miss join conditions." },
-                { id: 16, category: "db", label: "Which database lock rule blocks external read operations alongside structural changes?", options: ["Shared Lock", "Exclusive Lock", "Intent Lock", "Row-Level Update Block"], match: 1, explanation: "Exclusive locks isolate transactional modifications, denying concurrent transactions both read and write capabilities until released." },
-                { id: 17, category: "db", label: "What mechanism handles virtual query views dynamically without writing physical data pages directly to disks?", options: ["Materialized View", "Standard View", "Index Cluster", "Staged Table Schema"], match: 1, explanation: "Standard views work as dynamic query configurations, executing their underlying statement fresh on every lookup request." },
-                { id: 18, category: "db", label: "Which SQL clause drops clustered rows post aggregation outputs?", options: ["WHERE", "HAVING", "GROUP BY", "ORDER BY"], match: 1, explanation: "The HAVING filter operates specifically on aggregated values computed by a GROUP BY clause, whereas WHERE applies to raw rows." },
-                { id: 19, category: "db", label: "What type of key links child table records directly back to parent primary keys?", options: ["Composite Pointer", "Candidate Option", "Foreign Key", "Unique Alternate"], match: 2, explanation: "Foreign Keys establish referential integrity bounds between tables by linking attributes directly back to primary keys." },
-                { id: 20, category: "db", label: "What transaction isolation phenomenon occurs when re-reading rows returns newly inserted records?", options: ["Dirty Read", "Non-Repeatable Read", "Phantom Read", "Cascading Rollback Logs"], match: 2, explanation: "Phantom Reads occur when a parallel transaction inserts new matching records into a range filter while the original transaction is active." },
+                { id: 11, category: "db", categoryLabel: "Database Systems", label: "What target asset describes the exact goal of standard Database Index components?", options: ["Row Level Locking Logs", "Storage Footprint Compression", "Query Execution Optimization", "Foreign Constraint Enforcements"], match: 2, explanation: "Indexes build reference maps on selected table rows, bypassing expensive full-table scans to accelerate data retrieval queries." },
+                { id: 12, category: "db", categoryLabel: "Database Systems", label: "Which relational property ensures a database transaction fully finishes or rolls back completely?", options: ["Atomicity", "Consistency", "Isolation", "Durability"], match: 0, explanation: "Atomicity defines the 'all-or-nothing' execution phase rule, ensuring failures leave zero partial configurations behind." },
+                { id: 13, category: "db", categoryLabel: "Database Systems", label: "What standard normalization form actively works to strip transitive functional dependencies from tables?", options: ["1NF", "2NF", "3NF", "BCNF"], match: 2, explanation: "Third Normal Form ensures non-prime attributes rely strictly on the primary key, blocking transitive dependency anomalies." },
+                { id: 14, category: "db", categoryLabel: "Database Systems", label: "Which command completely drops table rows instantly without scanning or logging item deletes?", options: ["DROP", "DELETE", "TRUNCATE", "REMOVE"], match: 2, explanation: "TRUNCATE releases data storage pages instantly and generates minimal log entries compared to iterative DELETE actions." },
+                { id: 15, category: "db", categoryLabel: "Database Systems", label: "What join layout brings all left table matches alongside unlinked nulls from the target right table?", options: ["Inner Join", "Left Outer Join", "Full Join", "Cross Product Join"], match: 1, explanation: "Left Outer Joins retain every record from the left table, inserting NULL markers for right-side elements that miss join conditions." },
+                { id: 16, category: "db", categoryLabel: "Database Systems", label: "Which database lock rule blocks external read operations alongside structural changes?", options: ["Shared Lock", "Exclusive Lock", "Intent Lock", "Row-Level Update Block"], match: 1, explanation: "Exclusive locks isolate transactional modifications, denying concurrent transactions both read and write capabilities until released." },
+                { id: 17, category: "db", categoryLabel: "Database Systems", label: "What mechanism handles virtual query views dynamically without writing physical data pages directly to disks?", options: ["Materialized View", "Standard View", "Index Cluster", "Staged Table Schema"], match: 1, explanation: "Standard views work as dynamic query configurations, executing their underlying statement fresh on every lookup request." },
+                { id: 18, category: "db", categoryLabel: "Database Systems", label: "Which SQL clause drops clustered rows post aggregation outputs?", options: ["WHERE", "HAVING", "GROUP BY", "ORDER BY"], match: 1, explanation: "The HAVING filter operates specifically on aggregated values computed by a GROUP BY clause, whereas WHERE applies to raw rows." },
+                { id: 19, category: "db", categoryLabel: "Database Systems", label: "What type of key links child table records directly back to parent primary keys?", options: ["Composite Pointer", "Candidate Option", "Foreign Key", "Unique Alternate"], match: 2, explanation: "Foreign Keys establish referential integrity bounds between tables by linking attributes directly back to primary keys." },
+                { id: 20, category: "db", categoryLabel: "Database Systems", label: "What transaction isolation phenomenon occurs when re-reading rows returns newly inserted records?", options: ["Dirty Read", "Non-Repeatable Read", "Phantom Read", "Cascading Rollback Logs"], match: 2, explanation: "Phantom Reads occur when a parallel transaction inserts new matching records into a range filter while the original transaction is active." },
 
                 // === COMPUTER NETWORKS (cn) ===
-                { id: 21, category: "cn", label: "Which OSI architectural layer maps directly to tracking network IP routing configurations?", options: ["Data Link Layer", "Network Layer", "Transport Layer", "Session Layer"], match: 1, explanation: "The Network Layer manages logical addressing protocols (IP addresses) and routes data packets across networks." },
-                { id: 22, category: "cn", label: "What transport mechanism coordinates reliable state synchronization via a three-way handshake?", options: ["UDP Stream", "TCP Protocol", "ICMP Ping Logic", "DNS Query Loop"], match: 1, explanation: "TCP utilizes SYN, SYN-ACK, and ACK packet sequences to securely negotiate connection parameters before transmitting user payloads." },
-                { id: 23, category: "cn", label: "What system converts human-readable domains directly into target computer-readable IP paths?", options: ["DHCP Engine", "DNS Server Map", "NAT Gateway Allocation", "FTP Controller"], match: 1, explanation: "Domain Name System (DNS) maps human-friendly domain lookups (like eduflow.com) to machine-readable numeric IP endpoints." },
-                { id: 24, category: "cn", label: "Which network device routes traffic across isolated subnet pools by inspecting destination IP headers?", options: ["Hub Link Box", "Layer 2 Switch", "Router", "Network Repeater Module"], match: 2, explanation: "Routers forward packets across network boundaries by parsing Layer 3 IP paths and maintaining active routing tables." },
-                { id: 25, category: "cn", label: "What protocol automatically configures dynamic client IP allocations across a network?", options: ["SMTP", "DHCP", "HTTP", "SNMP"], match: 1, explanation: "Dynamic Host Configuration Protocol (DHCP) automatically assigns IP addresses, subnet masks, and gateways to client machines." },
-                { id: 26, category: "cn", label: "Which address block represents a local device diagnostic Loopback environment?", options: ["192.168.1.1", "10.0.0.1", "127.0.0.1", "255.255.255.255"], match: 2, explanation: "127.0.0.1 is the universal IPv4 loopback address, routing outbound traffic right back to the local operating network stack." },
-                { id: 27, category: "cn", label: "What HTTP method is designed to be idempotent when updating data assets entirely?", options: ["POST", "PUT", "PATCH", "DELETE"], match: 1, explanation: "PUT requests are designed to replace resources entirely. Making multiple identical PUT calls yields the exact same server state." },
-                { id: 28, category: "cn", label: "Which tool masks private backend IP spaces behind a single public-facing network gateway profile?", options: ["NAT Gateway", "MAC filtering Switch", "VLAN Bridge", "Proxy Server Log"], match: 0, explanation: "Network Address Translation (NAT) maps internal private IP ranges onto a public gateway to defend and conserve IP blocks." },
-                { id: 29, category: "cn", label: "What error code flags standard authentication roadblocks or forbidden client permission states?", options: ["400 Bad Request", "401 Unauthorized", "403 Forbidden", "404 Not Found"], match: 2, explanation: "A 403 Forbidden status confirms the server understood the identity credentials but the user lacks the explicit permissions required." },
-                { id: 30, category: "cn", label: "Which application protocol routes secure web file payloads using cryptographic TLS validation hooks?", options: ["HTTP", "HTTPS", "SSH Link", "SFTP Log"], match: 1, explanation: "HTTPS wraps plain web text traffic inside an encrypted Transport Layer Security (TLS/SSL) tunnel to block eavesdropping." },
+                { id: 21, category: "cn", categoryLabel: "Computer Networks", label: "Which OSI architectural layer maps directly to tracking network IP routing configurations?", options: ["Data Link Layer", "Network Layer", "Transport Layer", "Session Layer"], match: 1, explanation: "The Network Layer manages logical addressing protocols (IP addresses) and routes data packets across networks." },
+                { id: 22, category: "cn", categoryLabel: "Computer Networks", label: "What transport mechanism coordinates reliable state synchronization via a three-way handshake?", options: ["UDP Stream", "TCP Protocol", "ICMP Ping Logic", "DNS Query Loop"], match: 1, explanation: "TCP utilizes SYN, SYN-ACK, and ACK packet sequences to securely negotiate connection parameters before transmitting user payloads." },
+                { id: 23, category: "cn", categoryLabel: "Computer Networks", label: "What system converts human-readable domains directly into target computer-readable IP paths?", options: ["DHCP Engine", "DNS Server Map", "NAT Gateway Allocation", "FTP Controller"], match: 1, explanation: "Domain Name System (DNS) maps human-friendly domain lookups (like eduflow.com) to machine-readable numeric IP endpoints." },
+                { id: 24, category: "cn", categoryLabel: "Computer Networks", label: "Which network device routes traffic across isolated subnet pools by inspecting destination IP headers?", options: ["Hub Link Box", "Layer 2 Switch", "Router", "Network Repeater Module"], match: 2, explanation: "Routers forward packets across network boundaries by parsing Layer 3 IP paths and maintaining active routing tables." },
+                { id: 25, category: "cn", categoryLabel: "Computer Networks", label: "What protocol automatically configures dynamic client IP allocations across a network?", options: ["SMTP", "DHCP", "HTTP", "SNMP"], match: 1, explanation: "Dynamic Host Configuration Protocol (DHCP) automatically assigns IP addresses, subnet masks, and gateways to client machines." },
+                { id: 26, category: "cn", categoryLabel: "Computer Networks", label: "Which address block represents a local device diagnostic Loopback environment?", options: ["192.168.1.1", "10.0.0.1", "127.0.0.1", "255.255.255.255"], match: 2, explanation: "127.0.0.1 is the universal IPv4 loopback address, routing outbound traffic right back to the local operating network stack." },
+                { id: 27, category: "cn", categoryLabel: "Computer Networks", label: "What HTTP method is designed to be idempotent when updating data assets entirely?", options: ["POST", "PUT", "PATCH", "DELETE"], match: 1, explanation: "PUT requests are designed to replace resources entirely. Making multiple identical PUT calls yields the exact same server state." },
+                { id: 28, category: "cn", categoryLabel: "Computer Networks", label: "Which tool masks private backend IP spaces behind a single public-facing network gateway profile?", options: ["NAT Gateway", "MAC filtering Switch", "VLAN Bridge", "Proxy Server Log"], match: 0, explanation: "Network Address Translation (NAT) maps internal private IP ranges onto a public gateway to defend and conserve IP blocks." },
+                { id: 29, category: "cn", categoryLabel: "Computer Networks", label: "What error code flags standard authentication roadblocks or forbidden client permission states?", options: ["400 Bad Request", "401 Unauthorized", "403 Forbidden", "404 Not Found"], match: 2, explanation: "A 403 Forbidden status confirms the server understood the identity credentials but the user lacks the explicit permissions required." },
+                { id: 30, category: "cn", categoryLabel: "Computer Networks", label: "Which application protocol routes secure web file payloads using cryptographic TLS validation hooks?", options: ["HTTP", "HTTPS", "SSH Link", "SFTP Log"], match: 1, explanation: "HTTPS wraps plain web text traffic inside an encrypted Transport Layer Security (TLS/SSL) tunnel to block eavesdropping." },
 
                 // === OPERATING SYSTEMS (os) ===
-                { id: 31, category: "os", label: "What deadlock criteria occurs when a process retains assets while requesting new ones?", options: ["Mutual Exclusion", "Hold and Wait", "No Preemption", "Circular Wait Condition"], match: 1, explanation: "The 'Hold and Wait' condition occurs when a task holds its currently locked resources while waiting to grab new system resources." },
-                { id: 32, category: "os", label: "Which scheduling logic risks starvation issues by always clearing out the shortest jobs first?", options: ["Round Robin Scheduler", "First Come First Served", "Shortest Job First (SJF)", "Priority Queue Loops"], match: 2, explanation: "SJF schedules tasks by execution runtime estimates, which can starve longer background jobs if short tasks continually arrive." },
-                { id: 33, category: "os", label: "What hardware component handles translating virtual memory addresses directly into physical RAM maps?", options: ["CPU Cache Logic", "MMU (Memory Management Unit)", "DMA Controller Engine", "ALU Registers"], match: 1, explanation: "The Memory Management Unit (MMU) utilizes internal page tables to convert process-level virtual memory pointers into physical RAM addresses." },
-                { id: 34, category: "os", label: "Which system signal shifts a execution control thread from user privilege levels straight into safe kernel spaces?", options: ["Context Switch", "System Call", "Interrupt Vector", "Thread Spawning Allocation"], match: 1, explanation: "System Calls prompt software interrupts that escalate process access privileges securely to execute kernel-level tasks." },
-                { id: 35, category: "os", label: "What mechanism coordinates multi-process synchronization using atomic wait/signal operations?", options: ["Page Table Matrix", "Inode Blocks", "Semaphore Indicators", "Buffer Caches"], match: 2, explanation: "Semaphores use counter variables and atomic operations to safely throttle concurrent resource access across thread tracks." },
-                { id: 36, category: "os", label: "What condition describes a system spending more time swapping memory pages to disk than executing real work?", options: ["Paging Errors", "Thrashing", "Segmentation Fault Trace", "Cache Miss Lag"], match: 1, explanation: "Thrashing occurs when available RAM drops too low, forcing the OS into endless loops of page-fault evictions and disk writes." },
-                { id: 37, category: "os", label: "Which file structure component holds metadata definitions like size, permissions, and block pointers?", options: ["Superblock Data", "Inode Block", "Directory Mapping File", "Journal Logging Segment"], match: 1, explanation: "An inode (index node) stores file attributes, access control privileges, and pointers to the physical sectors holding the content." },
-                { id: 38, category: "os", label: "What execution environment shares code segments and memory space directly with its parent process?", options: ["Isolated Forked Process", "Sub-Thread Entity", "Daemon Container", "Microkernel Module"], match: 1, explanation: "Threads operate inside their parent process's memory footprint, sharing data spaces while maintaining their own registers and program counters." },
-                { id: 39, category: "os", label: "Which replacement approach evicts the memory page that has gone unused for the longest duration?", options: ["FIFO Scheme", "Optimal Predictor Engine", "LRU (Least Recently Used)", "Random Discard Model"], match: 2, explanation: "LRU looks backward in time to drop pages that haven't been accessed recently, anticipating they are less likely to be needed next." },
-                { id: 40, category: "os", label: "What type of kernel exposes minimal essential systems directly inside core privileged memory segments?", options: ["Monolithic Kernel", "Microkernel", "Hybrid Schema Layout", "Exokernel Architecture"], match: 1, explanation: "Microkernels minimize core privilege layers, shifting services like drivers and filesystems to safer, user-space system apps." },
+                { id: 31, category: "os", categoryLabel: "Operating Systems", label: "What deadlock criteria occurs when a process retains assets while requesting new ones?", options: ["Mutual Exclusion", "Hold and Wait", "No Preemption", "Circular Wait Condition"], match: 1, explanation: "The 'Hold and Wait' condition occurs when a task holds its currently locked resources while waiting to grab new system resources." },
+                { id: 32, category: "os", categoryLabel: "Operating Systems", label: "Which scheduling logic risks starvation issues by always clearing out the shortest jobs first?", options: ["Round Robin Scheduler", "First Come First Served", "Shortest Job First (SJF)", "Priority Queue Loops"], match: 2, explanation: "SJF schedules tasks by execution runtime estimates, which can starve longer background jobs if short tasks continually arrive." },
+                { id: 33, category: "os", categoryLabel: "Operating Systems", label: "What hardware component handles translating virtual memory addresses directly into physical RAM maps?", options: ["CPU Cache Logic", "MMU (Memory Management Unit)", "DMA Controller Engine", "ALU Registers"], match: 1, explanation: "The Memory Management Unit (MMU) utilizes internal page tables to convert process-level virtual memory pointers into physical RAM addresses." },
+                { id: 34, category: "os", categoryLabel: "Operating Systems", label: "Which system signal shifts a execution control thread from user privilege levels straight into safe kernel spaces?", options: ["Context Switch", "System Call", "Interrupt Vector", "Thread Spawning Allocation"], match: 1, explanation: "System Calls prompt software interrupts that escalate process access privileges securely to execute kernel-level tasks." },
+                { id: 35, category: "os", categoryLabel: "Operating Systems", label: "What mechanism coordinates multi-process synchronization using atomic wait/signal operations?", options: ["Page Table Matrix", "Inode Blocks", "Semaphore Indicators", "Buffer Caches"], match: 2, explanation: "Semaphores use counter variables and atomic operations to safely throttle concurrent resource access across thread tracks." },
+                { id: 36, category: "os", categoryLabel: "Operating Systems", label: "What condition describes a system spending more time swapping memory pages to disk than executing real work?", options: ["Paging Errors", "Thrashing", "Segmentation Fault Trace", "Cache Miss Lag"], match: 1, explanation: "Thrashing occurs when available RAM drops too low, forcing the OS into endless loops of page-fault evictions and disk writes." },
+                { id: 37, category: "os", categoryLabel: "Operating Systems", label: "Which file structure component holds metadata definitions like size, permissions, and block pointers?", options: ["Superblock Data", "Inode Block", "Directory Mapping File", "Journal Logging Segment"], match: 1, explanation: "An inode (index node) stores file attributes, access control privileges, and pointers to the physical sectors holding the content." },
+                { id: 38, category: "os", categoryLabel: "Operating Systems", label: "What execution environment shares code segments and memory space directly with its parent process?", options: ["Isolated Forked Process", "Sub-Thread Entity", "Daemon Container", "Microkernel Module"], match: 1, explanation: "Threads operate inside their parent process's memory footprint, sharing data spaces while maintaining their own registers and program counters." },
+                { id: 39, category: "os", categoryLabel: "Operating Systems", label: "Which replacement approach evicts the memory page that has gone unused for the longest duration?", options: ["FIFO Scheme", "Optimal Predictor Engine", "LRU (Least Recently Used)", "Random Discard Model"], match: 2, explanation: "LRU looks backward in time to drop pages that haven't been accessed recently, anticipating they are less likely to be needed next." },
+                { id: 40, category: "os", categoryLabel: "Operating Systems", label: "What type of kernel exposes minimal essential systems directly inside core privileged memory segments?", options: ["Monolithic Kernel", "Microkernel", "Hybrid Schema Layout", "Exokernel Architecture"], match: 1, explanation: "Microkernels minimize core privilege layers, shifting services like drivers and filesystems to safer, user-space system apps." },
 
                 // === SOFTWARE ENGINEERING (se) ===
-                { id: 41, category: "se", label: "In SOLID architectural patterns, what principle dictates that software components should be open for extension but closed for modification?", options: ["Single Responsibility", "Open/Closed Principle", "Liskov Substitution", "Dependency Inversion"], match: 1, explanation: "The Open/Closed Principle encourages designs that allow developers to append new features via inheritance or interfaces without altering working source code." },
-                { id: 42, category: "se", label: "Which software design pattern ensures a class limits itself to spawning a single global instance footprint?", options: ["Factory Method", "Observer Interface", "Singleton Pattern", "Strategy Blueprint"], match: 2, explanation: "The Singleton pattern locks structural constructor access, exposing an internal instance path that guarantees single instances." },
-                { id: 43, category: "se", label: "What testing level evaluates combined interaction modules to ensure they function correctly together?", options: ["Unit Testing Logs", "Integration Testing", "System Verification Validation", "Acceptance Checkouts"], match: 1, explanation: "Integration testing focuses on identifying structural data defects and interface mismatches across interacting software modules." },
-                { id: 44, category: "se", label: "Which development philosophy mandates writing automated validation scripts prior to implementing application source code?", options: ["Agile Scrum Sprints", "Waterfall Project Loops", "TDD (Test-Driven Development)", "DevOps Continuous Tracking"], match: 2, explanation: "Test-Driven Development cycles follow a strict 'Red-Green-Refactor' flow, requiring failing test definitions before adding functional code." },
-                { id: 45, category: "se", label: "What metric tracks the strength and direct dependence bonds tying structural code components to one another?", options: ["Cohesion Index", "Coupling", "Complexity Depth", "Cyclomatic Rating Score"], match: 1, explanation: "Coupling calculates the interconnectedness of program elements. Software design best practices aim for loose coupling." },
-                { id: 46, category: "se", label: "Which design pattern notifies multiple downstream subscriber objects automatically about state changes?", options: ["Decorator Schema", "Facade Wrapper", "Observer Pattern", "Command Routing Interface"], match: 2, explanation: "The Observer pattern sets up dynamic subscription tracks that push event alerts out to collections of listening consumer objects." },
-                { id: 47, category: "se", label: "What version management command safety merges isolated histories together by rebuilding distinct commits directly on top of target tips?", options: ["git merge", "git rebase", "git checkout -b", "git fetch --all"], match: 1, explanation: "Git rebase rewrites project histories by modifying commit bases, keeping linear project tracking lines cleaner than merge commits." },
-                { id: 48, category: "se", label: "Which architectural metric calculates the internal functional focus and strength inside a single module class?", options: ["Coupling Density", "Cohesion", "Inheritance Tree Depth", "Polymorphic Scale"], match: 1, explanation: "Cohesion evaluates how closely related the responsibilities within a single module are. High internal cohesion is ideal." },
-                { id: 49, category: "se", label: "What type of analysis parses code configurations for vulnerabilities without deploying or executing runtime builds?", options: ["Static Analysis", "Dynamic Profile Verification", "Fuzzing Tests", "Regression Lifecycle Profiling"], match: 0, explanation: "Static analysis scans uncompiled source text files against known rule maps to flag security risks and syntax errors early." },
-                { id: 50, category: "se", label: "Which software development framework maps project timelines around fixed iterations known as Sprints?", options: ["Traditional Waterfall", "Scrum Framework", "Spiral Development", "V-Model Architecture"], match: 1, explanation: "Scrum splits production goals into timeboxed sprints (typically 2-4 weeks) accompanied by daily synchronization touchpoints." }
+                { id: 41, category: "se", categoryLabel: "Software Engineering", label: "In SOLID architectural patterns, what principle dictates that software components should be open for extension but closed for modification?", options: ["Single Responsibility", "Open/Closed Principle", "Liskov Substitution", "Dependency Inversion"], match: 1, explanation: "The Open/Closed Principle encourages designs that allow developers to append new features via inheritance or interfaces without altering working source code." },
+                { id: 42, category: "se", categoryLabel: "Software Engineering", label: "Which software design pattern ensures a class limits itself to spawning a single global instance footprint?", options: ["Factory Method", "Observer Interface", "Singleton Pattern", "Strategy Blueprint"], match: 2, explanation: "The Singleton pattern locks structural constructor access, exposing an internal instance path that guarantees single instances." },
+                { id: 43, category: "se", categoryLabel: "Software Engineering", label: "What testing level evaluates combined interaction modules to ensure they function correctly together?", options: ["Unit Testing Logs", "Integration Testing", "System Verification Validation", "Acceptance Checkouts"], match: 1, explanation: "Integration testing focuses on identifying structural data defects and interface mismatches across interacting software modules." },
+                { id: 44, category: "se", categoryLabel: "Software Engineering", label: "Which development philosophy mandates writing automated validation scripts prior to implementing application source code?", options: ["Agile Scrum Sprints", "Waterfall Project Loops", "TDD (Test-Driven Development)", "DevOps Continuous Tracking"], match: 2, explanation: "Test-Driven Development cycles follow a strict 'Red-Green-Refactor' flow, requiring failing test definitions before adding functional code." },
+                { id: 45, category: "se", categoryLabel: "Software Engineering", label: "What metric tracks the strength and direct dependence bonds tying structural code components to one another?", options: ["Cohesion Index", "Coupling", "Complexity Depth", "Cyclomatic Rating Score"], match: 1, explanation: "Coupling calculates the interconnectedness of program elements. Software design best practices aim for loose coupling." },
+                { id: 46, category: "se", categoryLabel: "Software Engineering", label: "Which design pattern notifies multiple downstream subscriber objects automatically about state changes?", options: ["Decorator Schema", "Facade Wrapper", "Observer Pattern", "Command Routing Interface"], match: 2, explanation: "The Observer pattern sets up dynamic subscription tracks that push event alerts out to collections of listening consumer objects." },
+                { id: 47, category: "se", categoryLabel: "Software Engineering", label: "What version management command safety merges isolated histories together by rebuilding distinct commits directly on top of target tips?", options: ["git merge", "git rebase", "git checkout -b", "git fetch --all"], match: 1, explanation: "Git rebase rewrites project histories by modifying commit bases, keeping linear project tracking lines cleaner than merge commits." },
+                { id: 48, category: "se", categoryLabel: "Software Engineering", label: "Which architectural metric calculates the internal functional focus and strength inside a single module class?", options: ["Coupling Density", "Cohesion", "Inheritance Tree Depth", "Polymorphic Scale"], match: 1, explanation: "Cohesion evaluates how closely related the responsibilities within a single module are. High internal cohesion is ideal." },
+                { id: 49, category: "se", categoryLabel: "Software Engineering", label: "What type of analysis parses code configurations for vulnerabilities without deploying or executing runtime builds?", options: ["Static Analysis", "Dynamic Profile Verification", "Fuzzing Tests", "Regression Lifecycle Profiling"], match: 0, explanation: "Static analysis scans uncompiled source text files against known rule maps to flag security risks and syntax errors early." },
+                { id: 50, category: "se", categoryLabel: "Software Engineering", label: "Which software development framework maps project timelines around fixed iterations known as Sprints?", options: ["Traditional Waterfall", "Scrum Framework", "Spiral Development", "V-Model Architecture"], match: 1, explanation: "Scrum splits production goals into timeboxed sprints (typically 2-4 weeks) accompanied by daily synchronization touchpoints." }
             ];
 
             // Feedback Toast System
-            function launchToast(message) {
+            function showToast(message) {
                 toastMsg.innerText = message;
                 toast.style.opacity = '1';
                 toast.style.transform = 'translateY(0px)';
                 setTimeout(() => {
                     toast.style.opacity = '0';
                     toast.style.transform = 'translateY(20px)';
-                }, 3000);
+                }, 2500);
             }
 
-            // Countdown Clock Processor Loop
-            function triggerCountdown() {
-                clearInterval(timerInterval);
-                timerInterval = setInterval(() => {
-                    if (timeRemaining <= 0) {
-                        clearInterval(timerInterval);
-                        evaluateActiveQuizResults();
-                        launchToast("Time expired! Submitting answers.");
-                        return;
-                    }
-                    timeRemaining--;
-                    const dynamicMinutes = Math.floor(timeRemaining / 60).toString().padStart(2, '0');
-                    const dynamicSeconds = (timeRemaining % 60).toString().padStart(2, '0');
-                    timerDisplay.innerText = `${dynamicMinutes}:${dynamicSeconds}`;
-                }, 1000);
-            }
-
-            // Build UI List for Questions
-            function constructActiveQuiz() {
-                const selection = topicSelect.value;
-                activeQuestions = selection === 'all' ? [...questionsPool] : questionsPool.filter(q => q.category === selection);
+            // Load Quiz Session Variables
+            function initializeQuizSession() {
+                const targetValue = topicSelect.value;
+                activeQuestions = targetValue === 'all' ? [...questionsPool] : questionsPool.filter(q => q.category === targetValue);
                 
-                if (activeQuestions.length === 0) {
-                    questionsWrapper.innerHTML = `<div class="text-center py-12 text-slate-400 italic">No items matching criteria.</div>`;
-                    actionFooter.classList.add('hidden');
+                currentCardIndex = 0;
+                userScores = {};
+                userSelections = {};
+                
+                navActionBar.classList.remove('hidden');
+                updateMetricsUI();
+                renderCurrentCard();
+                showToast("New Quiz Card Stream Active!");
+            }
+
+            // Render Single Card Question View
+            function renderCurrentCard() {
+                if (activeQuestions.length === 0) return;
+                
+                const questionData = activeQuestions[currentCardIndex];
+                
+                // Set Header Progress Information
+                progressBadge.innerText = `${currentCardIndex + 1} / ${activeQuestions.length}`;
+                cardSubjectBadge.innerText = questionData.categoryLabel;
+
+                // Build Card Workspace UI
+                quizCardBody.innerHTML = `
+                    <div class="space-y-5 animate-fade-in text-xs">
+                        <h3 class="text-sm font-bold text-slate-800 leading-snug">${questionData.label}</h3>
+                        
+                        <div class="grid gap-3 font-medium" id="optionsGroup">
+                            ${questionData.options.map((optionText, optionIdx) => {
+                                let labelStyle = "bg-slate-50 border-slate-200 text-slate-600 hover:bg-emerald-50/40 hover:border-emerald-200";
+                                let inputProps = "";
+                                
+                                // Handle styles if user already interacted with this card previously
+                                if (userSelections[questionData.id] !== undefined) {
+                                    const selectedIdx = parseInt(userSelections[questionData.id]);
+                                    inputProps = "disabled";
+                                    if (userSelections[questionData.id] == optionIdx) inputProps += " checked";
+
+                                    if (optionIdx === questionData.match) {
+                                        labelStyle = "bg-emerald-50 border-emerald-400 text-emerald-800 font-bold cursor-default";
+                                    } else if (selectedIdx === optionIdx && selectedIdx !== questionData.match) {
+                                        labelStyle = "bg-red-50 border-red-300 text-red-800 font-medium cursor-default";
+                                    } else {
+                                        labelStyle = "bg-white border-slate-100 text-slate-400 cursor-default opacity-60";
+                                    }
+                                }
+
+                                return `
+                                    <label class="flex items-center gap-3 border rounded-xl p-3.5 cursor-pointer transition-all ${labelStyle}">
+                                        <input type="radio" name="activeCardRadio" value="${optionIdx}" ${inputProps} class="accent-emerald-600 h-4 w-4">
+                                        <span>${optionText}</span>
+                                    </label>
+                                `;
+                            }).join('')}
+                        </div>
+
+                        <div id="cardExplanationBox" class="${userSelections[questionData.id] !== undefined ? '' : 'hidden'} p-4 bg-blue-50 border border-blue-200 rounded-xl leading-relaxed text-slate-700">
+                            <strong class="text-blue-800 block mb-1 text-[11px] uppercase tracking-wide"><i class="fas fa-circle-info mr-1"></i> Analysis Explanation:</strong>
+                            <span>${questionData.explanation}</span>
+                        </div>
+                    </div>
+                `;
+
+                // Map Dynamic Interaction Handlers onto Choices
+                const optionsGroup = document.getElementById('optionsGroup');
+                optionsGroup.querySelectorAll('label').forEach((label, clickedIndex) => {
+                    label.addEventListener('click', (e) => {
+                        // Drop executions if card is already scored
+                        if (userSelections[questionData.id] !== undefined) return;
+
+                        const radioInput = label.querySelector('input');
+                        if (radioInput) radioInput.checked = true;
+
+                        processImmediateCardSelection(questionData, clickedIndex);
+                    });
+                });
+
+                // Update Control Button Visibility Locks
+                prevBtn.disabled = currentCardIndex === 0;
+                nextBtn.disabled = currentCardIndex === activeQuestions.length - 1;
+            }
+
+            // Lock Selection on click, score layout immediately and reveal explanations
+            function processImmediateCardSelection(question, chosenIdx) {
+                userSelections[question.id] = chosenIdx;
+                
+                // Score evaluation phase
+                const isCorrect = chosenIdx === question.match;
+                userScores[question.id] = isCorrect ? 1 : 0;
+
+                // Update analytical logs instantly
+                updateMetricsUI();
+
+                // Trigger UI updates on the current active choices cleanly
+                const optionsLabels = document.getElementById('optionsGroup').querySelectorAll('label');
+                optionsLabels.forEach((lbl, idx) => {
+                    const inputElement = lbl.querySelector('input');
+                    if (inputElement) inputElement.disabled = true;
+
+                    lbl.classList.remove('hover:bg-emerald-50/40', 'hover:border-emerald-200');
+
+                    if (idx === question.match) {
+                        lbl.className = "flex items-center gap-3 border rounded-xl p-3.5 bg-emerald-50 border-emerald-400 text-emerald-800 font-bold cursor-default";
+                    } else if (idx === chosenIdx && !isCorrect) {
+                        lbl.className = "flex items-center gap-3 border rounded-xl p-3.5 bg-red-50 border-red-300 text-red-800 font-medium cursor-default";
+                    } else {
+                        lbl.className = "flex items-center gap-3 border rounded-xl p-3.5 bg-white border-slate-100 text-slate-400 cursor-default opacity-60";
+                    }
+                });
+
+                // Reveal explanation layer container seamlessly
+                document.getElementById('cardExplanationBox').classList.remove('hidden');
+                showToast(isCorrect ? "Correct Option Selected!" : "Incorrect Choice Recorded.");
+            }
+
+            // Sync metrics dashboard indicators
+            function updateMetricsUI() {
+                const totalAnsweredCount = Object.keys(userSelections).length;
+                const totalQuizCount = activeQuestions.length;
+
+                statCompleted.innerText = `${totalAnsweredCount} / ${totalQuizCount}`;
+
+                if (totalAnsweredCount === 0) {
+                    statAccuracy.innerText = "0%";
                     return;
                 }
 
-                questionsWrapper.innerHTML = '';
-                progressBadge.innerText = `0 / ${activeQuestions.length}`;
-
-                activeQuestions.forEach((data, indexIdx) => {
-                    const block = document.createElement('div');
-                    block.className = "space-y-3 p-4 bg-slate-50 border border-slate-200 rounded-xl relative transition-all";
-                    
-                    block.innerHTML = `
-                        <h4 class="font-bold text-slate-700">${indexIdx + 1}. ${data.label}</h4>
-                        <div class="grid gap-2 font-medium">
-                            ${data.options.map((opt, optIdx) => `
-                                <label class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl p-3 cursor-pointer hover:bg-emerald-50/50 hover:border-emerald-200 transition-all">
-                                    <input type="radio" name="question-${data.id}" value="${optIdx}" required class="accent-emerald-600 h-4 w-4 tracking-radio">
-                                    <span class="text-slate-600">${opt}</span>
-                                </label>
-                            `).join('')}
-                        </div>
-                        <!-- Hidden Explanation Box Container -->
-                        <div class="explanation-box hidden mt-3 p-3 bg-blue-50/80 border border-blue-200 rounded-lg text-slate-700 text-[11px] leading-relaxed">
-                            <strong class="text-blue-800 block mb-0.5"><i class="fas fa-circle-info mr-1"></i> Explanation:</strong>
-                            ${data.explanation}
-                        </div>
-                    `;
-
-                    // Update live question completion metrics on input selection change
-                    block.querySelectorAll('input[type="radio"]').forEach(radio => {
-                        radio.addEventListener('change', () => {
-                            const selectedCount = new Set([...questionsWrapper.querySelectorAll('input[type="radio"]:checked')].map(r => r.name)).size;
-                            progressBadge.innerText = `${selectedCount} / ${activeQuestions.length}`;
-                        });
-                    });
-
-                    questionsWrapper.appendChild(block);
-                });
-
-                actionFooter.classList.remove('hidden');
-                
-                // Set flexible countdown allowances based on generated count sizes
-                timeRemaining = activeQuestions.length * 45; 
-                triggerCountdown();
-                launchToast("Quiz Session Live!");
+                const correctSum = Object.values(userScores).reduce((acc, curr) => acc + curr, 0);
+                const percentResult = Math.round((correctSum / totalAnsweredCount) * 100);
+                statAccuracy.innerText = `${percentResult}%`;
             }
 
-            // Calculate Score, display feedback configurations, and reveal explanations
-            function evaluateActiveQuizResults() {
-                clearInterval(timerInterval);
-                let targetedScore = 0;
-
-                activeQuestions.forEach(item => {
-                    const questionBox = questionsWrapper.querySelector(`input[name="question-${item.id}"]`).closest('.space-y-3');
-                    const selected = questionBox.querySelector(`input[name="question-${item.id}"]:checked`);
-                    const inputs = questionBox.querySelectorAll(`input[name="question-${item.id}"]`);
-                    
-                    inputs.forEach((input, idx) => {
-                        const optionContainer = input.closest('label');
-                        optionContainer.classList.remove('hover:bg-emerald-50/50', 'hover:border-emerald-200');
-                        input.disabled = true;
-
-                        if (idx === item.match) {
-                            optionContainer.className = "flex items-center gap-3 bg-emerald-50 border border-emerald-400 rounded-xl p-3 text-emerald-700 font-bold";
-                        } else if (selected && parseInt(selected.value) === idx && idx !== item.match) {
-                            optionContainer.className = "flex items-center gap-3 bg-red-50 border border-red-300 rounded-xl p-3 text-red-700 font-medium";
-                        }
-                    });
-
-                    if (selected && parseInt(selected.value) === item.match) {
-                        targetedScore++;
-                    }
-
-                    // Reveal the explanation block underneath the question
-                    const explanationBox = questionBox.querySelector('.explanation-box');
-                    if (explanationBox) {
-                        explanationBox.classList.remove('hidden');
-                    }
-                });
-
-                // Update Performance Metrics Layout Panels
-                totalCompletedCount++;
-                const currentAccuracyPercent = Math.round((targetedScore / activeQuestions.length) * 100);
-                
-                statAccuracy.innerText = `${currentAccuracyPercent}%`;
-                statCompleted.innerText = totalCompletedCount;
-
-                actionFooter.classList.add('hidden');
-                launchToast(`Processing Complete! Score: ${targetedScore}/${activeQuestions.length}`);
-                
-                // Scroll to top of current work space to inspect answers smoothly
-                questionsWrapper.scrollIntoView({ behavior: 'smooth' });
-            }
-
-            // Dynamic Form Action Trigger Hooks
-            startBtn.addEventListener('click', constructActiveQuiz);
-            submitFormBtn.addEventListener('click', () => {
-                const quizFormElement = document.getElementById('mainQuizForm');
-                if (quizFormElement.checkValidity()) {
-                    evaluateActiveQuizResults();
-                } else {
-                    quizFormElement.reportValidity();
+            // Nav Directional Setup Triggers
+            prevBtn.addEventListener('click', () => {
+                if (currentCardIndex > 0) {
+                    currentCardIndex--;
+                    renderCurrentCard();
                 }
             });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentCardIndex < activeQuestions.length - 1) {
+                    currentCardIndex++;
+                    renderCurrentCard();
+                }
+            });
+
+            startBtn.addEventListener('click', initializeQuizSession);
         });
     </script>
 </body>
