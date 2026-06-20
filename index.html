@@ -8,11 +8,14 @@
     <link rel="icon" type="image/svg+xml" href="logo.svg?v=1">
     <title>EduFlow - Academic Resource & Assignment Management Platform</title>
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Font Awesome -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <!-- Smooth Scrolling -->
     <style>
         html {
             scroll-behavior: smooth;
@@ -22,12 +25,10 @@
 
 <body class="bg-gradient-to-b from-white via-emerald-50/30 to-slate-50 text-slate-800">
 
-    <button id="backToTop" class="fixed bottom-10 right-10 z-[100] hidden bg-emerald-600 text-white p-4 rounded-full shadow-lg hover:bg-emerald-700 transition-all duration-300">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
+    <!-- HEADER -->
     <header id="home"></header>
 
+    <!-- NAVBAR -->
     <nav class="sticky top-0 z-50
         bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500
         shadow-xl">
@@ -36,12 +37,14 @@
 
             <div class="flex justify-between items-center h-20">
 
+                <!-- LOGO -->
                 <a href="index.html" class="flex items-center gap-3">
                     <span class="text-3xl font-bold text-white">
                         <i class="fas fa-graduation-cap text-xl"></i> EduFlow
                     </span>
                 </a>
 
+                <!-- NAVIGATION LINKS -->
                 <ul class="hidden md:flex gap-8 font-medium text-white">
                     <li><a href="#home" class="hover:text-emerald-100 transition font-bold">Home</a></li>
                     <li><a href="#utility" class="hover:text-emerald-100 transition">Utility Hub</a></li>
@@ -50,6 +53,7 @@
                     <li><a href="focus.html" class="hover:text-emerald-100 transition">Focus Mode</a></li>
                 </ul>
 
+                <!-- Buttons -->
                 <div class="hidden md:flex gap-4">
 
                     <a href="login.html"
@@ -72,6 +76,7 @@
         
     </nav>
     
+    <!-- Hero Section -->
     <section class="relative flex items-center justify-center bg-slate-950 overflow-hidden py-24">
 
         <video id="heroVideo" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover pointer-events-none z-0">
@@ -82,6 +87,7 @@
 
             <div class="grid lg:grid-cols-2 gap-12 items-center">
 
+                <!-- Left Grid -->
                 <div>
 
                     <div class="inline-block bg-white px-5 py-2 rounded-full shadow mb-6">
@@ -133,6 +139,7 @@
 
                 </div>
 
+                <!-- Right Grid -->
                 <div>
                     <div class="bg-white rounded-3xl shadow-xl p-8">
 
@@ -178,6 +185,7 @@
 
     </section>
 
+    <!-- Utility Hub -->
     <section id="utility" class="py-24">
 
         <div class="max-w-7xl mx-auto px-6">
@@ -187,60 +195,78 @@
                 One platform for learning, collaboration, productivity and growth.
             </p>
 
-            <div id="utilityGrid" class="grid md:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-3 gap-8">
 
-                <div class="utility-card bg-white rounded-xl shadow p-6 text-center transition-all duration-300">
+                <div class="bg-white rounded-xl shadow p-6 text-center">
                     <i class="fas fa-users text-4xl text-purple-500"></i>
                     <h3 class="font-semibold mt-4">Student Collaboration</h3>
-                    <p class="mt-2 text-gray-600">Find study partners and collaborate on projects.</p>
+                    <p class="mt-2 text-gray-600">
+                        Find study partners and collaborate on projects.
+                    </p>
                 </div>
 
-                <div class="utility-card bg-white rounded-xl shadow p-6 text-center transition-all duration-300">
+                <div class="bg-white rounded-xl shadow p-6 text-center">
                     <i class="fas fa-chalkboard-user text-4xl text-emerald-600"></i>
                     <h3 class="font-semibold mt-4">Teacher Connect</h3>
-                    <p class="mt-2 text-gray-600">Faculty interaction, mentorship and academic guidance.</p>
+                    <p class="mt-2 text-gray-600">
+                        Faculty interaction, mentorship and academic guidance.
+                    </p>
                 </div>
 
-                <div class="utility-card bg-white rounded-xl shadow p-6 text-center transition-all duration-300">
+                <div class="bg-white rounded-xl shadow p-6 text-center">
                     <i class="fas fa-stopwatch text-4xl text-orange-500"></i>
                     <h3 class="text-2xl font-bold mt-4">Focus Mode</h3>
-                    <p class="mt-2 text-gray-600">Study with all the Distractions Blocked.</p>
+                    <p class="mt-2 text-gray-600">
+                        Study with all the Distractions Blocked.
+                    </p>
                 </div>
 
-                <div class="utility-card bg-white rounded-xl shadow p-6 text-center transition-all duration-300">
+                <div class="bg-white rounded-xl shadow p-6 text-center">
                     <i class="fas fa-list-check text-4xl text-blue-500"></i>
                     <h3 class="font-semibold mt-4">Assignment Tracker</h3>
-                    <p class="mt-2 text-gray-600">Track deadlines and receive smart reminders.</p>
+                    <p class="mt-2 text-gray-600">
+                        Track deadlines and receive smart reminders.
+                    </p>
                 </div>
 
-                <div class="utility-card bg-white rounded-xl shadow p-6 text-center transition-all duration-300">
+                <div class="bg-white rounded-xl shadow p-6 text-center">
                     <i class="fas fa-calendar-check text-4xl text-red-500"></i>
                     <h3 class="text-2xl font-bold mt-4">Study Planner</h3>
-                    <p class="mt-2 text-gray-600">Plan your Day & Stay Productive.</p>
+                    <p class="mt-2 text-gray-600">
+                        Plan your Day & Stay Productive.
+                    </p>
                 </div>
                 
-                <div class="utility-card bg-white rounded-xl shadow p-6 text-center transition-all duration-300">
+                <div class="bg-white rounded-xl shadow p-6 text-center">
                     <i class="fas fa-circle-question text-4xl ttext-amber-500"></i>
                     <h3 class="text-2xl font-bold mt-4">Quiz Hub</h3>
-                    <p class="mt-2 text-gray-600">Revise what you Studied through AI made Quizes.</p>
+                    <p class="mt-2 text-gray-600">
+                        Revise what you Studied through AI made Quizes.
+                    </p>
                 </div>
 
-                <div class="utility-card bg-white rounded-xl shadow p-6 text-center transition-all duration-300">
+                <div class="bg-white rounded-xl shadow p-6 text-center">
                     <i class="fas fa-book text-4xl text-purple-400"></i>
                     <h3 class="font-semibold mt-4">Academic Resources</h3>
-                    <p class="mt-2 text-gray-600">Notes, PDFs, PYQs, lab manuals and curated learning material.</p>
+                    <p class="mt-2 text-gray-600">
+                        Notes, PDFs, PYQs, lab manuals and curated learning material.
+                    </p>
                 </div>
                 
-                <div class="utility-card bg-white rounded-xl shadow p-6 text-center transition-all duration-300">
+                <div class="bg-white rounded-xl shadow p-6 text-center">
                     <i class="fas fa-robot text-4xl text-blue-600"></i>
                     <h3 class="font-semibold mt-4">AI Study Assistant</h3>
-                    <p class="mt-2 text-gray-600">Generate summaries, quizzes and study plans.</p>
+                    <p class="mt-2 text-gray-600">
+                        Generate summaries, quizzes and study plans.
+                    </p>
                 </div>
                 
-                <div class="utility-card bg-white rounded-xl shadow p-6 text-center transition-all duration-300">
+                <div class="bg-white rounded-xl shadow p-6 text-center">
                     <i class="fas fa-briefcase text-4xl text-amber-800"></i>
                     <h3 class="font-semibold mt-4">Career Development</h3>
-                    <p class="mt-2 text-gray-600">Access internships, job opportunities and professional growth resources.</p>
+                    <p class="mt-2 text-gray-600">
+                        Access internships, job opportunities and professional growth resources.
+                    </p>
                 </div>
 
             </div>
@@ -249,6 +275,7 @@
 
     </section>
     
+    <!-- AI Bot -->
     <section id="ai-bot" class="bg-gradient-to-b from-slate-100 to-white py-24">
         
         <div class="max-w-7xl mx-auto px-6">
@@ -278,6 +305,7 @@
         
     </section>
 
+    <!-- TYPOGRAPHY SECTION -->
     <section class="bg-slate-800 text-white py-24">
         
         <div class="max-w-4xl mx-auto px-6 prose prose-lg prose-invert">
@@ -298,6 +326,7 @@
 
     </section>
 
+    <!-- Footer -->
     <footer id="footer" class="bg-black text-gray-300">
 
         <div class="max-w-8xl mx-auto px-10 py-12">
@@ -380,40 +409,15 @@
             <hr class="border-gray-800 my-8">
 
             <p class="text-center">
-                © 2026 EduFlow. All rights reserved.
+                &copy; 2026 EduFlow. All rights reserved.
             </p>
 
         </div>
 
     </footer>
 
+    <!-- Geolocation API -->
     <script>
-        // BACK TO TOP
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTop.classList.remove('hidden');
-            } else {
-                backToTop.classList.add('hidden');
-            }
-        });
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // CARD HOVER
-        const utilityCards = document.querySelectorAll('.utility-card');
-        utilityCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.classList.add('bg-emerald-50', 'scale-105', 'border-emerald-200');
-            });
-            card.addEventListener('mouseleave', () => {
-                card.classList.remove('bg-emerald-50', 'scale-105', 'border-emerald-200');
-            });
-        });
-
-        // GEOLOCATION API
         const campusLocation = "Bangalore";
         let userLat = null;
         let userLng = null;
