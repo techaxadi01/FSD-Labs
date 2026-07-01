@@ -1,0 +1,7 @@
+[
+    { "username": "admin", "email": "admin@eduflow.com", "password": "123", "role": "admin" },
+    { "username": "dr_vijay", "email": "vijay@christ.edu", "password": "password", "role": "teacher" },
+    { "username": "dr_tejal", "email": "tejal@christ.edu", "password": "password", "role": "teacher" },
+    { "username": "aditya", "email": "aditya@student.edu", "password": "password", "role": "student" },
+    { "username": "aishraj", "email": "aishraj@student.edu", "password": "password", "role": "student" }
+]
