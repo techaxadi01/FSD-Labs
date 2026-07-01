@@ -16,11 +16,11 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const data = await response.json();
     
     if (data.success) {
-        msg.innerText = `Login Successful! You are logged in as ${data.role}. Redirecting...`;
-        msg.className = "mt-4 text-xs text-center font-bold text-emerald-600";
+        msg.innerText = data.message;
+        msg.className = "text-medium text-center font-semibold text-emerald-600";
         setTimeout(() => window.location.href = "../index.html", 2000);
     } else {
         msg.innerText = data.message;
-        msg.className = "mt-4 text-xs text-center font-bold text-red-600";
+        msg.className = "text-medium text-center font-semibold text-red-600";
     }
 });
